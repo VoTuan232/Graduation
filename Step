@@ -1,0 +1,41 @@
+B1: Create project
+B2: Create database mysql and config env
+B3: Create migration
+	Role-Permission: https://stackoverflow.com/questions/42910954/whats-the-best-way-to-store-user-role-permissions-in-laravel-5
+B4: Create models and relaltionship
+B:  Create file language
+B : Make auth
+B5: Install adminlte and config file app ( use npm )
+	npm install admin-lte@v3.0.0-alpha.2 --save 
+	Ref: https://adminlte.io/themes/dev/AdminLTE/index.html
+B : Install Fontawesome and config file 
+	npm install @fortawesome/fontawesome-free
+B : Custom color global
+B : Install vue Route and add Template for View Admin
+	Ref: https://router.vuejs.org/
+	npm install vue-router
+B : Install Vue Progress Bar
+	Ref:http://hilongjw.github.io/vue-progressbar/
+	npm install vue-progressbar
+B : Create Reposiroty
+
+B : Install VForm
+	Ref: https://github.com/cretueusebiu/vform/
+	npm i axios vform
+B : Use filter for change data and use momentjs for change datetime
+	Ref: https://momentjs.com/ 
+	npm install moment --save
+B : Use sweetalert2
+	Ref: https://www.npmjs.com/package/vue-sweetalert2
+	npm install -S vue-sweetalert2
+B : Use laravel vue pagination
+	Ref:https://github.com/gilbitron/laravel-vue-pagination
+	npm install laravel-vue-pagination
+B : Use multiple select
+	Ref: https://vue-multiselect.js.org/
+	npm install vue-multiselect --save
+B : Use vue-select
+	Ref: https://sagalbot.github.io/vue-select/docs/Install.html
+B : Manager User
+B6: Manager website for admin	
+B7: Manager website for clients

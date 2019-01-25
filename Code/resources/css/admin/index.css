@@ -1,0 +1,25 @@
+ .admin-body {
+        margin-left: 196px;
+        margin-top: 37px;
+     }
+
+    .panel-body .btn:not(.btn-block) { width:120px;margin-bottom:10px; }
+
+    .panel-heading {
+        background-color: #337ab7;
+    }
+
+    .panel-primary {
+        border-color: #337ab7 !important;
+    }
+
+    .panel {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    }
+
+    .panel-body {
+        padding: 15px;
+    }

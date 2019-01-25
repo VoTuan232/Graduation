@@ -9,6 +9,62 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+/*use Vue Route*/
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+let routes = [
+    { path: '/admin', component: require('./components/admin/Index.vue').default },
+    { path: '/m/users', component: require('./components/admin/User.vue').default },
+]
+
+const router = new VueRouter({
+	mode: 'history', //remove url old
+    linkActiveClass: 'active',
+    routes, // short for `routes: routes`,
+})
+
+/*Vue ProgressBar*/
+import VueProgressBar from 'vue-progressbar'
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '2px'
+})
+
+/*VForm*/
+import { Form, HasError, AlertError } from 'vform'
+window.Form = Form;
+// Validate
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError) 
+
+/*Filter*/
+Vue.filter('upText', function(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1)
+})
+/*Mommentjs*/
+import moment from 'moment'
+Vue.filter('changerDate', function(created) {
+  return moment(created).format('MMMM Do YYYY');
+})
+
+/*Use vue-sweetalert2 */
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2);
+
+/*Use Component local for hook*/
+window.Fire = new Vue();
+
+/*Use pagination*/
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+/* use multiple select */
+import Multiselect from 'vue-multiselect'
+/*register globally*/
+Vue.component('multiselect', Multiselect)
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -29,5 +85,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });

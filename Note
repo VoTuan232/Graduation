@@ -1,0 +1,29 @@
+***Multiple language in database
+Schema::create('index', function(Blueprint $table) {
+        $table->increments('id');
+        $table->string('title_uk');
+        $table->string('title_ru');
+        $table->string('title_en');
+        $table->string('heading_uk');
+        $table->string('heading_ru');
+        $table->string('heading_en');
+        $table->string('photo');
+        $table->timestamps();
+    });
+public function TextTrans($text)
+{
+    $locale=App::getLocale();
+    $column=$text.'_'.$locale;
+
+    return $this->{$column};
+}
+
+
+
+***Many to many Category: 1 table category , 1 table child_parent_category 
+
+
+***Smart search in laravel
+https://viblo.asia/p/xay-dung-chuc-nang-tim-kiem-thong-minh-trong-laravel-voi-typeaheadjs-aWj53ko856m
+
+***Thiết kế 
