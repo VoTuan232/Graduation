@@ -19,5 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('m/users', 'api\admin\UserController@index');
 Route::post('m/user', 'api\admin\UserController@store');
+Route::delete('m/user/{user}', 'api\admin\UserController@destroy');
+Route::put('m/user/{user}', 'api\admin\UserController@update');
 
 Route::get('m/roles', 'api\admin\RoleController@index');
+
+Route::get('profile', 'api\admin\UserController@profile');

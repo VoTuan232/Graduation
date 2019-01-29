@@ -38,11 +38,11 @@
                                     </td>
                                     <td>{{ user.created_at | changerDate }}</td>
                                     <td>
-                                        <a href="#">
+                                        <a href="#" @click="editModal(user)">
                                         <i class="fa fa-edit blue"></i>
                                         </a>
                                         /
-                                        <a href="#">
+                                        <a href="#" @click="deleteUser(user.id)">
                                         <i class="fa fa-trash red"></i>
                                         </a>
                                     </td>
@@ -158,7 +158,7 @@
 
             updateUser() {
                 // console.log(this.form.name);
-                this.form.put('api/user/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put(''+'/api/m/user/' + this.form.id) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -173,6 +173,7 @@
                 })
                 .catch(() => {
                     this.$Progress.fail();
+                    this.$swal("Failed!", "There was something wrong!", "warning");
                 });
             },
 
@@ -203,7 +204,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete('api/user/'+id)
+                        this.form.delete(''+'/api/m/user/'+id)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(

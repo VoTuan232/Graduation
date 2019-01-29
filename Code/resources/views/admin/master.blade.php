@@ -257,11 +257,7 @@
         <!-- ./wrapper -->
 
         <!--Gate-->
-        @auth
-            <script>
-                window.user = @json(auth()->user())
-            </script>
-        @endauth
+        
         <!-- REQUIRED SCRIPTS -->
         <script src="{{ asset('/js/app.js') }}"></script>
     </body>

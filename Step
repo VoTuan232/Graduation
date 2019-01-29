@@ -37,5 +37,9 @@ B : Use multiple select
 B : Use vue-select
 	Ref: https://sagalbot.github.io/vue-select/docs/Install.html
 B : Manager User
+B : Use Larave Passport for Authentication api
+	Ref: https://laravel.com/docs/5.7/passport
+	composer require laravel/passport
+
 B6: Manager website for admin	
 B7: Manager website for clients
