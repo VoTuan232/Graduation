@@ -28,6 +28,48 @@ class UserController extends Controller
         return Auth::user();
     }
 
+    public function getListFollow() {
+        $user = Auth::user();
+
+        return $user->follows()->paginate(2);
+    }
+
+    public function destroyUserFollow(User $user) {
+        Auth::user()->follows()->detach($user);
+
+        return ['messgae' => true];
+    }
+
+    public function getListFollower() {
+        $user = Auth::user();
+
+        return $user->followers()->paginate(2);
+    }
+
+    public function getListPost() {
+        $user = Auth::user();
+
+        return $user->posts()->with('user', 'categories', 'tags')->paginate(2);
+    }
+
+    public function countFollow() {
+        $user = Auth::user();
+
+        return $user->follows()->count(); 
+    }
+
+    public function countFollower() {
+        $user = Auth::user();
+
+        return $user->followers()->count(); 
+    }
+
+    public function countPost() {
+        $user = Auth::user();
+
+        return $user->posts()->count(); 
+    }
+
     public function updateProfile(Request $request)
     {
         $user = auth('api')->user();

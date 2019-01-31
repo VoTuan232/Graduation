@@ -13166,6 +13166,8 @@ a.text-muted:hover {
   color: #6cb2eb;
 }
 
+/*boootstrap*/
+
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
@@ -23657,6 +23659,10 @@ a.text-dark:focus {
   }
 }
 
+/*adminlte*/
+
+/*fontawesome*/
+
 /*!
  * Font Awesome Free 5.6.3 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -30952,6 +30958,10 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     position: initial !important;
   }
 }
+
+/*Bulma*/
+
+/*@import '~bulma/css/bulma.css';*/
 
 .navbar-laravel {
   background-color: #fff;

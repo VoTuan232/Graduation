@@ -22,6 +22,13 @@ Route::post('m/user', 'api\admin\UserController@store');
 Route::delete('m/user/{user}', 'api\admin\UserController@destroy');
 Route::put('m/user/{user}', 'api\admin\UserController@update');
 Route::get('user/current', 'api\admin\UserController@getUserCurrent');
+Route::get('user/follows', 'api\admin\UserController@getListFollow');
+Route::delete('user/follow/{user}', 'api\admin\UserController@destroyUserFollow');
+Route::get('user/followers', 'api\admin\UserController@getListFollower');
+Route::get('user/posts', 'api\admin\UserController@getListPost');
+Route::get('user/countFollow', 'api\admin\UserController@countFollow');
+Route::get('user/countFollower', 'api\admin\UserController@countFollower');
+Route::get('user/countPost', 'api\admin\UserController@countPost');
 
 Route::get('m/roles/all', 'api\admin\RoleController@getAllRole');
 

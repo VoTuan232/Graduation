@@ -41,5 +41,8 @@ B : Use Larave Passport for Authentication api
 	Ref: https://laravel.com/docs/5.7/passport
 	composer require laravel/passport
 
-B6: Manager website for admin	
+B6: Manager website for admin
+B : Install bulma
+    	Ref:
+	npm install bulma	
 B7: Manager website for clients

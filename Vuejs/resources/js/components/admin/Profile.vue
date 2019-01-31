@@ -31,7 +31,7 @@
                     <div class="row">
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
-                        <h5 class="description-header">3,200</h5>
+                        <h5 class="description-header">{{ follows }}</h5>
                         <span class="description-text">FOLLOWS</span>
                         </div>
                         <!-- /.description-block -->
@@ -39,7 +39,7 @@
                     <!-- /.col -->
                     <div class="col-sm-4 border-right">
                         <div class="description-block">
-                        <h5 class="description-header">13,000</h5>
+                        <h5 class="description-header">{{ followers }}</h5>
                         <span class="description-text">FOLLOWERS</span>
                         </div>
                         <!-- /.description-block -->
@@ -47,7 +47,7 @@
                     <!-- /.col -->
                     <div class="col-sm-4">
                         <div class="description-block">
-                        <h5 class="description-header">35</h5>
+                        <h5 class="description-header">{{ posts }}</h5>
                         <span class="description-text">POSTS</span>
                         </div>
                         <!-- /.description-block -->
@@ -120,6 +120,9 @@
         data() {
             return {
                 user : user,
+                follows : 0,
+                followers : 0,
+                posts : 0,
             }
         },
 
@@ -133,6 +136,21 @@
                 return avatar;
             },
 
+            countFollows() {
+                axios.get('' + '/api/user/countFollow')
+                .then(resopnse => this.follows = resopnse.data);
+            },
+
+            countFollowers() {
+                axios.get('' + '/api/user/countFollower')
+                .then(resopnse => this.followers = resopnse.data);
+            },
+
+            countPosts() {
+                axios.get('' + '/api/user/countPost')
+                .then(resopnse => this.posts = resopnse.data);
+            },
+
             getUser() {
                 axios.get('' + '/api/user/current')
                 .then(({data}) => {
@@ -143,10 +161,14 @@
         },
         
         created() {
+            this.countFollows();
+            this.countFollowers();
+            this.countPosts();
             Fire.$on('afterUpdateProfile', () => {
                 this.getUser();
-                // this.$root.username = this.user.name; //update root username for view
-                // this.$root.avatar = this.user.avatar; //update root avatar for view
+            });
+            Fire.$on('AfterUnfollow', () => {
+                this.countFollows();
             });
         }
     }

@@ -67,9 +67,21 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+const admin = new Vue({
+    el: '#admin',
     router,
+    data: {
+      updateProfile: 0,
+      username: user.name,
+      avatar : '/images/profile/'+user.avatar,
+    }
+});
+
+// import x form x;
+const client = new Vue({
+    el: '#client',
+    router,
+    components: {},
     data: {
       updateProfile: 0,
       username: user.name,

@@ -38,16 +38,16 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-6 col-md-6">
-                              <a href="" class="btn btn-danger btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>News</a>
-                              <a href="" class="btn btn-warning btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Storages</a>
-                              <a href="" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Posts</a>
-                              <a href="#" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Comments</a>
+                              <router-link to="/profile" class="btn btn-danger btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Profile</router-link>
+                              <router-link  to="/profile" class="btn btn-warning btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Storages</router-link>
+                              <router-link to="/m/posts" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Posts</router-link>
+                              <router-link to="/m/comments" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Comments</router-link>
                             </div>
                             <div class="col-xs-6 col-md-6">
-                              <a href="" class="btn btn-success btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Users</a>
-                              <a href="" class="btn btn-info btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Categories</a>
-                              <a href="" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Authorization</a>
-                              <a href="" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Tags</a>
+                              <router-link to="/m/users" class="btn btn-success btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Users</router-link>
+                              <router-link to="/m/categories" class="btn btn-info btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Categories</router-link>
+                              <router-link to="/profile" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Authorization</router-link>
+                              <router-link to="/m/tags" class="btn btn-primary btn-lg" role="button"><i class="nav-icon fas fa-tachometer-alt white"></i> <br/>Tags</router-link>
                             </div>
                         </div>
                         <a href="" class="btn btn-success btn-lg btn-block" role="button"><span class="glyphicon glyphicon-globe"></span> News Website</a>
