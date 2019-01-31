@@ -72,6 +72,7 @@ const app = new Vue({
     router,
     data: {
       updateProfile: 0,
-      username: 'username',
+      username: user.name,
+      avatar : '/images/profile/'+user.avatar,
     }
 });

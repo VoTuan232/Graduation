@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -21,6 +22,10 @@ class UserController extends Controller
     public function profile()
     {
         return auth('api')->user();
+    }
+
+    public function getUserCurrent() {
+        return Auth::user();
     }
 
     public function updateProfile(Request $request)

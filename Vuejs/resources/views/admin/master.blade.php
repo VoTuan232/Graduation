@@ -152,11 +152,11 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="{{ asset('images/profile/'.Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
+                            <img :src="avatar" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                                <a v-if="updateProfile" href="#" class="d-block">@{{ username }}</a>
-                                <a v-else href="#" class="d-block">{{ Auth::user()->name }}</a>
+                                <a href="#" class="d-block">@{{ username }}</a>
+                                {{-- <a v-else href="#" class="d-block">{{ Auth::user()->name }}</a> --}}
                         </div>
                     </div>
                     <!-- Sidebar Menu -->
@@ -293,10 +293,10 @@
             <footer class="main-footer">
                 <!-- To the right -->
                 <div class="float-right d-none d-sm-inline">
-                    Anything you want
+                    You can do it if you want!
                 </div>
                 <!-- Default to the left -->
-                <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+                <strong>Copyright &copy; 2019 <a href="https://adminlte.io">Vo Anh Tuan</a></strong> created by.
             </footer>
         </div>
         <!-- ./wrapper -->

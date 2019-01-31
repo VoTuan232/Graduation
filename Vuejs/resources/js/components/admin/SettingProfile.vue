@@ -68,10 +68,14 @@
             console.log('Component mounted.')
         },
         methods:{
-            getProfilePhoto(){
-                let avatar = (this.form.avatar.length > 200) ? this.form.avatar : "images/profile/"+ this.form.avatar ;
-                return avatar;
-            },
+            // getUser() {
+            //     axios.get('' + '/api/user/current')
+            //     .then(({data}) => {
+            //         user = data;
+            //     })
+            //     .catch(() => {})
+            // },
+
             updateInfo() {
                 this.$Progress.start();
                 if(this.form.password == ''){
@@ -86,8 +90,10 @@
                       'Updated User successfully!',
                       'success'
                     )
-                    this.$parent.updateProfile = 1;
-                    this.$parent.username = this.form.name;
+                    this.$root.username = this.form.name; //update root username for view
+                    this.$root.avatar = this.form.avatar; //update root avatar for view
+                    Fire.$emit('afterUpdateProfile'); //call hook for update profile (Profile vue)
+
                     this.$Progress.finish();
                 })
                 .catch(() => {

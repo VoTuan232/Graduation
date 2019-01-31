@@ -17,9 +17,21 @@ let routes = [
                 component: require('./components/admin/SettingProfile.vue').default,
             },
             {
-                path: '/profile/activity',
-                component: require('./components/admin/Activity.vue').default,
-            }
+                path: '/profile/activities',
+                component: require('./components/admin/Activities.vue').default,
+            },
+            {
+                path: '/profile/follows',
+                component: require('./components/admin/FollowProfile.vue').default,
+            },
+            {
+                path: '/profile/followers',
+                component: require('./components/admin/FollowerProfile.vue').default,
+            },
+            {
+                path: '/profile/posts',
+                component: require('./components/admin/PostProfile.vue').default,
+            },
         ]
     },
 ];

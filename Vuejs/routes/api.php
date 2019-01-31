@@ -21,6 +21,7 @@ Route::get('m/users', 'api\admin\UserController@index');
 Route::post('m/user', 'api\admin\UserController@store');
 Route::delete('m/user/{user}', 'api\admin\UserController@destroy');
 Route::put('m/user/{user}', 'api\admin\UserController@update');
+Route::get('user/current', 'api\admin\UserController@getUserCurrent');
 
 Route::get('m/roles/all', 'api\admin\RoleController@getAllRole');
 
