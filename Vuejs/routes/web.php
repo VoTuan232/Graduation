@@ -14,6 +14,9 @@
 Auth::routes();
 
 Route::get('/', 'client\HomeController@index')->name('client.index');
+Route::get('/p/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
+Route::get('/question', 'client\HomeController@index')->name('client.index');
+Route::get('/discuss', 'client\HomeController@index')->name('client.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

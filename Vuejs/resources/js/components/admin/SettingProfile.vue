@@ -91,7 +91,9 @@
                       'success'
                     )
                     this.$root.username = this.form.name; //update root username for view
-                    this.$root.avatar = this.form.avatar; //update root avatar for view
+                    if(this.form.avatar.length > 200) {
+                        this.$root.avatar = this.form.avatar; //update root avatar for view
+                    }
                     Fire.$emit('afterUpdateProfile'); //call hook for update profile (Profile vue)
 
                     this.$Progress.finish();

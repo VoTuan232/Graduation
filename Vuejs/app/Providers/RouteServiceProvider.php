@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\Post;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,14 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+        // Route::bind('post', function ($value) {
+        //     return Post::find($value)->where('slug', $value)->orWhere(function ($query) use($value) {
+        //         if (is_numeric($value)) {
+        //             $query->where('id', $value);
+        //         }
+        //     })->firstOrFail();
+        // });
     }
 
     /**

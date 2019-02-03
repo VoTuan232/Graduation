@@ -62,3 +62,8 @@ Route::get('m/comments', 'api\admin\CommentController@index');
 Route::post('m/comment', 'api\admin\CommentController@store');
 Route::put('m/comment/{comment}', 'api\admin\CommentController@update');
 Route::delete('m/comment/{comment}', 'api\admin\CommentController@destroy');
+
+Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
+
+Route::get('p/{slug}', 'api\client\PostController@getSingle');
+

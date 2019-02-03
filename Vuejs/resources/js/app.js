@@ -10,9 +10,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 /*use Vue Route*/
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
-import router from './routes';
+// import VueRouter from 'vue-router';
+// Vue.use(VueRouter);
+// import router from './routes';
 
 /*Vue ProgressBar*/
 import VueProgressBar from 'vue-progressbar'
@@ -67,24 +67,39 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const admin = new Vue({
-    el: '#admin',
-    router,
-    data: {
-      updateProfile: 0,
-      username: user.name,
-      avatar : '/images/profile/'+user.avatar,
-    }
-});
+// const admin = new Vue({
+//     el: '#admin',
+//     router,
+//     data: {
+//       updateProfile: 0,
+//       username: user.name,
+//       avatar : '/images/profile/'+user.avatar,
+//     },
+
+//     methods: {
+//       subIsActive(input) {
+//         const paths = Array.isArray(input) ? input : [input]
+//         return paths.some(path => {
+//           return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+//         })
+//       }
+//     }
+// });
 
 // import x form x;
-const client = new Vue({
-    el: '#client',
-    router,
-    components: {},
-    data: {
-      updateProfile: 0,
-      username: user.name,
-      avatar : '/images/profile/'+user.avatar,
-    }
-});
+// const client = new Vue({
+//     el: '#client',
+//     router,
+//     components: {},
+//     data: {
+//     },
+
+//     methods: {
+//       subIsActive(input) {
+//         const paths = Array.isArray(input) ? input : [input]
+//         return paths.some(path => {
+//           return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+//         })
+//       }
+//     }
+// });

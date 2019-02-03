@@ -15,6 +15,7 @@
         <title>MondkeyDNews | Admin</title>
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="{{ asset('/css/app.css/') }}">
+        <link rel="stylesheet" href="{{ asset('/css/admin.css/') }}">
 
         <style>
            
@@ -142,10 +143,10 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
-                <a href="index3.html" class="brand-link">
-                <img src="images/logo.png" alt="" class="brand-image img-circle elevation-3"
+                <a href="/" class="brand-link">
+                <img src="/images/logo.png" alt="" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">MonkeyDnews</span>
+                <span class="brand-text font-weight-light">Home</span>
                 </a>
                 <!-- Sidebar -->
                 <div class="sidebar">
@@ -189,7 +190,7 @@
                             </li>
                             @endcan
                             <li class="nav-item">
-                                <router-link to="/profile" class="nav-link">
+                                <router-link to="/profile/setting" class="nav-link" :class="{'router-link-exact-active': subIsActive('/profile')}">
                                     <i class="nav-icon fas fa-user orange"></i>
                                     <p>
                                         Profile
@@ -307,6 +308,7 @@
         </script>
         <!-- REQUIRED SCRIPTS -->
         <script src="{{ asset('/js/app.js') }}"></script>
+        <script src="{{ asset('/js/admin.js') }}"></script>
     </body>
 </html>
 
