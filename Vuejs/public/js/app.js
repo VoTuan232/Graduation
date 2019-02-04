@@ -68842,6 +68842,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('changeCreatedDate', function 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('upText', function (text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 });
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('agoDate', function (created) {
+  return moment__WEBPACK_IMPORTED_MODULE_1___default()(created).fromNow();
+});
 
 /***/ }),
 

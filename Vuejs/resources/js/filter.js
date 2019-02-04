@@ -7,4 +7,8 @@ Vue.filter('changeCreatedDate', function(created) {
 
 Vue.filter('upText', function(text) {
   return text.charAt(0).toUpperCase() + text.slice(1)
-})
+});
+
+Vue.filter('agoDate', function(created) {
+  return moment(created).fromNow();
+});

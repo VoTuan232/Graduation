@@ -22,6 +22,8 @@ class Post extends Model
         'trending',
     ];
 
+    protected $with = ['comments']; 
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

@@ -66,4 +66,5 @@ Route::delete('m/comment/{comment}', 'api\admin\CommentController@destroy');
 Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
 
 Route::get('p/{slug}', 'api\client\PostController@getSingle');
+Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
 

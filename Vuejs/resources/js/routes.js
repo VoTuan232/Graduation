@@ -37,23 +37,23 @@ let routes = [
     { 
         path: '/', 
         // beforeEnter: (to, from, next) => next('/newlist'),
-        component: require('./components/client/Post.vue').default,
+        component: require('./components/client/post/Post.vue').default,
         children: [
             {
                 path: '/',
-                component: require('./components/client/NewList.vue').default,
+                component: require('./components/client/post/NewList.vue').default,
             },
             {
                 path: '/series',
-                component: require('./components/client/Series.vue').default,
+                component: require('./components/client/post/Series.vue').default,
             },
             {
                 path: '/following',
-                component: require('./components/client/Following.vue').default,
+                component: require('./components/client/post/Following.vue').default,
             },
         ]
     },
-    { path: '/p/:slug', component: require('./components/client/SinglePost.vue').default  }
+    { path: '/p/:slug', component: require('./components/client/post/SinglePost.vue').default  }
 ];
 
 export default new VueRouter({

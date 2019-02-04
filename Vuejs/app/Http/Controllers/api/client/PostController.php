@@ -15,9 +15,12 @@ class PostController extends Controller
     }
 
     public function getSingle(Request $request, Post $post, $slug) {
-        // return $post;
-        // $post = Post::where('slug', '=', $slug)->firstOrFail();
-        // return $post;
-        return Post::where('slug', $slug)->with('categories', 'user', 'tags')->firstOrFail();
+        return Post::where('slug', $slug)->with('categories', 'user', 'tags', 'comments')->firstOrFail();
+    }
+
+    public function getUserBaseSlugPost(Request $request, $slug) {
+    	$user = Post::where('slug', $slug)->first()->user()->firstOrFail();
+    	
+        return $user->with('posts')->firstOrFail();
     }
 }
