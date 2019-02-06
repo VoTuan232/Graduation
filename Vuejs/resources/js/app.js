@@ -46,7 +46,10 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 /* use multiple select */
 import Multiselect from 'vue-multiselect'
 /*register globally*/
-Vue.component('multiselect', Multiselect)
+Vue.component('multiselect', Multiselect);
+
+/*Vuejs paginator*/
+// Vue.component('paginate', require('vuejs-paginate'));
 
 /**
  * The following block of code may be used to automatically register your

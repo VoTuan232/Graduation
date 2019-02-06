@@ -68640,6 +68640,9 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 /*register globally*/
 
 Vue.component('multiselect', vue_multiselect__WEBPACK_IMPORTED_MODULE_4___default.a);
+/*Vuejs paginator*/
+// Vue.component('paginate', require('vuejs-paginate'));
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

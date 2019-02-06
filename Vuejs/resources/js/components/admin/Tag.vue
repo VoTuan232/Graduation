@@ -22,12 +22,14 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Slug</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                                 <tr v-for="tag in tags.data" :key="tag.id">
                                     <td>{{ tag.id }}</td>
                                     <td>{{ tag.name }}</td>
+                                    <td>{{ tag.slug }}</td>
                                     <td>{{ tag.created_at | changeCreatedDate }}</td>
                                     <td>
                                         <a href="#" @click="editModal(tag)" title="edit">
@@ -91,6 +93,7 @@
                 form: new Form({
                     id : '',
                     name : '',
+                    slug: '',
                 })
             }
         },

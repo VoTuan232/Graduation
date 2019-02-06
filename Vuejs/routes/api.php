@@ -68,3 +68,4 @@ Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
 Route::get('p/{slug}', 'api\client\PostController@getSingle');
 Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
 
+Route::get('t/{tag}', 'api\client\TagController@getDataBaseSlugTag');

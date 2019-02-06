@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnToComments extends Migration
+class AddColumnToTags extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnToComments extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            
+        Schema::table('tags', function (Blueprint $table) {
+             $table->string('slug')->after('name')->unique();
         });
     }
 
@@ -25,10 +25,8 @@ class AddColumnToComments extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function (Blueprint $table) {
-            $table->dropColumn('parent_id');
-            $table->dropColumn('commentable_id');
-            $table->dropColumn('commentable_type');
+        Schema::table('tags', function (Blueprint $table) {
+            $table->dropColumn('slug');
         });
     }
 }

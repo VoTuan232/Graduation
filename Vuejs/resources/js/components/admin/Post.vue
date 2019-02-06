@@ -90,7 +90,7 @@
                                 <has-error :form="form" field="title"></has-error>
                             </div>
                             <div class="form-group">
-                                <input v-model="form.slug" type="text" name="slug"
+                                <input v-model="form.slug" type="text" name="slug" @input="setSlug"
                                     placeholder="Slug..." 
                                     class="form-control" :class="{ 'is-invalid': form.errors.has('slug') }">
                                 <has-error :form="form" field="slug"></has-error>
@@ -273,8 +273,24 @@
                     this.$Progress.fail();
                 })
 
+            },
+
+            compileSlug: function(input) {
+              return input.replace(/[^a-zA-Z0-9 -]/g, '')
+                .replace(/\s+/g, '-')
+                .toLowerCase();
+            },
+            setSlug: function (input) {
+                this.form.slug = this.compileSlug(input.target.value)
             }
         },
+
+         watch: {
+            'form.title': function(value) {
+                this.form.slug = this.compileSlug(value);
+            }
+          },
+
         created() {
             // Fire.$on('searching', () => {
             //     let query = this.$parent.search;

@@ -53,7 +53,8 @@ let routes = [
             },
         ]
     },
-    { path: '/p/:slug', component: require('./components/client/post/SinglePost.vue').default  }
+    { path: '/p/:slug', component: require('./components/client/post/SinglePost.vue').default  },
+    { path: '/t/:slug', component: require('./components/client/tag/TagBaseSlug.vue').default  },
 ];
 
 export default new VueRouter({

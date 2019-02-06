@@ -17,7 +17,8 @@
 	<div class="container">
 		<div class="row"  v-for="post in posts.data" :key="post.id">
 			<div class="col-md-1">
-				<img :src="'images/profile/' + post.user.avatar" class="avatar-client">
+				<img v-if="post.user.avatar !=null" :src="'images/profile/' + post.user.avatar" class="avatar-client">
+				<img v-else src="images/profile/profile.png" class="avatar-client">
 			</div>
 			<div class="col-md-11">
 				<p>
@@ -27,9 +28,13 @@
 					<router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
 				</p>
 				<!-- <router-link :to="{ name: 'user', params: { userId: 123 }}">{{ post.title }}</router-link> -->
-				<button v-for="tag in post.tags" type="button" class="btn btn-primary btn-client" :key="tag.id">
-					{{ tag.name }}
-				</button>
+				<div class="btn-group">
+					<!-- <li  v-for="tag in post.tags"> -->
+						<router-link  v-for="tag in post.tags" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
+							{{ tag.name }}
+						</router-link>
+					<!-- </li> -->
+				</div>
 				<p>
 					<i class="fas fa-eye client"></i>&nbsp;{{ post.view }} &nbsp;&nbsp;&nbsp;
 					<i class="fa fa-comments client"></i>&nbsp;{{ post.comments.length }}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use DB;
 
@@ -15,12 +16,12 @@ class PostController extends Controller
     }
 
     public function getSingle(Request $request, Post $post, $slug) {
-        return Post::where('slug', $slug)->with('categories', 'user', 'tags', 'comments')->firstOrFail();
+        return Post::where('slug', $slug)->with('categories', 'user', 'user.posts', 'user.followers', 'tags', 'comments')->firstOrFail();
     }
 
-    public function getUserBaseSlugPost(Request $request, $slug) {
+    public function getUserBaseSlugPost(Request $request, Post $post, $slug) {
     	$user = Post::where('slug', $slug)->first()->user()->firstOrFail();
     	
-        return $user->with('posts')->firstOrFail();
+        return User::where('id', $user->id)->with('posts', 'followers')->firstOrFail();
     }
 }

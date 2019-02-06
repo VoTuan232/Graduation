@@ -22,8 +22,9 @@ class TagController extends Controller
         $this->validate($request, [
             'name' => 'required|string|max:255|unique:tags',
         ]);
+        $request->merge(['slug' => str_slug($request->name)]);
 
-        $tag = Tag::create($request->only(['name']));
+        $tag = Tag::create($request->all());
 
         return $tag;
     }
@@ -32,8 +33,9 @@ class TagController extends Controller
     	$this->validate($request, [
             'name' => 'required|string|max:255|unique:tags,name,'.$tag->id,
         ]);
+        $request->merge(['slug' => str_slug($request->name)]);
 
-    	$tag->update($request->only(['name']));
+    	$tag->update($request->all());
 
     	return $tag;
     }

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use App\Models\Post;
+use App\Models\Tag;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,14 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
 
+        // Route::bind('tag', function($value) {
+        //     return Tag::where('id', $value)->orWhere('slug', $value)->first();
+        // });
+
+        // Route::bind('post', function($value) {
+        //     return Post::where('id', $value)->orWhere('slug', $value)->first();
+        // });
+        
         // Route::bind('post', function ($value) {
         //     return Post::find($value)->where('slug', $value)->orWhere(function ($query) use($value) {
         //         if (is_numeric($value)) {
