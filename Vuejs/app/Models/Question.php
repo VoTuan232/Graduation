@@ -14,6 +14,7 @@ class Question extends Model
         'body',
         'image',
         'view',
+        'user_id',
     ];
 
     protected $with = ['comments']; 
@@ -31,5 +32,10 @@ class Question extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

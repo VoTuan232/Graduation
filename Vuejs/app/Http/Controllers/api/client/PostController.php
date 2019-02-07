@@ -12,7 +12,7 @@ use DB;
 class PostController extends Controller
 {
     public function getNewestPosts() {
-    	return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'tags')->paginate(2);
+    	return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(2);
     }
 
     public function getSingle(Request $request, Post $post, $slug) {

@@ -23,6 +23,9 @@ $fa-font-path: "../webfonts";
 /*Bulma*/
 /*@import '~bulma/css/bulma.css';*/
 
+/*Popper*/
+@import '~vue-popperjs/dist/vue-popper.css';
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

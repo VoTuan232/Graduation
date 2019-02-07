@@ -31,7 +31,7 @@
                             <router-link to="/" class="nav-link" href="#">Posts <span class="sr-only">(current)</span></router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Question</a>
+                            <router-link to="/questions" class="nav-link" href="#">Question</router-link>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Discuss</a>

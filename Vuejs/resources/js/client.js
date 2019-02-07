@@ -15,6 +15,10 @@ const client = new Vue({
         return paths.some(path => {
           return this.$route.path.indexOf(path) === 0 // current path starts with this path string
         })
-      }
+      }, 
+
+      changeEmail(email) {
+          return email.replace('@gmail.com', '');
+      },
     }
 });

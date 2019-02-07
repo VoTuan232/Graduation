@@ -11,7 +11,7 @@
 
 		<div class="row">
 			<div class="col-md-8">
-				<div class="row"  v-for="post in tag['posts']" :key="post.id">
+				<div class="row"  v-for="post in reversePostOfTag(page)" :key="post.id">
 					<div class="col-md-1">
 						<img src="/images/profile/profile.png" class="avatar-client">
 					</div>
@@ -20,7 +20,7 @@
 							<a href="#">{{ post.user.name }}</a>
 							{{ post.created_at | agoDate }}
 							<br>
-							<router-link :to="'/t/' + post.slug">{{ post.title }}</router-link>{{ post.id }}
+							<router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>{{ post.id }}
 						</p>
 						<div class="btn-group">
 							<!-- <li  v-for="tag in post.tags"> -->
@@ -36,15 +36,13 @@
 						<hr>
 					</div>
 				</div>
-				<div class="card-footer">
-                    <pagination  :data="tag['posts']" @pagination-change-page="getResults"></pagination>
-                </div>
+				<button  v-for="n in totalPage" type="button" :class="page==n ? 'btn btn-success':'btn btn-light'" v-text="n" @click="changePage(n)"></button>
 			</div>
 			<div class="col-md-4">
 				{{ slug }}
 				<div class="row">
 					<div class="col-md-4">
-						{{ tag['posts'].length }} Posts
+						{{ posts.length }} Posts
 					</div>
 					<div class="col-md-4">
 						1 Question
@@ -65,42 +63,61 @@
 			return {
 				slug: this.$route.params.slug,
 				tag : {
-					posts: {},
 				},
-				page: 1
+				posts: {},
+				totalPage: '',
+				perPage: 3,
+				page: 1,
 			}
 		},
 
 		methods: {
-			getResults(page = 1) {
-                axios.get(''+'/api/m/posts?page=' + page)
-                    .then(response => {
-                        this.posts = response.data;
-                });
+			changePage(value) {
+				this.page = value;
+				this.scrollToTop();
+            },
+
+            reversePostOfTag(page=1) {
+		        var newArray = [];
+		        var x = this.posts.length;
+			  	for (var i = x - this.perPage*page + this.perPage - 1; i >= 0 && i >= x-this.perPage*page; i--) {
+			    	newArray.push(this.posts[i]);
+			  	}
+			  	return newArray;
+		    },
+
+            getPostFirstPage() {
+            	var newArray = [];
+            	var x = this.tag['posts'].length;
+            	console.log(x);
+			  	for (var i = x - 1; i >= 0 && i >= x-2; i--) {
+			    	newArray.push(this.tag['posts'][i]);
+			  	}
+			  	return newArray;
             },
             
 			getTagSingle() {
 				axios.get('' + '/api/t/'+this.slug)
-				.then(response => this.tag = response.data);
+				.then(response => (
+						this.tag = response.data, 
+						this.posts = response.data['posts'], 
+						this.totalPage = Math.ceil(response.data['posts'].length/this.perPage)
+					));
 			},
+
 			scrollToTop() {
                 window.scrollTo(0,0);
             }
 		},
 
 		computed: {
-		    reversePostOfTag: function() {
-		        var newArray = [];
-			  	for (var i = this.tag['posts'].length - 1; i >= 0; i--) {
-			    	newArray.push(this.tag['posts'][i]);
-			  	}
-			  	return newArray;
-		    }
+		    
 		},
 
 		watch: {
 		    '$route.params.slug': function (slug) {
 		    	this.slug = this.$route.params.slug;
+		    	this.page =1;
 		      	this.getTagSingle();
 				this.scrollToTop();
 		    },
@@ -110,6 +127,7 @@
 
 		created() {
 			this.getTagSingle();
+			// this.getPostFirstPage();
 		}
 	}
 </script>

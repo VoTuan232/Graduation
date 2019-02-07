@@ -55,6 +55,23 @@ let routes = [
     },
     { path: '/p/:slug', component: require('./components/client/post/SinglePost.vue').default  },
     { path: '/t/:slug', component: require('./components/client/tag/TagBaseSlug.vue').default  },
+    { 
+        path: '/u/:email', 
+        component: require('./components/client/user/User.vue').default,
+        children: [
+            {
+                path: '/u/:email',
+                component: require('./components/client/user/Post.vue').default,
+            },
+        ]  
+    },
+    { 
+        path: '/questions', 
+        component: require('./components/client/question/Question.vue').default,
+        children: [
+            
+        ]
+    },
 ];
 
 export default new VueRouter({

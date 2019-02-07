@@ -33,9 +33,9 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h1>{{ post['title'] }}</h1>
-				<button v-for="tag in post['tags']" type="button" class="btn btn-primary btn-client" :key="tag.id">
+				<router-link v-for="tag in post['tags']" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
 					{{ tag.name }}
-				</button>
+				</router-link>
 				<p>{{ post['body'] }}</p>
 			</div>
 		</div>

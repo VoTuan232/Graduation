@@ -50,6 +50,9 @@ Vue.component('multiselect', Multiselect);
 
 /*Vuejs paginator*/
 // Vue.component('paginate', require('vuejs-paginate'));
+// 
+/*Popper*/
+Vue.component('popper', require('vue-popperjs'));
 
 /**
  * The following block of code may be used to automatically register your
