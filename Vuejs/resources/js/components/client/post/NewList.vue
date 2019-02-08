@@ -40,12 +40,12 @@
 				        <router-link :to="'u/' + changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link>
 		                </a>  
 	                </popper>
-                {{ post.created_at | agoDate }}
+                {{ post.created_at }}
                 <br>
                 <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
                 </p>
                 <!-- <router-link :to="{ name: 'user', params: { userId: 123 }}">{{ post.title }}</router-link> -->
-                <div class="btn-group">
+                <div  v-if="post.tags.length > 0" class="btn-group">
                     <!-- <li  v-for="tag in post.tags"> -->
                     <router-link  v-for="tag in post.tags" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
                         {{ tag.name }}

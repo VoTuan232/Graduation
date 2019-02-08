@@ -69,9 +69,14 @@ let routes = [
         path: '/questions', 
         component: require('./components/client/question/Question.vue').default,
         children: [
-            
+             {
+                path: '/questions',
+                component: require('./components/client/question/Newest.vue').default,
+            },
         ]
     },
+    { path: '/questions/ask', component: require('./components/client/question/Ask.vue').default  },
+    { path: '/q/:slug', component: require('./components/client/question/Single.vue').default  },
 ];
 
 export default new VueRouter({

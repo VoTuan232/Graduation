@@ -56,7 +56,11 @@
             </nav>
             <img src="{{ asset('images/user-cover.jpg') }}" class="ads-client"/>
             <br><br>
-            <router-view></router-view>
+            <div class="row">
+              <div class="col-md-12">
+                <router-view></router-view>
+              </div>
+            </div>
             <vue-progress-bar></vue-progress-bar>
             <footer class="page-footer font-small blue pt-4">
 
@@ -155,13 +159,16 @@
         <!-- REQUIRED SCRIPTS -->
         <script src="{{ asset('/js/app.js') }}"></script>
         <script src="{{ asset('/js/client.js') }}"></script>
-        <script>
+         <script>
+            // window.user = @json(auth()->user());
+        </script>
+        {{-- <script>
             $(document).ready(function () {
             $("#linkHome").click(function(){
-             // $(this).removeClass();
             });
             });
-        </script>
+        </script> --}}
+
     </body>
 </html>
 

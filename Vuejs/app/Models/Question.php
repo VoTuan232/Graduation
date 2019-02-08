@@ -19,6 +19,11 @@ class Question extends Model
 
     protected $with = ['comments']; 
 
+    public function getRouteKeyName()
+    {
+        return 'slug'; // db column name
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_question', 'question_id', 'category_id');

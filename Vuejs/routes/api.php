@@ -65,7 +65,6 @@ Route::delete('m/comment/{comment}', 'api\admin\CommentController@destroy');
 
 /* client */
 Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
-
 Route::get('p/{slug}', 'api\client\PostController@getSingle');
 Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
 
@@ -73,3 +72,8 @@ Route::get('t/{tag}', 'api\client\TagController@getDataBaseSlugTag');
 
 Route::get('u/{email}', 'api\client\UserController@getSinge');
 Route::get('u/{email}/posts', 'api\client\UserController@getPostsOfUser');
+
+Route::post('m/question', 'api\admin\QuestionController@store');
+Route::get('q/{slug}', 'api\client\QuestionController@getSingle');
+Route::get('c/newestquestions', 'api\client\QuestionController@getNewests');
+

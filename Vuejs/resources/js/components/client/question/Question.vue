@@ -12,7 +12,7 @@
   <div>
       <div class="row">
         <div class="col-md-8">
-          <router-link to="/" href="#" class="list-function">Newlist</router-link>
+          <router-link to="/questions" href="#" class="list-function">Newlist</router-link>
           <router-link to="/series" class="list-function notfirst">Series</router-link>
           <router-link to="/following" class="list-function notfirst">Following</router-link>
           <router-link to="/following" class="list-function notfirst">Trendings</router-link>
@@ -20,7 +20,7 @@
           <router-link to="/following" class="list-function notfirst">Editor's Choice</router-link>
         </div>
         <div class="col-md-4">
-          <button type="button" class="btn btn-primary "><i class="fa fa-pen"></i>Ask Question</button>
+          <router-link to="/questions/ask" type="button" class="btn btn-primary "><i class="fa fa-pen"></i>Ask Question</router-link>
         </div>
       </div>
       <br><br>
