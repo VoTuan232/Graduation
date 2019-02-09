@@ -12,7 +12,11 @@ use DB;
 
 class TagController extends Controller
 {
-    public function getDataBaseSlugTag(Request $request, $slug) {
-        return Tag::where('slug', $slug)->with('posts', 'posts.user', 'posts.tags')->firstOrFail();
+	public function getSingle(Request $request, $slug) {
+		return Tag::where('slug', $slug)->firstOrFail();
+	}
+
+    public function getPostsBaseTag(Request $request, Tag $tag) {
+    	return $tag->posts()->orderBy('created_at', 'desc')->with('user', 'user.posts', 'user.followers', 'tags')->paginate(2);
     }
 }

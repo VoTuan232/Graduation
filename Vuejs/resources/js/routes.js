@@ -54,7 +54,16 @@ let routes = [
         ]
     },
     { path: '/p/:slug', component: require('./components/client/post/SinglePost.vue').default  },
-    { path: '/t/:slug', component: require('./components/client/tag/TagBaseSlug.vue').default  },
+    { 
+        path: '/t/:slug', 
+        component: require('./components/client/tag/Single.vue').default,
+        children: [
+            {
+                path: '/t/:slug',
+                component: require('./components/client/tag/PostBaseTag.vue').default,
+            },
+        ]    
+    },
     { 
         path: '/u/:email', 
         component: require('./components/client/user/User.vue').default,
@@ -62,6 +71,10 @@ let routes = [
             {
                 path: '/u/:email',
                 component: require('./components/client/user/Post.vue').default,
+            },
+            {
+                path: '/u/:email/questions',
+                component: require('./components/client/user/Question.vue').default,
             },
         ]  
     },

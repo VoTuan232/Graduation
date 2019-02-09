@@ -16,10 +16,10 @@ class Tag extends Model
 	 *
 	 * @return string
 	 */
-	// public function getRouteKeyName()
-	// {
-	//      return ['tag' => 'id', 'tag_slug' => 'slug'];
-	// }
+	public function getRouteKeyName()
+	{
+	     return 'slug';
+	}
 
     public function posts()
     {

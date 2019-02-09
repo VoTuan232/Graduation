@@ -68,10 +68,12 @@ Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
 Route::get('p/{slug}', 'api\client\PostController@getSingle');
 Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
 
-Route::get('t/{tag}', 'api\client\TagController@getDataBaseSlugTag');
+Route::get('t/{tag}', 'api\client\TagController@getSingle');
+Route::get('t/{tag}/posts', 'api\client\TagController@getPostsBaseTag');
 
 Route::get('u/{email}', 'api\client\UserController@getSinge');
 Route::get('u/{email}/posts', 'api\client\UserController@getPostsOfUser');
+Route::get('u/{email}/questions', 'api\client\UserController@getQuestionsOfUser');
 
 Route::post('m/question', 'api\admin\QuestionController@store');
 Route::get('q/{slug}', 'api\client\QuestionController@getSingle');

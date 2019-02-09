@@ -22,6 +22,7 @@ class Post extends Model
         'trending',
     ];
 
+    /* auto with in Pot Model*/
     protected $with = ['comments']; 
 
     public function user()
