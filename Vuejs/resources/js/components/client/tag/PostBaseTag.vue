@@ -18,24 +18,7 @@
 					</div>
 					<div class="col-md-11">
 						<p>
-							<popper trigger="hover" :options="{placement: 'top'}">
-				                <div class="popper">
-				                	<div class="row">
-				                		<div class="col-md-3">
-						                	<router-link :to="'' +'/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link>
-				                		</div>
-				                		<div class="col-md-9">
-						                	<router-link :to="'' +'/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link>
-						                	<br>
-						                	{{ post.user.followers.length }} follwers
-						                	{{ post.user.posts.length }} posts
-				                		</div>
-				                	</div>
-				                </div>
-				                <a href="#" slot="reference" class="top">
-						        <router-link :to="'' +'/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link>
-				                </a>  
-			                </popper>
+                   			 <user-popper :userData="post.user"></user-popper>
 							{{ post.created_at}}
 							<br>
 							<router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
@@ -57,8 +40,6 @@
 				 <div>
                     <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
                 </div>
-				<!-- <button  v-for="n in totalPage" type="button" :class="page==n ? 'btn btn-success':'btn btn-light'" v-text="n" @click="changePage(n)"></button> -->
-				<!-- this.$parent.$options.methods.someParentMethod(data) -->
 			</div>
 			<div class="col-md-4">
 				{{ slug }}
@@ -79,8 +60,12 @@
 </template>
 
 <script>
+    import UserPopper from '../../asset/UserPopper.vue';
+
 	export default {
 		props: ['tagData'],
+
+		components: {UserPopper},
 
 		data() {
 			return {

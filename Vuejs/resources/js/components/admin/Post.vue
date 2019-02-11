@@ -132,7 +132,7 @@
                             <div class="form-group">
                                 Published: 
                                 <input type="radio" v-model="form.published" v-bind:value="1">true
-                                <input type="radio" v-model="form.published" v-bind:value="0">false
+                                <input type="radio" v-model="form.published" v-bind:value="0" checked="checked" >false
                                 <has-error :form="form" field="published"></has-error>
                             </div>
                         </div>
@@ -287,7 +287,7 @@
 
          watch: {
             'form.title': function(value) {
-                this.form.slug = this.compileSlug(value);
+                this.form.slug = this.$root.sanitizeText(value);
             }
           },
 

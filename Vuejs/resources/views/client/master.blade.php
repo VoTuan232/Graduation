@@ -54,7 +54,7 @@
                     </form>
                 </div>
             </nav>
-            <img src="{{ asset('images/user-cover.jpg') }}" class="ads-client"/>
+            {{-- <img src="{{ asset('images/user-cover.jpg') }}" class="ads-client"/> --}}
             <br><br>
             <div class="row">
               <div class="col-md-12">

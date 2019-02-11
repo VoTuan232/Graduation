@@ -25,7 +25,17 @@ class PostController extends Controller
 
         DB::beginTransaction();
         try {
-            $post = Post::create($request->only(['title', 'slug', 'body', 'published', 'user_id']));
+
+            $request->merge(['user_id' => auth('api')->user()->id]);
+
+            if($request->published !=null) {
+                $request->merge(['published' => $request->published]);
+            }
+            else {
+                $request->merge(['published' => false]);
+            }
+
+            $post = Post::create($request->all());
 
             if(count($request->categories) > 0) {
                 $data_categories_sync = [];

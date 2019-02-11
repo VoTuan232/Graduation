@@ -12,7 +12,7 @@
 			</div>
 			<div class="col-md-8">
 				<p>
-					<a href="#">{{ post['user'].name }}</a>
+                    <user-popper :userData="post['user']"></user-popper>
 					{{ post['created_at'] | agoDate }}
 					<br>
 					<i class="fa fa-user-friends"></i>{{ post['user']['followers'].length }}&nbsp;&nbsp;&nbsp;
@@ -55,23 +55,16 @@
 			    <router-link :to="'/p/' + item.slug" href="#" class="btn btn-primary">>>>See More</router-link>
 			  </div>
 			</div>
-			<!-- <div v-for="post in shorterList" class="card list-under" style="width: 16.5rem;" :key="post.id">
-			  <div class="card-body">
-			    <h5 class="card-title">{{ post.title }}</h5>{{ post.id }}
-			    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			    <a href="#" class="btn btn-primary">Go somewhere</a>
-			  </div>
-			</div> -->
 		</div>
-		<!-- <button  @click="MoreOrLess(limitationList)" class="btn btn-primary">
-		    >>>show {{limitationList == 4 ? 'more' : 'less'}}
-		</button> -->
     </div>
 </template>
 
 <script>
+    import UserPopper from '../../asset/UserPopper.vue';
+
 	export default {
-	// console.log(this.$route.params.id);
+		components: {UserPopper},
+		
 		data() {
 			return {
 				slug: this.$route.params.slug,
@@ -83,31 +76,15 @@
 					},
 					comments: {},
 				},
-				// user: {
-				// 	posts: {},
-				// 	followers: {}
-				// },
 			}
 		},
 
 		methods: {
-			// MoreOrLess(limitationList){
-			//   if (this.limitationList == this.user['posts'].length) {
-			//     this.limitationList = 5
-			//   }else{
-			//     this.limitationList = this.user['posts'].length
-			//   }
-			// }
-			// ,
-
 			getPostSingle() {
 				axios.get('' + '/api/p/'+this.slug)
 				.then(response => this.post = response.data);
 			},
-			// getUserBaseSlugPost() {
-			// 	axios.get('' + '/api/user/p/'+this.slug)
-			// 	.then(response => this.user = response.data);
-			// }, 
+			
 			scrollToTop() {
                 window.scrollTo(0,0);
             }
@@ -127,7 +104,6 @@
 		    '$route.params.slug': function (slug) {
 		    	this.slug = this.$route.params.slug;
 		      	this.getPostSingle();
-				// this.getUserBaseSlugPost();
 				this.scrollToTop();
 		    },
 
@@ -136,7 +112,6 @@
 
 		created() {
 			this.getPostSingle();
-			// this.getUserBaseSlugPost();
 		}, 
 	}
 </script>

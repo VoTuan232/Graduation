@@ -75,7 +75,9 @@ Route::get('u/{email}', 'api\client\UserController@getSinge');
 Route::get('u/{email}/posts', 'api\client\UserController@getPostsOfUser');
 Route::get('u/{email}/questions', 'api\client\UserController@getQuestionsOfUser');
 
+Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');
 Route::get('q/{slug}', 'api\client\QuestionController@getSingle');
 Route::get('c/newestquestions', 'api\client\QuestionController@getNewests');
+
 

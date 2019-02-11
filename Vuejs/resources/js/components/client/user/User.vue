@@ -1,17 +1,26 @@
+<style>	
+	.avatar-user {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+	}
+</style>
 <template>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
-				<img src="" alt="User Avatar"/>
+			<div class="col-md-2">
+				<img v-if="user.avatar != null" :src="'images/profile/' + user.avatar" alt="User Avatar" class="avatar-user" />
+				<img v-else src="/images/profile/profile.png" alt="User Avatar" class="avatar-user" />
 			</div>
-			<div class="col-md-8">
-				{{ user.name }}
+			<div class="col-md-4">
+				{{ user.name }} &nbsp; <button>Follow</button>
 				<br>
 				{{ user.email }}
-
+				<br>
+				Report
 			</div>
 		</div>
-		<div class="row">
+		<div class="row mt-5">
           <router-link :to="'/u/' + slug" href="#" class="list-function">Posts</router-link>
           <router-link :to="'/u/' + slug + '/questions'" class="list-function notfirst">Questions</router-link>
           <router-link to="/series" class="list-function notfirst">Series</router-link>
@@ -20,7 +29,7 @@
           <router-link to="/following" class="list-function notfirst">Tags</router-link>
           <router-link to="/following" class="list-function notfirst">Drafts</router-link>
         </div>
-        <div class="row">
+        <div class="row  mt-5">
         	<div class="col-md-9">
         		<router-view :userData="user"></router-view>
         	</div>

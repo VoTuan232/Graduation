@@ -18,6 +18,7 @@ Route::get('/p/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\
 Route::get('/t/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 Route::get('/u/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 Route::get('/q/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
+Route::get('/publish/post',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 Route::get('/questions', 'client\HomeController@index')->name('client.index');
 Route::get('/questions/ask', 'client\HomeController@index')->name('client.index');
 Route::get('/discuss', 'client\HomeController@index')->name('client.index');

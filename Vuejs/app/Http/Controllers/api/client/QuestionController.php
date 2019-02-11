@@ -16,6 +16,10 @@ class QuestionController extends Controller
     	return Question::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(2);
     }
 
+    public function getQuestionSideBar() {
+        return Question::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->take(5)->get();
+    }
+
     public function getSingle(Request $request, $slug) {
         return Question::where('slug', $slug)->with('categories', 'user', 'user.posts', 'user.followers', 'user.questions', 'tags', 'comments')->firstOrFail();
     }

@@ -30,24 +30,7 @@
 					</div>
 					<div class="col-md-9">
 						<p>
-							<popper trigger="hover" :options="{placement: 'top'}">
-				                <div class="popper">
-				                	<div class="row">
-				                		<div class="col-md-3">
-						                	<router-link :to="'' + '/u/' + $root.changeEmail(question['user'].email)" href="#">{{ question['user'].name }}</router-link>
-				                		</div>
-				                		<div class="col-md-9">
-						                	<router-link :to="'' + '/u/' + $root.changeEmail(question['user'].email)" href="#">{{ question['user'].name }}</router-link>
-						                	<br>
-						                	{{ question['user'].followers.length }} follwers
-						                	{{ question['user'].posts.length }} posts
-				                		</div>
-				                	</div>
-				                </div>
-				                <a href="#" slot="reference" class="top">
-						        <router-link :to="'' + '/u/' + $root.changeEmail(question['user'].email)" href="#">{{ question['user'].name }}</router-link>
-				                </a>  
-			                </popper>
+                   			<user-popper :userData="question['user']"></user-popper>
 							{{ question['user'].email }}
 						</p>
 						<p>
@@ -62,14 +45,20 @@
 </template>
 
 <script>
+    import UserPopper from '../../asset/UserPopper.vue';
+
 	export default {
+		components: {UserPopper},
+		
 		data() {
 			return {
 				slug: this.$route.params.slug,
 				question : {
 					user: {
+						email: '',
 						followers: {},
 						posts: {},
+						questions: {},
 					},
 					comments: {},
 				},

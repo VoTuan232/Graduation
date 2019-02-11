@@ -54,6 +54,7 @@ let routes = [
         ]
     },
     { path: '/p/:slug', component: require('./components/client/post/SinglePost.vue').default  },
+    { path: '/publish/post', component: require('./components/client/post/Create.vue').default  },
     { 
         path: '/t/:slug', 
         component: require('./components/client/tag/Single.vue').default,
@@ -88,7 +89,7 @@ let routes = [
             },
         ]
     },
-    { path: '/questions/ask', component: require('./components/client/question/Ask.vue').default  },
+    { path: '/questions/ask', component: require('./components/client/question/Create.vue').default  },
     { path: '/q/:slug', component: require('./components/client/question/Single.vue').default  },
 ];
 

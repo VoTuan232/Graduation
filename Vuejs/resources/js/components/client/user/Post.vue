@@ -7,27 +7,10 @@
             </div>
             <div class="col-md-11">
                 <p>
-                    <popper trigger="hover" :options="{placement: 'top'}">
-		                <div class="popper">
-		                	<div class="row">
-		                		<div class="col-md-3">
-				                	<router-link :to="'u/' + slug" href="#">{{ userData.name }}</router-link>
-		                		</div>
-		                		<div class="col-md-9">
-				                	<router-link :to="'u/' + slug" href="#">{{ userData.name }}</router-link>
-				                	<br>
-				                	{{ userData.followers.length }} follwers
-				                	{{ userData.posts.length }} posts
-		                		</div>
-		                	</div>
-		                </div>
-		                <a href="#" slot="reference" class="top">
-				        <router-link :to="''+ '/u/' + slug" href="#">{{ userData.name }}</router-link>
-		                </a>  
-	                </popper>
-                {{ post.created_at}}
-                <br>
-                <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
+                   	<user-popper :userData="userData"></user-popper>
+	                {{ post.created_at}}
+	                <br>
+	                <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
                 </p>
                 <div v-if="post.tags.length > 0" class="btn-group">
                     <router-link  v-for="tag in post.tags" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
@@ -51,8 +34,12 @@
 </template>
 
 <script>
+    import UserPopper from '../../asset/UserPopper.vue';
+
 	export default {
 		props: ['userData'],
+
+		components: {UserPopper},
 
 		data() {
 			return {
