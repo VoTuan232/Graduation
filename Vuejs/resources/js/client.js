@@ -5,12 +5,22 @@ import router from './routes';
 import data from './asset/data';
 window.data = data;
 
+/*components*/
+Vue.component(
+    'user-popper',
+    require('./components/asset/UserPopper.vue').default
+);
+Vue.component(
+    'tag-of-new',
+    require('./components/asset/TagOfNew.vue').default
+);
 
 const client = new Vue({
     el: '#client',
     router,
     components: {},
     data: {
+        userLogged: userLogged,
     },
 
     methods: {
@@ -20,6 +30,10 @@ const client = new Vue({
           return this.$route.path.indexOf(path) === 0 // current path starts with this path string
         })
       }, 
+
+        scrollToTop() {
+            window.scrollTo(0,0);
+        },
 
       changeEmail(email) {
           return email.replace('@gmail.com', '');

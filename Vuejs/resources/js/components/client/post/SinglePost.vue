@@ -16,8 +16,6 @@
 					{{ post['created_at'] | agoDate }}
 					<br>
 					<i class="fa fa-user-friends"></i>{{ post['user']['followers'].length }}&nbsp;&nbsp;&nbsp;
-					<!-- <i class="fa fa-user-friends"></i>{{ user['followers'].length }}&nbsp;&nbsp;&nbsp; -->
-					<!-- <i class="fas fa-pen"></i>{{ user['posts'].length }} -->
 					<i class="fas fa-pen"></i>{{ post['user']['posts'].length }}
 				</p>
 				
@@ -33,9 +31,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h1>{{ post['title'] }}</h1>
-				<router-link v-for="tag in post['tags']" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
-					{{ tag.name }}
-				</router-link>
+                <tag-of-new :tagData="post['tags']"></tag-of-new>
 				<p>{{ post['body'] }}</p>
 			</div>
 		</div>
@@ -60,17 +56,14 @@
 </template>
 
 <script>
-    import UserPopper from '../../asset/UserPopper.vue';
-
 	export default {
-		components: {UserPopper},
-		
 		data() {
 			return {
 				slug: this.$route.params.slug,
 				limitationList: '',
 				post : {
 					user: {
+						email: '',
 						followers: {},
 						posts: {},
 					},
@@ -83,11 +76,9 @@
 			getPostSingle() {
 				axios.get('' + '/api/p/'+this.slug)
 				.then(response => this.post = response.data);
+				this.$root.scrollToTop();
+
 			},
-			
-			scrollToTop() {
-                window.scrollTo(0,0);
-            }
 		},
 
 		computed: {
@@ -104,14 +95,17 @@
 		    '$route.params.slug': function (slug) {
 		    	this.slug = this.$route.params.slug;
 		      	this.getPostSingle();
-				this.scrollToTop();
+				this.$root.scrollToTop();
+				
 		    },
 
 		    
 	 	},
 
 		created() {
+			this.$Progress.start();
 			this.getPostSingle();
+			this.$Progress.finish();
 		}, 
 	}
 </script>

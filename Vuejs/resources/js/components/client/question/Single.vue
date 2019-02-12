@@ -13,9 +13,7 @@
 					<i class="fa fa-comments client"></i>&nbsp;{{ question['comments'].length }}
 				</p>
 				<h1>{{ question['title'] }}</h1>
-				<router-link v-for="tag in question['tags']" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
-					{{ tag.name }}
-				</router-link>
+                    <tag-of-new :tagData="question['tags']"></tag-of-new>
 				<br>
 				<p>
 					{{ question['body'] }}
@@ -45,11 +43,7 @@
 </template>
 
 <script>
-    import UserPopper from '../../asset/UserPopper.vue';
-
 	export default {
-		components: {UserPopper},
-		
 		data() {
 			return {
 				slug: this.$route.params.slug,
@@ -96,7 +90,9 @@
 	 	},
 
 		created() {
+			 this.$Progress.start();
 			this.getQuestionSingle();
+            this.$Progress.finish();
 		}, 
 	}
 </script>

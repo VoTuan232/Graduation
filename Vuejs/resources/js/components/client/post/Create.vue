@@ -165,8 +165,10 @@
           },
 
 		created() {
+       this.$Progress.start();
       this.loadCategories();
       this.loadTags();
+            this.$Progress.finish();
 		}
 	}
 </script>

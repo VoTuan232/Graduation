@@ -19,7 +19,7 @@
           <router-link to="/following" class="list-function notfirst">Videos</router-link>
           <router-link to="/following" class="list-function notfirst">Editor's Choice</router-link>
         </div>
-        <div class="col-md-4">
+        <div v-if="$root.userLogged != null" class="col-md-4">
           <router-link to="publish/post" type="button" class="btn btn-primary "><i class="fa fa-pen"></i>Create Post</router-link>
         </div>
       </div>
@@ -39,7 +39,6 @@
 
 <script>
   import NewestQuestion from './NewestQuestion';
-
   export default {
     components: {NewestQuestion},
     data() {

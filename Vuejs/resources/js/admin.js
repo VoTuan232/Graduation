@@ -2,6 +2,16 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 import router from './routes';
 
+/*component*/
+Vue.component(
+    'not-found',
+    require('./components/NotFound.vue').default
+);
+
+/*gate*/
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user)
+
 const admin = new Vue({
     el: '#admin',
     router: router,

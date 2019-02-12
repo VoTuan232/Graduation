@@ -286,9 +286,11 @@
             //     })
             //     .catch(() => {})
             // });
+             this.$Progress.start();
             this.loadPosts();
             this.loadCategories();
             this.loadTags();
+            this.$Progress.finish();
             // after event active
             Fire.$on('AfterCrud', () => {
                 this.loadPosts();

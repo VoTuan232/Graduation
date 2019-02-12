@@ -157,11 +157,17 @@
   </footer>
         </div>
         <!-- REQUIRED SCRIPTS -->
+        <script>
+            // window.user = @json(auth()->user());
+            window.userLogged = {!! json_encode($userLogged); !!};
+        </script>
+        {{-- <script>
+              /*user*/
+              window.auth_user = {!! json_encode(Auth::user()); !!};
+        </script> --}}
         <script src="{{ asset('/js/app.js') }}"></script>
         <script src="{{ asset('/js/client.js') }}"></script>
-         <script>
-            // window.user = @json(auth()->user());
-        </script>
+          
         {{-- <script>
             $(document).ready(function () {
             $("#linkHome").click(function(){

@@ -19,7 +19,7 @@
           <router-link to="/following" class="list-function notfirst">Videos</router-link>
           <router-link to="/following" class="list-function notfirst">Editor's Choice</router-link>
         </div>
-        <div class="col-md-4">
+        <div v-if="$root.userLogged != null" class="col-md-4">
           <router-link to="/questions/ask" type="button" class="btn btn-primary "><i class="fa fa-pen"></i>Ask Question</router-link>
         </div>
       </div>

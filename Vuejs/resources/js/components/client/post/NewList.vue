@@ -29,11 +29,7 @@
                 </p>
                 <!-- <router-link :to="{ name: 'user', params: { userId: 123 }}">{{ post.title }}</router-link> -->
                 <div  v-if="post.tags.length > 0" class="btn-group">
-                    <!-- <li  v-for="tag in post.tags"> -->
-                    <router-link  v-for="tag in post.tags" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
-                        {{ tag.name }}
-                    </router-link>
-                    <!-- </li> -->
+                    <tag-of-new :tagData="post.tags"></tag-of-new>
                 </div>
                 <p>
                     <i class="fas fa-eye client"></i>&nbsp;{{ post.view }} &nbsp;&nbsp;&nbsp;
@@ -48,10 +44,11 @@
     </div>
 </template>
 <script>
-    import UserPopper from '../../asset/UserPopper.vue';
+    // import UserPopper from '../../asset/UserPopper.vue';
+    // import TagOfNew from '../../asset/TagOfNew.vue';
 
     export default {
-        components: { UserPopper },
+        // components: { UserPopper, TagOfNew },
     	data() {
     		return {
     			posts: {},
@@ -68,6 +65,8 @@
                        .then(response => {
                            this.posts = response.data;
                    });
+                this.$root.scrollToTop();
+                       
                },
     
     		getPosts() {
@@ -77,7 +76,9 @@
     	},
     
     	created() {
-    		this.getPosts();
+            this.$Progress.start();
+            this.getPosts();
+            this.$Progress.finish();
     	}
     
     }

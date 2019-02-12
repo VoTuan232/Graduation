@@ -203,7 +203,9 @@
             //     })
             //     .catch(() => {})
             // });
+             this.$Progress.start();
             this.loadTags();
+            this.$Progress.finish();
             // after event active
             Fire.$on('AfterCrud', () => {
                 this.loadTags();

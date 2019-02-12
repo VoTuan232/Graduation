@@ -218,7 +218,9 @@
             //     })
             //     .catch(() => {})
             // });
+             this.$Progress.start();
             this.loadRoles();
+            this.$Progress.finish();
             // after event active
             Fire.$on('AfterCrud', () => {
                 this.loadRoles();

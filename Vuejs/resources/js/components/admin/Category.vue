@@ -259,8 +259,10 @@
             //     })
             //     .catch(() => {})
             // });
+             this.$Progress.start();
             this.loadCategories();
             this.loadCategoriesModel();
+            this.$Progress.finish();
             // after event active
             Fire.$on('AfterCrud', () => {
                 this.loadCategories();

@@ -161,9 +161,11 @@
         },
         
         created() {
+             this.$Progress.start();
             this.countFollows();
             this.countFollowers();
             this.countPosts();
+            this.$Progress.finish();
             Fire.$on('afterUpdateProfile', () => {
                 this.getUser();
             });

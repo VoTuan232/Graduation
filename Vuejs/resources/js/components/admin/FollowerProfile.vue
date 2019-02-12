@@ -73,7 +73,9 @@
     	},
 
     	created() {
-    		this.loadUsers();
+             this.$Progress.start();
+            this.loadUsers();
+            this.$Progress.finish();
     	}
     }
 </script>

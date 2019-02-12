@@ -206,7 +206,9 @@
             //     })
             //     .catch(() => {})
             // });
+             this.$Progress.start();
             this.loadComments();
+            this.$Progress.finish();
             // after event active
             Fire.$on('AfterCrud', () => {
                 this.loadComments();

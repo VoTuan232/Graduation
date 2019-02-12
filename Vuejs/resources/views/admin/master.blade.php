@@ -212,6 +212,14 @@
                                 </router-link>
                             </li>
                             <li class="nav-item">
+                                <router-link to="/m/posts" class="nav-link">
+                                    <i class="nav-icon fas fa-newspaper blue"></i>
+                                    <p>
+                                        Questions
+                                    </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
                                 <router-link to="/m/tags" class="nav-link">
                                     <i class="nav-icon fas fa-tags orange"></i>
                                     <p>

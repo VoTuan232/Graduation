@@ -3,19 +3,17 @@
 
 <template>
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5" v-if="$gate.isAdmin()">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">User Table</h3>
                         <div class="card-tools">
-                            <!-- <button class="btn btn-success" data-toggle="modal" data-target="#addNew">Add New -->
                             <button class="btn btn-success" @click="newModal">Add New
                             <i class="fas fa-user-plus fa-fw"></i>
                             </button>
                         </div>
                     </div>
-                    <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover">
                             <tbody>
@@ -50,13 +48,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                     <div class="card-footer">
                         <pagination  :data="users" @pagination-change-page="getResults"></pagination>
                     </div>
                 </div>
-                <!-- /.card -->
             </div>
+        </div>
+        <div v-else>
+            <not-found></not-found>
         </div>
 
         <div id="addNew" class="modal fade" role="dialog">
@@ -259,8 +258,10 @@
             //     })
             //     .catch(() => {})
             // });
+             this.$Progress.start();
             this.loadUsers();
             this.loadRoles();
+            this.$Progress.finish();
             // after event active
             Fire.$on('AfterCrud', () => {
                 this.loadUsers();

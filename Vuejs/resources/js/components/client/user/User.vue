@@ -4,20 +4,30 @@
 		height: 80px;
 		border-radius: 50%;
 	}
+
+	.username {
+		font-size: 1.9rem;
+	}
+
+	.follow {
+		margin-bottom: 13px;
+		border: 1px solid #e6bdbd;
+	}
 </style>
 <template>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2">
-				<img v-if="user.avatar != null" :src="'images/profile/' + user.avatar" alt="User Avatar" class="avatar-user" />
+				<img v-if="user.avatar != null" :src="'/images/profile/' + user.avatar" alt="User Avatar" class="avatar-user" />
 				<img v-else src="/images/profile/profile.png" alt="User Avatar" class="avatar-user" />
 			</div>
-			<div class="col-md-4">
-				{{ user.name }} &nbsp; <button>Follow</button>
-				<br>
-				{{ user.email }}
-				<br>
-				Report
+			<div class="col-md-10">
+				<p>
+				<span class="username">{{ user.name }}</span> &nbsp; 
+				<button  class="btn btn-light follow" type="button">Follow</button>
+				</p>
+				<p>{{ user.email }}</p>
+				<p>Report</p>
 			</div>
 		</div>
 		<div class="row mt-5">
@@ -55,11 +65,14 @@
 				.then(response => 
 					this.user = response.data,
 				);
+				this.$root.scrollToTop();
 			}
 		},
 
 		created() {
+            this.$Progress.start();
 			this.getUserSingle();
+            this.$Progress.finish();
 		}
 	}
 </script>

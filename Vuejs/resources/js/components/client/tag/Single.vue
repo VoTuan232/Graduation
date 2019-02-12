@@ -48,7 +48,9 @@
     },
 
     created() {
+       this.$Progress.start();
       this.getTagSingle();
+            this.$Progress.finish();
     }
   }
 </script>

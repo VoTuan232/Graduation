@@ -101,7 +101,9 @@
     	},
 
     	created() {
-    		this.loadUsers();
+             this.$Progress.start();
+            this.loadUsers();
+            this.$Progress.finish();
 
     		Fire.$on('AfterUnfollow', () => {
     			this.loadUsers();

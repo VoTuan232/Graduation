@@ -178,7 +178,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         //debug bar
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        //jwt
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ],
 
     /*
@@ -231,7 +232,9 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         //debug bar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
+        //jwt
+       'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];

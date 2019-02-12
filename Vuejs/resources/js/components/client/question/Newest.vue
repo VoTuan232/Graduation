@@ -26,9 +26,7 @@
                     <router-link :to="'/q/' + question.slug">{{ question.title }}</router-link>
                 </p>
                 <div v-if="question.tags.length > 0" class="btn-group">
-                    <router-link  v-for="tag in question.tags" :to="'/t/' + tag.slug" type="button" class="btn btn-primary btn-client" :key="tag.id">
-                        {{ tag.name }}
-                    </router-link>
+                    <tag-of-new :tagData="question.tags"></tag-of-new>
                 </div>
                 <p>
                     <i class="fas fa-eye client"></i>&nbsp;{{ question.view }} &nbsp;&nbsp;&nbsp;
@@ -43,11 +41,7 @@
     </div>
 </template>
 <script>
-    import UserPopper from '../../asset/UserPopper.vue';
-
     export default {
-        components: {UserPopper},
-        
     	data() {
     		return {
     			questions: {},
@@ -60,6 +54,8 @@
                        .then(response => {
                            this.questions = response.data;
                    });
+                this.$root.scrollToTop();
+                       
                },
     
     		getQuestions() {
@@ -73,8 +69,10 @@
 	 	},
     
     	created() {
-    		console.log('created', this);
-    		this.getQuestions();
+    		// console.log('created', this);
+             this.$Progress.start();
+            this.getQuestions();
+            this.$Progress.finish(); 
     	}
     
     }
