@@ -10,7 +10,7 @@
                         <h3 class="card-title">User Table</h3>
                         <div class="card-tools">
                             <button class="btn btn-success" @click="newModal">Add New
-                            <i class="fas fa-user-plus fa-fw"></i>
+                            <i class="fas fa-plus-square"></i>                           
                             </button>
                         </div>
                     </div>

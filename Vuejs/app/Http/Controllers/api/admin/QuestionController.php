@@ -19,7 +19,7 @@ class QuestionController extends Controller
     }
 
     public function index() {
-    	return Post::with('categories', 'user', 'tags')->paginate(2);
+    	return Question::with('categories', 'user', 'tags')->paginate(2);
     }
 
     public function store(Request $request)
@@ -63,24 +63,23 @@ class QuestionController extends Controller
         return $question;
     }
 
-    public function update(Request $request, Post $post) {
+    public function update(Request $request, Question $question) {
         $this->validate($request, [
             'title'       => 'required|max:255',
-            'slug'        => 'required|alpha_dash|min:5|max:255|unique:posts,slug,'.$post->id,
+            'slug'        => 'required|alpha_dash|min:5|max:255|unique:posts,slug,'.$question->id,
             'body'         => 'required',
         ]);
 
-
         DB::beginTransaction();
         try {
-            $post->update($request->all());
+            $question->update($request->all());
 
             if(count($request->categories) > 0) {
                 $data_categories_sync = [];
                 foreach ($request->categories as $key => $value) {
                     array_push($data_categories_sync, $value['id']);
                 }
-                $post->categories()->sync($data_categories_sync);
+                $question->categories()->sync($data_categories_sync);
             }
 
             if(count($request->tags) > 0) {
@@ -88,7 +87,7 @@ class QuestionController extends Controller
                 foreach ($request->tags as $key => $value) {
                     array_push($data_tags_sync, $value['id']);
                 }
-                    $post->tags()->sync($data_tags_sync);
+                    $question->tags()->sync($data_tags_sync);
             }
 
             DB::commit();
@@ -96,13 +95,11 @@ class QuestionController extends Controller
         catch (\Exception $e) {
             DB::rollback();
         }
-
-        // return $post;
     }
 
-    public function destroy(Post $post) {
-        $post->categories()->detach();
-        $post->tags()->detach();
-        $post->delete();
+    public function destroy(Question $question) {
+        $question->categories()->detach();
+        $question->tags()->detach();
+        $question->delete();
     }
 }

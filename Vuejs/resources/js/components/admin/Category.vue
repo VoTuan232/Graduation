@@ -11,7 +11,7 @@
                         <div class="card-tools">
                             <!-- <button class="btn btn-success" data-toggle="modal" data-target="#addNew">Add New -->
                             <button class="btn btn-success" @click="newModal">Add New
-                            <i class="fas fa-user-plus fa-fw"></i>
+                            <i class="fas fa-plus-square"></i>
                             </button>
                         </div>
                     </div>

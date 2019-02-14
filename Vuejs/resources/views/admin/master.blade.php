@@ -212,7 +212,7 @@
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link to="/m/posts" class="nav-link">
+                                <router-link to="/m/questions" class="nav-link">
                                     <i class="nav-icon fas fa-newspaper blue"></i>
                                     <p>
                                         Questions
@@ -245,7 +245,7 @@
                             </li>
                             <li class="nav-item">
                                 <router-link to="/m/comments" class="nav-link">
-                                    <i class="nav-icon fas fa-user blue"></i>
+                                    <i class="fas fa-comments"></i>
                                     <p>
                                         Comments
                                     </p>

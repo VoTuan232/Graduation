@@ -7,6 +7,7 @@ let routes = [
     { path: '/m/categories', component: require('./components/admin/Category.vue').default },
     { path: '/m/roles', component: require('./components/admin/Role.vue').default },
     { path: '/m/posts', component: require('./components/admin/Post.vue').default },
+    { path: '/m/questions', component: require('./components/admin/Question.vue').default },
     { path: '/m/comments', component: require('./components/admin/Comment.vue').default },
     {
         path: '/profile',

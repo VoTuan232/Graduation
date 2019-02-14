@@ -11,7 +11,7 @@
                         <div class="card-tools">
                             <!-- <button class="btn btn-success" data-toggle="modal" data-target="#addNew">Add New -->
                             <button class="btn btn-success" @click="newModal">Add New
-                            <i class="fas fa-user-plus fa-fw"></i>
+                            <i class="fas fa-plus-square"></i>
                             </button>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                                     <th>ID</th>
                                     <th>Title</th>
                                     <th>Slug</th>
-                                    <th>Body</th>
+                                    <!-- <th>Body</th> -->
                                     <th>Published</th>
                                     <th>User</th>
                                     <th>Category</th>
@@ -35,7 +35,7 @@
                                     <td>{{ post.id }}</td>
                                     <td>{{ post.title }}</td>
                                     <td>{{ post.slug }}</td>
-                                    <td>{{ post.body }}</td>
+                                    <!-- <td v-html="post.body"></td> -->
                                     <td>{{ post.published }}</td>
                                     <td>{{ post.user.name }}</td>
                                     <td>
@@ -96,11 +96,14 @@
                                 <has-error :form="form" field="slug"></has-error>
                             </div>
                             <div class="form-group">
+                              <ckeditor :editor="editor" v-model="form.body" :config="editorConfig"></ckeditor>
+                            </div>
+                            <!-- <div class="form-group">
                                 <input v-model="form.body" type="text" name="body"
                                     placeholder="Body..." 
                                     class="form-control" :class="{ 'is-invalid': form.errors.has('body') }">
                                 <has-error :form="form" field="body"></has-error>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <multiselect 
                                 v-model="form.categories" 
@@ -148,6 +151,8 @@
     </div>
 </template>
 <script>
+  import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
     export default {
         data () {
             return {
@@ -167,7 +172,10 @@
                     user_id : user.id,
                     categories : [],
                     tags : [],
-                })
+                }),
+                 editor: ClassicEditor,
+                editorConfig: {
+                }
             }
         },
         methods: {

@@ -31,19 +31,21 @@ Route::get('/discuss', 'client\HomeController@index')->name('client.index');
 Route::middleware(['auth'])->group(function () {
 	Route::get('/admin', 'admin\AdminController@index')->name('admin.index');
 	
-	Route::get('/m/users', 'admin\UserController@index')->name('admin.user.index');
+	Route::get('/m/users', 'admin\AdminController@index')->name('admin.user.index');
 
-	Route::get('/m/tags', 'admin\TagController@index')->name('admin.tag.index');
+	Route::get('/m/tags', 'admin\AdminController@index')->name('admin.tag.index');
 
-	Route::get('/m/categories', 'admin\CategoryController@index')->name('admin.categories.index');
+	Route::get('/m/categories', 'admin\AdminController@index')->name('admin.categories.index');
 
-	Route::get('/m/roles', 'admin\RoleController@index')->name('admin.roles.index');
+	Route::get('/m/roles', 'admin\AdminController@index')->name('admin.roles.index');
 
-	Route::get('/m/posts', 'admin\PostController@index')->name('admin.posts.index');
+	Route::get('/m/posts', 'admin\AdminController@index')->name('admin.posts.index');
 
-	Route::get('/m/comments', 'admin\CommentController@index')->name('admin.comments.index');
+	Route::get('/m/questions', 'admin\AdminController@index')->name('admin.posts.index');
 
-	Route::get('/profile', 'admin\ProfileController@index')->name('user.profile');
-	Route::get('/profile/{path}',"admin\ProfileController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
+	Route::get('/m/comments', 'admin\AdminController@index')->name('admin.comments.index');
+
+	Route::get('/profile', 'admin\AdminController@index')->name('user.profile');
+	Route::get('/profile/{path}',"admin\AdminController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 });
 

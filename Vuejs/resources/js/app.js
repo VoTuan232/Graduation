@@ -23,6 +23,10 @@ Vue.use(VueProgressBar, {
   height: '2px'
 })
 
+/*Ckeditor*/
+import CKEditor from '@ckeditor/ckeditor5-vue';
+Vue.use(CKEditor);
+
 /*VForm*/
 import { Form, HasError, AlertError } from 'vform'
 window.Form = Form;

@@ -58,6 +58,11 @@ Route::post('m/post', 'api\admin\PostController@store');
 Route::put('m/post/{post}', 'api\admin\PostController@update');
 Route::delete('m/post/{post}', 'api\admin\PostController@destroy');
 
+Route::get('m/questions', 'api\admin\QuestionController@index');
+Route::post('m/question', 'api\admin\QuestionController@store');
+Route::put('m/question/{question}', 'api\admin\QuestionController@update');
+Route::delete('m/question/{question}', 'api\admin\QuestionController@destroy');
+
 Route::get('m/comments', 'api\admin\CommentController@index');
 Route::post('m/comment', 'api\admin\CommentController@store');
 Route::put('m/comment/{comment}', 'api\admin\CommentController@update');

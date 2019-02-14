@@ -15,9 +15,7 @@
 				<h1>{{ question['title'] }}</h1>
                     <tag-of-new :tagData="question['tags']"></tag-of-new>
 				<br>
-				<p>
-					{{ question['body'] }}
-				</p>
+				<p v-html="question['body']"></p>
 				<button type="button" class="btn btn-primary">Post Answer</button>
 			</div>
 			<div class="col-md-3">

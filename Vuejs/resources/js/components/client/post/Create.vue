@@ -22,10 +22,7 @@
                 </div>
                 <!-- textarea -->
                 <div class="form-group">
-                    <input v-model="form.body" type="text" name="body"
-                        placeholder="Body..." 
-                        class="form-control" :class="{ 'is-invalid': form.errors.has('body') }">
-                    <has-error :form="form" field="body"></has-error>
+                  <ckeditor :editor="editor" v-model="form.body" :config="editorConfig"></ckeditor>
                 </div>
                 <div class="form-group">
                     <multiselect 
@@ -74,6 +71,7 @@
   // import TagView from '../../asset/Tag.vue' 
 
   // import {data} from './data.js'; 
+  import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
   export default {
     // components: {TagView},
@@ -82,13 +80,16 @@
 				  categories : [],
           tags : [],
 				form: new Form({
-					title: '',
-					slug: '',
-					body: '',
-          published: '',
-          categories : [],
-          tags : [],
-				})
+  					title: '',
+  					slug: '',
+  					body: '',
+            published: '',
+            categories : [],
+            tags : [],
+  				}),
+        editor: ClassicEditor,
+        editorConfig: {
+        }
 			}
 		},
 
