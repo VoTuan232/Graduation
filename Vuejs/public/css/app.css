@@ -31043,3 +31043,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 }
 */
 
+.ck-editor__editable {
+  min-height: 180px;
+}
+

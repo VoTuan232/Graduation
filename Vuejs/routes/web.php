@@ -22,7 +22,7 @@ Route::get('/q/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/publish/post',"client\HomeController@index");
-	Route::get('/questions/ask', 'client\HomeController@index')->name('client.index');
+	Route::get('/question/ask', 'client\HomeController@index')->name('client.index');
 });
 
 Route::get('/questions', 'client\HomeController@index')->name('client.index');

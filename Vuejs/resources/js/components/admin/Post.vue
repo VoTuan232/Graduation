@@ -1,6 +1,5 @@
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-
 <template>
     <div class="container">
         <div class="row mt-5">
@@ -72,7 +71,7 @@
         </div>
 
         <div id="addNew" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-lg" role="document" style="margin-left: 25%;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 v-show="!editMode" class="modal-title" id="exampleModalLabel">Add New</h5>

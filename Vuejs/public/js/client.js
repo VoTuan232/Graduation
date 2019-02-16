@@ -1092,7 +1092,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -7294,7 +7293,8 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "modal-dialog modal-dialog-centered",
+            staticClass: "modal-dialog modal-lg",
+            staticStyle: { "margin-left": "25%" },
             attrs: { role: "document" }
           },
           [
@@ -8594,7 +8594,8 @@ var render = function() {
         _c(
           "div",
           {
-            staticClass: "modal-dialog modal-dialog-centered",
+            staticClass: "modal-dialog modal-lg",
+            staticStyle: { "margin-left": "25%" },
             attrs: { role: "document" }
           },
           [
@@ -11551,7 +11552,7 @@ var render = function() {
                 "router-link",
                 {
                   staticClass: "btn btn-primary ",
-                  attrs: { to: "/questions/ask", type: "button" }
+                  attrs: { to: "/question/ask", type: "button" }
                 },
                 [_c("i", { staticClass: "fa fa-pen" }), _vm._v("Ask Question")]
               )
@@ -17748,7 +17749,7 @@ var routes = [{
     component: __webpack_require__(/*! ./components/client/question/Newest.vue */ "./resources/js/components/client/question/Newest.vue").default
   }]
 }, {
-  path: '/questions/ask',
+  path: '/question/ask',
   component: __webpack_require__(/*! ./components/client/question/Create.vue */ "./resources/js/components/client/question/Create.vue").default
 }, {
   path: '/q/:slug',

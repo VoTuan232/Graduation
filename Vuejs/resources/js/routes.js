@@ -90,7 +90,7 @@ let routes = [
             },
         ]
     },
-    { path: '/questions/ask', component: require('./components/client/question/Create.vue').default  },
+    { path: '/question/ask', component: require('./components/client/question/Create.vue').default  },
     { path: '/q/:slug', component: require('./components/client/question/Single.vue').default  },
 ];
 

@@ -47,8 +47,7 @@ B : Design Client
 	
 B7: Manager website for clients
 
-B : Use JWT API: 
-https://github.com/tymondesigns/jwt-auth/wiki/Installation
+B : Authenticated
 
 B : Craw data posts for search
 
