@@ -35,6 +35,16 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+     public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+     public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_user');

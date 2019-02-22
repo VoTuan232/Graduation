@@ -73,7 +73,7 @@
 
 		methods: {
 			getResults(page = 1) {
-                axios.get('' + '/api/t/' + this.slug + '/posts?page=' + page)
+                axios.get('t/' + this.slug + '/posts?page=' + page)
                     .then(response => {
                         this.posts = response.data;
                 });
@@ -86,7 +86,7 @@
             },
 
 			getTagSingle() {
-				axios.get('' + '/api/t/' + this.slug + '/posts')
+				axios.get('t/' + this.slug + '/posts')
 				.then(response => this.posts = response.data);
 			},
 

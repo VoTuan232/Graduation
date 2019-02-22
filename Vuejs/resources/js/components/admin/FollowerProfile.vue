@@ -61,19 +61,19 @@
 
     	methods: {
             getResults(page = 1) {
-                axios.get(''+'/api/user/followers?page=' + page)
+                axios.get('user/followers?page=' + page)
                     .then(response => {
                         this.users = response.data;
                 });
             },
 
     		loadUsers() {
-    			axios.get(''+'/api/user/followers').then(response => this.users = response.data);
+    			axios.get('user/followers').then(response => this.users = response.data);
     		},
     	},
 
     	created() {
-             this.$Progress.start();
+            this.$Progress.start();
             this.loadUsers();
             this.$Progress.finish();
     	}

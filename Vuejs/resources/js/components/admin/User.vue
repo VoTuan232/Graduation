@@ -3,7 +3,8 @@
 
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isAdmin()">
+        <!-- <div class="row mt-5" v-if="$gate.isAdmin()"> -->
+        <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
@@ -54,9 +55,9 @@
                 </div>
             </div>
         </div>
-        <div v-else>
+      <!--   <div v-else>
             <not-found></not-found>
-        </div>
+        </div> -->
 
         <div id="addNew" class="modal fade" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -149,7 +150,7 @@
         },
         methods: {
             getResults(page = 1) {
-                axios.get(''+'/api/m/users?page=' + page)
+                axios.get('m/users?page=' + page)
                     .then(response => {
                         this.users = response.data;
                 });
@@ -157,7 +158,7 @@
 
             updateUser() {
                 // console.log(this.form.name);
-                this.form.put(''+'/api/m/user/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put('m/user/' + this.form.id) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -203,7 +204,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete(''+'/api/m/user/'+id)
+                        this.form.delete('m/user/'+id)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(
@@ -221,17 +222,17 @@
 
             loadUsers() {
                 // if(this.$gate.isAdminorAuthor()) {
-                    axios.get(''+'/api/m/users').then(({ data }) => (this.users = data));
+                    axios.get('m/users').then(({ data }) => (this.users = data));
                 // }
             },
 
             loadRoles() {
-                    axios.get(''+'/api/m/roles/all').then(({ data }) => (this.roles = data));
+                    axios.get('m/roles/all').then(({ data }) => (this.roles = data));
             },
 
             createUser() {
                 this.$Progress.start();
-                this.form.post(''+'/api/m/user')
+                this.form.post('m/user')
                 .then(() => {
                     //call event
                     Fire.$emit('AfterCrud');

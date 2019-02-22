@@ -74,7 +74,7 @@
 
 		methods: {
 			getPostSingle() {
-				axios.get('' + '/api/p/'+this.slug)
+				axios.get('p/'+this.slug)
 				.then(response => this.post = response.data);
 				this.$root.scrollToTop();
 			},

@@ -11,24 +11,26 @@
 |
 */
 
-Auth::routes();
-Route::get('logout','Auth\LoginController@logout');
+// Auth::routes();
+// Route::get('logout','Auth\LoginController@logout');
 
 Route::get('/', 'client\HomeController@index')->name('client.index');
+Route::get('/login', 'client\HomeController@index')->name('client.index');
+Route::get('/register', 'client\HomeController@index')->name('client.index');
 Route::get('/p/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 Route::get('/t/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 Route::get('/u/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 Route::get('/q/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['jwt.auth'])->group(function () {
 	Route::get('/publish/post',"client\HomeController@index");
 	Route::get('/question/ask', 'client\HomeController@index')->name('client.index');
-});
+// });
 
 Route::get('/questions', 'client\HomeController@index')->name('client.index');
 Route::get('/discuss', 'client\HomeController@index')->name('client.index');
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['jwt.auth'])->group(function () {
 	Route::get('/admin', 'admin\AdminController@index')->name('admin.index');
 	
 	Route::get('/m/users', 'admin\AdminController@index')->name('admin.user.index');
@@ -47,5 +49,5 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::get('/profile', 'admin\AdminController@index')->name('user.profile');
 	Route::get('/profile/{path}',"admin\AdminController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
-});
+// });
 

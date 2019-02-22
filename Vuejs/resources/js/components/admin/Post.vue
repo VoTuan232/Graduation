@@ -159,7 +159,6 @@
                 posts : {},
                 categories : [],
                 tags : [],
-                user : user,
               // Create a new form instance
                 form: new Form({
                     id : '',
@@ -168,7 +167,7 @@
                     body : '',
                     image : '',
                     published : '0',
-                    user_id : user.id,
+                    user_id : this.$auth.user().id,
                     categories : [],
                     tags : [],
                 }),
@@ -179,14 +178,14 @@
         },
         methods: {
             getResults(page = 1) {
-                axios.get(''+'/api/m/posts?page=' + page)
+                axios.get('m/posts?page=' + page)
                     .then(response => {
                         this.posts = response.data;
                 });
             },
 
             updatePost() {
-                this.form.put(''+'/api/m/post/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put('m/post/' + this.form.id) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -232,7 +231,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete(''+'/api/m/post/'+id)
+                        this.form.delete('m/post/'+id)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(
@@ -250,21 +249,21 @@
 
             loadPosts() {
                 // if(this.$gate.isAdminorAuthor()) {
-                    axios.get(''+'/api/m/posts').then(({ data }) => (this.posts = data));
+                    axios.get('m/posts').then(({ data }) => (this.posts = data));
                 // }
             },
 
             loadCategories() {
-                    axios.get(''+'/api/m/categories/all').then(({ data }) => (this.categories = data));
+                    axios.get('m/categories/all').then(({ data }) => (this.categories = data));
             },
 
             loadTags() {
-                    axios.get(''+'/api/m/tags/all').then(({ data }) => (this.tags = data));
+                    axios.get('m/tags/all').then(({ data }) => (this.tags = data));
             },
 
             createPost() {
                 this.$Progress.start();
-                this.form.post(''+'/api/m/post')
+                this.form.post('m/post')
                 .then(() => {
                     //call event
                     Fire.$emit('AfterCrud');

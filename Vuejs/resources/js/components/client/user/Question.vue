@@ -44,7 +44,7 @@
 
 		methods: {
 			getResults(page = 1) {
-                axios.get('' + '/api/u/' + this.slug + '/questions?page=' + page)
+                axios.get('u/' + this.slug + '/questions?page=' + page)
                     .then(response => {
                         this.questions = response.data;
                 });
@@ -53,7 +53,7 @@
             },
 
 			getQuestionsOfUser() {
-				axios.get('' + '/api/u/' + this.slug + '/questions')
+				axios.get('u/' + this.slug + '/questions')
 				.then(response => this.questions = response.data);
 			}
 		},

@@ -7,12 +7,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Auth;
+use JWTAuth;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api');
+        // $this->middleware('auth:api');
     }
 
     public function index() {
@@ -21,7 +22,7 @@ class UserController extends Controller
 
     public function profile()
     {
-        return auth('api')->user();
+        return Auth::user();
     }
 
     public function getUserCurrent() {
@@ -72,7 +73,7 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $user = auth('api')->user();
+        $user = Auth::user();
 
         $this->validate($request,[
             'name' => 'required|string|max:191',

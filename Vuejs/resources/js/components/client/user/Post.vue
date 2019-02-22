@@ -44,7 +44,7 @@
 
 		methods: {
 			getResults(page = 1) {
-                axios.get('' + '/api/u/' + this.slug + '/posts?page=' + page)
+                axios.get('u/' + this.slug + '/posts?page=' + page)
                     .then(response => {
                         this.posts = response.data;
                 });
@@ -52,7 +52,7 @@
             },
 
 			getPostsOfUser() {
-				axios.get('' + '/api/u/' + this.slug + '/posts')
+				axios.get('u/' + this.slug + '/posts')
 				.then(response => 
 					this.posts = response.data, 
 				);

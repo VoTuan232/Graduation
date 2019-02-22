@@ -37,7 +37,6 @@ let routes = [
     },
     { 
         path: '/', 
-        // beforeEnter: (to, from, next) => next('/newlist'),
         component: require('./components/client/post/Post.vue').default,
         children: [
             {
@@ -92,6 +91,8 @@ let routes = [
     },
     { path: '/question/ask', component: require('./components/client/question/Create.vue').default  },
     { path: '/q/:slug', component: require('./components/client/question/Single.vue').default  },
+    { path: '/register', name: 'register', component: require('./components/client/auth/Register.vue').default, meta: {auth: false}  },
+    { path: '/login', name: 'login', component: require('./components/client/auth/Login.vue').default, meta: {auth: false}  },
 ];
 
 export default new VueRouter({

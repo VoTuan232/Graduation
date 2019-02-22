@@ -150,14 +150,14 @@
         },
         methods: {
             getResults(page = 1) {
-                axios.get(''+'/api/m/categories?page=' + page)
+                axios.get('m/categories?page=' + page)
                     .then(response => {
                         this.categories = response.data;
                 });
             },
 
             updateCategory() {
-                this.form.put(''+'/api/m/category/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put('m/category/' + this.form.id) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -203,7 +203,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete(''+'/api/m/category/'+id)
+                        this.form.delete('m/category/'+id)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(
@@ -221,17 +221,17 @@
 
             loadCategories() {
                 // if(this.$gate.isAdminorAuthor()) {
-                    axios.get(''+'/api/m/categories').then(({ data }) => (this.categories = data));
+                    axios.get('m/categories').then(({ data }) => (this.categories = data));
                 // }
             },
 
             loadCategoriesModel() {
-                    axios.get(''+'/api/m/categories/all').then(({ data }) => (this.categoriesModel = data));
+                    axios.get('m/categories/all').then(({ data }) => (this.categoriesModel = data));
             },
 
             createCategory() {
                 this.$Progress.start();
-                this.form.post(''+'/api/m/category')
+                this.form.post('m/category')
                 .then(() => {
                     //call event
                     Fire.$emit('AfterCrud');

@@ -1,26 +1,22 @@
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
-import router from './routes';
+// import VueRouter from 'vue-router';
+// Vue.use(VueRouter);
+// import router from './routes';
 
-import data from './asset/data';
-window.data = data;
-
-/*components*/
-Vue.component(
-    'user-popper',
-    require('./components/asset/UserPopper.vue').default
-);
-Vue.component(
-    'tag-of-new',
-    require('./components/asset/TagOfNew.vue').default
-);
+// Vue.component(
+//     'user-popper',
+//     require('./components/asset/UserPopper.vue').default
+// );
+// Vue.component(
+//     'tag-of-new',
+//     require('./components/asset/TagOfNew.vue').default
+// );
 
 const client = new Vue({
     el: '#client',
-    router,
+    router: Vue.router,
     components: {},
     data: {
-        userLogged: userLogged,
+        // userLogged: userLogged,
     },
 
     methods: {

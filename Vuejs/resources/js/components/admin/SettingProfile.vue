@@ -81,7 +81,7 @@
                 if(this.form.password == ''){
                     this.form.password = undefined;
                 }
-                this.form.put('' + '/api/profile')
+                this.form.put('profile')
                 .then(()=>{
                     /*update master blade*/
                      // Fire.$emit('AfterCreate');
@@ -90,10 +90,10 @@
                       'Updated User successfully!',
                       'success'
                     )
-                    this.$root.username = this.form.name; //update root username for view
-                    if(this.form.avatar.length > 200) {
-                        this.$root.avatar = this.form.avatar; //update root avatar for view
-                    }
+                    // this.$root.username = this.form.name; //update root username for view
+                    // if(this.form.avatar.length > 200) {
+                    //     this.$root.avatar = this.form.avatar; //update root avatar for view
+                    // }
                     Fire.$emit('afterUpdateProfile'); //call hook for update profile (Profile vue)
 
                     this.$Progress.finish();
@@ -122,7 +122,7 @@
             }
         },
         created() {
-            axios.get(''+'/api/profile')
+            axios.get('profile')
             .then(({ data }) => (this.form.fill(data)));
         }
     }

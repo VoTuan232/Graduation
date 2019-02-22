@@ -119,10 +119,11 @@
     export default {
         data() {
             return {
-                user : user,
+                user : this.$auth.user(),
                 follows : 0,
                 followers : 0,
                 posts : 0,
+                avatar: this.$auth.user().avatar,
             }
         },
 
@@ -132,27 +133,33 @@
 
         methods:{
             getProfilePhoto() {
-                let avatar = "/images/profile/"+ this.user.avatar ;
+                let avatar = '';
+                if(this.avatar != null) {
+                    avatar = "/images/profile/"+ this.user.avatar ;
+                }
+                else {
+                    avatar = "/images/profile/profile.png";
+                }
                 return avatar;
             },
 
             countFollows() {
-                axios.get('' + '/api/user/countFollow')
+                axios.get('user/countFollow')
                 .then(resopnse => this.follows = resopnse.data);
             },
 
             countFollowers() {
-                axios.get('' + '/api/user/countFollower')
+                axios.get('user/countFollower')
                 .then(resopnse => this.followers = resopnse.data);
             },
 
             countPosts() {
-                axios.get('' + '/api/user/countPost')
+                axios.get('user/countPost')
                 .then(resopnse => this.posts = resopnse.data);
             },
 
             getUser() {
-                axios.get('' + '/api/user/current')
+                axios.get('user/current')
                 .then(({data}) => {
                     this.user =data;
                 })
@@ -161,7 +168,7 @@
         },
         
         created() {
-             this.$Progress.start();
+            this.$Progress.start();
             this.countFollows();
             this.countFollowers();
             this.countPosts();

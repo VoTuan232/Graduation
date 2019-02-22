@@ -93,6 +93,7 @@
 					body: '',
           categories : [],
           tags : [],
+          user_id: this.$auth.user().id
 				}),
         editor: ClassicEditor,
         editorConfig: {
@@ -103,7 +104,7 @@
 		methods: {
 			createQuestion() {
                 this.$Progress.start();
-                this.form.post('' + '/api/m/question')
+                this.form.post('m/question')
                 .then(({data}) => {
                     console.log(data);
                     //call event
@@ -129,11 +130,11 @@
             // },
 
             loadCategories() {
-                    axios.get(''+'/api/m/categories/all').then(({ data }) => (this.categories = data));
+                    axios.get('m/categories/all').then(({ data }) => (this.categories = data));
             },
 
             loadTags() {
-                    axios.get(''+'/api/m/tags/all').then(({ data }) => (this.tags = data));
+                    axios.get('m/tags/all').then(({ data }) => (this.tags = data));
             },
 		},
 

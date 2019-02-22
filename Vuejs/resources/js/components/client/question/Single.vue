@@ -59,7 +59,7 @@
 
 		methods: {
 			getQuestionSingle() {
-				axios.get('' + '/api/q/'+this.slug)
+				axios.get('q/'+this.slug)
 				.then(response => this.question = response.data);
 			},
 			scrollToTop() {

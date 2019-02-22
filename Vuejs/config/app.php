@@ -179,7 +179,8 @@ return [
         //debug bar
         Barryvdh\Debugbar\ServiceProvider::class,
         //jwt
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        //cors
     ],
 
     /*
@@ -233,7 +234,7 @@ return [
         //debug bar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         //jwt
-       'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 

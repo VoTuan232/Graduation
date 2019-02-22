@@ -102,14 +102,14 @@
         },
         methods: {
             getResults(page = 1) {
-                axios.get(''+'/api/m/comments?page=' + page)
+                axios.get('m/comments?page=' + page)
                     .then(response => {
                         this.comments = response.data;
                 });
             },
 
             updateComment() {
-                this.form.put(''+'/api/m/comment/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put('m/comment/' + this.form.id) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -155,7 +155,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete(''+'/api/m/comment/'+id)
+                        this.form.delete('m/comment/'+id)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(
@@ -173,7 +173,7 @@
 
             loadComments() {
                 // if(this.$gate.isAdminorAuthor()) {
-                    axios.get(''+'/api/m/comments').then(({ data }) => (this.comments = data));
+                    axios.get('m/comments').then(({ data }) => (this.comments = data));
                 // }
             },
 
@@ -206,7 +206,7 @@
             //     })
             //     .catch(() => {})
             // });
-             this.$Progress.start();
+            this.$Progress.start();
             this.loadComments();
             this.$Progress.finish();
             // after event active

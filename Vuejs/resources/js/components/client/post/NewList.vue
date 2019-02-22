@@ -27,7 +27,6 @@
                 <br>
                 <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
                 </p>
-                <!-- <router-link :to="{ name: 'user', params: { userId: 123 }}">{{ post.title }}</router-link> -->
                 <div  v-if="post.tags.length > 0" class="btn-group">
                     <tag-of-new :tagData="post.tags"></tag-of-new>
                 </div>
@@ -44,11 +43,7 @@
     </div>
 </template>
 <script>
-    // import UserPopper from '../../asset/UserPopper.vue';
-    // import TagOfNew from '../../asset/TagOfNew.vue';
-
     export default {
-        // components: { UserPopper, TagOfNew },
     	data() {
     		return {
     			posts: {},
@@ -61,7 +56,7 @@
     		},
 
     		getResults(page = 1) {
-                   axios.get('' + '/api/c/newestposts?page=' + page)
+                   axios.get('c/newestposts?page=' + page)
                        .then(response => {
                            this.posts = response.data;
                    });
@@ -70,7 +65,7 @@
                },
     
     		getPosts() {
-    			axios.get('' + '/api/c/newestposts')
+    			axios.get('c/newestposts')
     			.then(({data}) => this.posts = data)
     		}
     	},

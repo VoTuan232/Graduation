@@ -61,7 +61,7 @@
 
 		methods: {
 			getUserSingle() {
-				axios.get('' + '/api/u/' + this.slug)
+				axios.get('u/' + this.slug)
 				.then(response => 
 					this.user = response.data,
 				);

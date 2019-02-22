@@ -50,7 +50,7 @@
     
     	methods: {
     		getResults(page = 1) {
-                   axios.get('' + '/api/c/newestquestions?page=' + page)
+                   axios.get('c/newestquestions?page=' + page)
                        .then(response => {
                            this.questions = response.data;
                    });
@@ -59,7 +59,7 @@
                },
     
     		getQuestions() {
-    			axios.get('' + '/api/c/newestquestions')
+    			axios.get('c/newestquestions')
     			.then(({data}) => this.questions = data)
     		}
     	},

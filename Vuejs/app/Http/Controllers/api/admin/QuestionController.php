@@ -13,11 +13,6 @@ use Auth;
 
 class QuestionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function index() {
     	return Question::with('categories', 'user', 'tags')->paginate(2);
     }
@@ -33,7 +28,7 @@ class QuestionController extends Controller
 
         DB::beginTransaction();
         try {
-            $request->merge(['user_id' => auth('api')->user()->id]);
+            // $request->merge(['user_id' => auth('api')->user()->id]);
 
             $question = Question::create($request->all());
 

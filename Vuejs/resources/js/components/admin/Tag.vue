@@ -99,14 +99,14 @@
         },
         methods: {
             getResults(page = 1) {
-                axios.get(''+'/api/m/tags?page=' + page)
+                axios.get('m/tags?page=' + page)
                     .then(response => {
                         this.tags = response.data;
                 });
             },
 
             updateTag() {
-                this.form.put(''+'/api/m/tag/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put('m/tag/' + this.form.id) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -152,7 +152,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete(''+'/api/m/tag/'+id)
+                        this.form.delete('m/tag/'+id)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(
@@ -170,13 +170,13 @@
 
             loadTags() {
                 // if(this.$gate.isAdminorAuthor()) {
-                    axios.get(''+'/api/m/tags').then(({ data }) => (this.tags = data));
+                    axios.get('m/tags').then(({ data }) => (this.tags = data));
                 // }
             },
 
             createTag() {
                 this.$Progress.start();
-                this.form.post(''+'/api/m/tag')
+                this.form.post('m/tag')
                 .then(() => {
                     //call event
                     Fire.$emit('AfterCrud');
@@ -203,7 +203,7 @@
             //     })
             //     .catch(() => {})
             // });
-             this.$Progress.start();
+            this.$Progress.start();
             this.loadTags();
             this.$Progress.finish();
             // after event active

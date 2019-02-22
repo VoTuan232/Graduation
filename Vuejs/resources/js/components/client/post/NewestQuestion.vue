@@ -24,7 +24,7 @@
 
 		methods: {
 			getQuestions() {
-				axios.get('' + 'api/q/slidebar')
+				axios.get('q/slidebar')
 				.then(response => this.questions = response.data)
 			}
 		},

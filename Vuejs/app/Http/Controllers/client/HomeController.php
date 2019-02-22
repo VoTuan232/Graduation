@@ -10,13 +10,13 @@ use App\Models\User;
 class HomeController extends Controller
 {
     public function index() {
-    	if(Auth::check()) {
-    		$userLogged = User::where('id', Auth::user()->id)->firstOrFail();
-    	}
-    	else {
-    		$userLogged = null;
-    	}
+    	// if(Auth::check()) {
+    	// 	$userLogged = User::where('id', Auth::user()->id)->firstOrFail();
+    	// }
+    	// else {
+    	// 	$userLogged = null;
+    	// }
 
-        return view('client.index', compact('userLogged'));
+        return view('client.index');
     }
 }

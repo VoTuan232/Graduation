@@ -42,7 +42,7 @@
 
     methods: {
       getTagSingle() {
-        axios.get('' + '/api/t/'+this.slug)
+        axios.get('t/'+this.slug)
         .then(response => this.tag = response.data);
       },
     },

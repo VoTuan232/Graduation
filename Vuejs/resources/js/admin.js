@@ -1,24 +1,23 @@
-import VueRouter from 'vue-router';
-Vue.use(VueRouter);
-import router from './routes';
+// import VueRouter from 'vue-router';
+// Vue.use(VueRouter);
+// import router from './routes';
 
-/*component*/
-Vue.component(
-    'not-found',
-    require('./components/NotFound.vue').default
-);
+// Vue.component(
+//     'not-found',
+//     require('./components/NotFound.vue').default
+// );
 
-/*gate*/
-import Gate from "./Gate";
-Vue.prototype.$gate = new Gate(window.user)
+// import Gate from "./Gate";
+// Vue.prototype.$gate = new Gate(window.user)
 
 const admin = new Vue({
     el: '#admin',
-    router: router,
+    router: Vue.router,
     data: {
       updateProfile: 0,
-      username: user.name,
-      avatar : user.avatar == null ? '/images/profile/profile.png' : '/images/profile/'+user.avatar,
+      // username: user.name,
+      // avatar : this.$auth.user().avatar == null ? '/images/profile/profile.png' : '/images/profile/'+user.avatar,
+      // avatar : '/images/profile/'+this.$auth.user().avatar,
     },
 
     methods: {

@@ -114,14 +114,14 @@
         },
         methods: {
             getResults(page = 1) {
-                axios.get(''+'/api/m/roles?page=' + page)
+                axios.get('m/roles?page=' + page)
                     .then(response => {
                         this.roles = response.data;
                 });
             },
 
             updateRole() {
-                this.form.put(''+'/api/m/role/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put('m/role/' + this.form.id) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -167,7 +167,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete(''+'/api/m/role/'+id)
+                        this.form.delete('m/role/'+id)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(
@@ -185,13 +185,13 @@
 
             loadRoles() {
                 // if(this.$gate.isAdminorAuthor()) {
-                    axios.get(''+'/api/m/roles').then(({ data }) => (this.roles = data));
+                    axios.get('m/roles').then(({ data }) => (this.roles = data));
                 // }
             },
 
             createRole() {
                 this.$Progress.start();
-                this.form.post(''+'/api/m/role')
+                this.form.post('m/role')
                 .then(() => {
                     //call event
                     Fire.$emit('AfterCrud');
@@ -218,7 +218,7 @@
             //     })
             //     .catch(() => {})
             // });
-             this.$Progress.start();
+            this.$Progress.start();
             this.loadRoles();
             this.$Progress.finish();
             // after event active

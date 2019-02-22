@@ -61,14 +61,14 @@
 
     	methods: {
     		getResults(page = 1) {
-                axios.get(''+'/api/user/follows?page=' + page)
+                axios.get('user/follows?page=' + page)
                     .then(response => {
                         this.users = response.data;
                 });
             },
 
     		loadUsers() {
-    			axios.get(''+'/api/user/follows').then(response => this.users = response.data);
+    			axios.get('user/follows').then(response => this.users = response.data);
     		},
 
     		unFollow(id) {
@@ -83,7 +83,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        axios.delete(''+'/api/user/follow/'+id)
+                        axios.delete('user/follow/'+id)
                         .then(() => {
                              Fire.$emit('AfterUnfollow');
                                 this.$swal(

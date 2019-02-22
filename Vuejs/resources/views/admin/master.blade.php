@@ -18,7 +18,10 @@
         <link rel="stylesheet" href="{{ asset('/css/admin.css/') }}">
 
         <style>
-           
+           .myselft {
+            height: 70px !important;
+            width: 70px !important;
+           }
         </style>
     </head>
     <body class="hold-transition sidebar-mini">
@@ -153,10 +156,11 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img :src="avatar" class="img-circle elevation-2" alt="User Image">
+                            <img v-if="$auth.user().avatar == null" src="/images/profile/profile.png" class="img-circle elevation-2 myselft" alt="User Image">
+                            <img v-else :src="'/images/profile/'+$auth.user().avatar" class="img-circle elevation-2 myselft" alt="User Image">
                         </div>
                         <div class="info">
-                                <a href="#" class="d-block">@{{ username }}</a>
+                                <a href="#" class="d-block" v-html="$auth.user().name"></a>
                                 {{-- <a v-else href="#" class="d-block">{{ Auth::user()->name }}</a> --}}
                         </div>
                     </div>
@@ -250,8 +254,11 @@
                                         Comments
                                     </p>
                                 </router-link>
-                            </li>
+                            </li> 
                             <li class="nav-item">
+                                <a href="/" @click="$auth.logout()" class="nav-link"><i class="nav-icon fa fa-power-off yellow"></i>Logout</a>
+                            </li>
+                           {{--  <li class="nav-item">
                                  <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -264,7 +271,7 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                            </li>
+                            </li> --}}
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

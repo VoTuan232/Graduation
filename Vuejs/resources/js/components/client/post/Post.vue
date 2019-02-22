@@ -19,8 +19,8 @@
           <router-link to="/following" class="list-function notfirst">Videos</router-link>
           <router-link to="/following" class="list-function notfirst">Editor's Choice</router-link>
         </div>
-        <div v-if="$root.userLogged != null" class="col-md-4">
-          <router-link to="publish/post" type="button" class="btn btn-primary "><i class="fa fa-pen"></i>Create Post</router-link>
+        <div class="col-md-4">
+          <router-link v-if="$auth.check()" to="publish/post" type="button" class="btn btn-primary "><i class="fa fa-pen"></i>Create Post</router-link>
         </div>
       </div>
       <br><br>
@@ -30,7 +30,6 @@
           </div>
           <div class="col-md-4">
             <newest-question></newest-question>
-            <!-- this is a component -->
           </div>
       </div>
   </div>

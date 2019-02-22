@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class PostController extends Controller
 {
@@ -23,11 +25,9 @@ class PostController extends Controller
             // 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+
         DB::beginTransaction();
         try {
-
-            $request->merge(['user_id' => auth('api')->user()->id]);
-
             if($request->published !=null) {
                 $request->merge(['published' => $request->published]);
             }

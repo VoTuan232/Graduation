@@ -9,18 +9,13 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/*use Vue Route*/
-// import VueRouter from 'vue-router';
-// Vue.use(VueRouter);
-// import router from './routes';
-
 /*Vue ProgressBar*/
 import VueProgressBar from 'vue-progressbar'
 
 Vue.use(VueProgressBar, {
   color: 'rgb(143, 255, 199)',
-  failedColor: 'red',
-  height: '2px'
+  failedColor: 'blue',
+  height: '20px'
 })
 
 /*Ckeditor*/
@@ -54,36 +49,50 @@ Vue.component('multiselect', Multiselect);
 
 /*Vuejs paginator*/
 // Vue.component('paginate', require('vuejs-paginate'));
-// 
+
 /*Popper*/
 Vue.component('popper', require('vue-popperjs'));
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+import router from './routes';
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+Vue.use(VueAxios, axios);
+axios.defaults.baseURL = 'http://localhost:8000/api';
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.router = router
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(require('@websanova/vue-auth'), {
 
-// const admin = new Vue({
-//     el: '#admin',
-//     router,
+   auth: require('@websanova/vue-auth/drivers/auth/bearer.js'),
+
+   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+
+   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+
+});
+
+Vue.component(
+    'user-popper',
+    require('./components/asset/UserPopper.vue').default
+);
+Vue.component(
+    'tag-of-new',
+    require('./components/asset/TagOfNew.vue').default
+);
+Vue.component(
+    'not-found',
+    require('./components/NotFound.vue').default
+);
+
+// const client = new Vue({
+//     el: '#client',
+//     router: router,
+//     components: {},
 //     data: {
-//       updateProfile: 0,
-//       username: user.name,
-//       avatar : '/images/profile/'+user.avatar,
+//         // userLogged: userLogged,
 //     },
 
 //     methods: {
@@ -92,16 +101,59 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //         return paths.some(path => {
 //           return this.$route.path.indexOf(path) === 0 // current path starts with this path string
 //         })
-//       }
+//       }, 
+
+//         scrollToTop() {
+//             window.scrollTo(0,0);
+//         },
+
+//       changeEmail(email) {
+//           return email.replace('@gmail.com', '');
+//       },
+
+//       sanitizeText(text) {
+//         var slug = "";
+//               // Change to lower case
+//               var titleLower = text.toLowerCase();
+//               // Letter "e"
+//               slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+//               // Letter "a"
+//               slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+//               // Letter "o"
+//               slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+//               // Letter "u"
+//               slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+//               // Letter "i"
+//               slug = slug.replace(/i|ì/gi, 'i');
+//               // Letter "d"
+//               slug = slug.replace(/đ/gi, 'd');
+//               // Trim the last whitespace
+//               slug = slug.replace(/\s*$/g, '');
+//               // Change whitespace to "-"
+//               slug = slug.replace(/\s+/g, '-');
+//               // ,
+//               slug = slug.replace(/,/g, '');
+//               // ""
+//               slug = slug.replace(/"/g, '');
+//               // ""
+//               slug = slug.replace(/“|”/g, '');
+//               // ?
+//               slug = slug.replace(/[?=]/g, "");
+//               // ;
+//               slug = slug.replace(/;/g, "");
+
+//               return slug;
+//       },
 //     }
 // });
 
-// import x form x;
-// const client = new Vue({
-//     el: '#client',
-//     router,
-//     components: {},
+// const admin = new Vue({
+//     el: '#admin',
+//     router: router,
 //     data: {
+//       updateProfile: 0,
+//       username: user.name,
+//       avatar : user.avatar == null ? '/images/profile/profile.png' : '/images/profile/'+user.avatar,
 //     },
 
 //     methods: {
@@ -110,6 +162,40 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //         return paths.some(path => {
 //           return this.$route.path.indexOf(path) === 0 // current path starts with this path string
 //         })
-//       }
+//       },
+
+//       sanitizeText(text) {
+//         var slug = "";
+//               // Change to lower case
+//               var titleLower = text.toLowerCase();
+//               // Letter "e"
+//               slug = titleLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e');
+//               // Letter "a"
+//               slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a');
+//               // Letter "o"
+//               slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o');
+//               // Letter "u"
+//               slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u');
+//               // Letter "i"
+//               slug = slug.replace(/i|ì/gi, 'i');
+//               // Letter "d"
+//               slug = slug.replace(/đ/gi, 'd');
+//               // Trim the last whitespace
+//               slug = slug.replace(/\s*$/g, '');
+//               // Change whitespace to "-"
+//               slug = slug.replace(/\s+/g, '-');
+//               // ,
+//               slug = slug.replace(/,/g, '');
+//               // ""
+//               slug = slug.replace(/"/g, '');
+//               // ""
+//               slug = slug.replace(/“|”/g, '');
+//               // ?
+//               slug = slug.replace(/[?=]/g, "");
+//               // ;
+//               slug = slug.replace(/;/g, "");
+
+//               return slug;
+//       },
 //     }
 // });
