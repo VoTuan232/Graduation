@@ -154,16 +154,7 @@
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img v-if="$auth.user().avatar == null" src="/images/profile/profile.png" class="img-circle elevation-2 myselft" alt="User Image">
-                            <img v-else :src="'/images/profile/'+$auth.user().avatar" class="img-circle elevation-2 myselft" alt="User Image">
-                        </div>
-                        <div class="info">
-                                <a href="#" class="d-block" v-html="$auth.user().name"></a>
-                                {{-- <a v-else href="#" class="d-block">{{ Auth::user()->name }}</a> --}}
-                        </div>
-                    </div>
+                    <user-panel></user-panel>
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

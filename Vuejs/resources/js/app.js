@@ -83,10 +83,13 @@ Vue.component(
     require('./components/asset/TagOfNew.vue').default
 );
 Vue.component(
+    'user-panel',
+    require('./components/asset/UserPanel.vue').default
+);
+Vue.component(
     'not-found',
     require('./components/NotFound.vue').default
 );
-
 // const client = new Vue({
 //     el: '#client',
 //     router: router,

@@ -79,15 +79,15 @@
 			return {
 				  categories : [],
           tags : [],
-				form: new Form({
-  					title: '',
-  					slug: '',
-  					body: '',
-            published: '',
-            categories : [],
-            tags : [],
-            user_id: this.$auth.user().id
-  				}),
+  				form: new Form({
+    					title: '',
+    					slug: '',
+    					body: '',
+              published: '',
+              categories : [],
+              tags : [],
+              user_id: this.$auth.user().id
+    				}),
         editor: ClassicEditor,
         editorConfig: {
         }

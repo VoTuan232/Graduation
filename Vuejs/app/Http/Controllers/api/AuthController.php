@@ -31,7 +31,8 @@ class AuthController extends Controller
                 ], 400);
         }
         return response([
-                'status' => 'success'
+                'status' => 'success',
+                'token' => $token,
             ])
             ->header('Authorization', $token);
     }

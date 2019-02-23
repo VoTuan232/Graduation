@@ -106,8 +106,7 @@ var admin = new Vue({
   el: '#admin',
   router: Vue.router,
   data: {
-    updateProfile: 0 // username: user.name,
-    // avatar : this.$auth.user().avatar == null ? '/images/profile/profile.png' : '/images/profile/'+user.avatar,
+    updateProfile: 0 // avatar : this.$auth.user().avatar == null ? '/images/profile/profile.png' : '/images/profile/'+user.avatar,
     // avatar : '/images/profile/'+this.$auth.user().avatar,
 
   },

@@ -15,7 +15,6 @@ const admin = new Vue({
     router: Vue.router,
     data: {
       updateProfile: 0,
-      // username: user.name,
       // avatar : this.$auth.user().avatar == null ? '/images/profile/profile.png' : '/images/profile/'+user.avatar,
       // avatar : '/images/profile/'+this.$auth.user().avatar,
     },
