@@ -13,11 +13,7 @@
       <div class="row">
         <div class="col-md-8">
           <router-link to="/questions" href="#" class="list-function">Newlist</router-link>
-          <router-link to="/series" class="list-function notfirst">Series</router-link>
-          <router-link to="/following" class="list-function notfirst">Following</router-link>
-          <router-link to="/following" class="list-function notfirst">Trendings</router-link>
-          <router-link to="/following" class="list-function notfirst">Videos</router-link>
-          <router-link to="/following" class="list-function notfirst">Editor's Choice</router-link>
+          <router-link to="/series" class="list-function notfirst">Unsolved</router-link>
         </div>
         <div class="col-md-4">
           <router-link v-if="$auth.check()" to="/question/ask" type="button" class="btn btn-primary "><i class="fa fa-pen"></i>Ask Question</router-link>
@@ -29,8 +25,10 @@
             <router-view></router-view>
           </div>
           <div class="col-md-4">
-            Newest Question
-            <!-- this is a component -->
+            <newest-post></newest-post>
+            <div class="container">
+              TOP AUTHOR
+            </div>
           </div>
       </div>
   </div>
@@ -38,7 +36,10 @@
 </template>
 
 <script>
+  import NewestPost from './NewestPost';
+
   export default {
+    components: {NewestPost},
     data() {
       return {
 

@@ -73,15 +73,21 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 
 /* client */
 Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
+Route::get('p/trending', 'api\client\PostController@getTrending');
+Route::get('p/slidebar', 'api\client\PostController@getPostSideBar');
 Route::get('p/{slug}', 'api\client\PostController@getSingle');
-Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
+// Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
 
 Route::get('t/{tag}', 'api\client\TagController@getSingle');
 Route::get('t/{tag}/posts', 'api\client\TagController@getPostsBaseTag');
+Route::get('t/{tag}/questions', 'api\client\TagController@getQuestionsBaseTag');
 
+Route::get('u/{email}/follows', 'api\client\UserController@getUserFollow');
+Route::get('u/{email}/followers', 'api\client\UserController@getUserFollower');
 Route::get('u/{email}', 'api\client\UserController@getSinge');
 Route::get('u/{email}/posts', 'api\client\UserController@getPostsOfUser');
 Route::get('u/{email}/questions', 'api\client\UserController@getQuestionsOfUser');
+Route::get('authors', 'api\client\UserController@getAllUser');
 
 Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');

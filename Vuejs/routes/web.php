@@ -29,6 +29,8 @@ Route::get('/q/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\
 
 Route::get('/questions', 'client\HomeController@index')->name('client.index');
 Route::get('/discuss', 'client\HomeController@index')->name('client.index');
+Route::get('/trending', 'client\HomeController@index')->name('client.index');
+Route::get('/authors', 'client\HomeController@index')->name('client.index');
 
 // Route::middleware(['jwt.auth'])->group(function () {
 	Route::get('/admin', 'admin\AdminController@index')->name('admin.index');

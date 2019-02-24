@@ -9,9 +9,11 @@
 
 // import Gate from "./Gate";
 // Vue.prototype.$gate = new Gate(window.user)
+import App from './components/admin/App.vue'
 
 const admin = new Vue({
     el: '#admin',
+    components: {App},
     router: Vue.router,
     data: {
       updateProfile: 0,

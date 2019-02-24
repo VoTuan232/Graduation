@@ -12,16 +12,24 @@ use DB;
 class PostController extends Controller
 {
     public function getNewestPosts() {
-    	return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(2);
+        return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
+    }
+
+    public function getTrending() {
+    	return Post::orderBy('trending', 'desc')->whereNotNull('trending')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
     }
 
     public function getSingle(Request $request, Post $post, $slug) {
         return Post::where('slug', $slug)->with('categories', 'user', 'user.posts', 'user.followers', 'tags', 'comments')->firstOrFail();
     }
 
-    public function getUserBaseSlugPost(Request $request, Post $post, $slug) {
-    	$user = Post::where('slug', $slug)->first()->user()->firstOrFail();
+    // public function getUserBaseSlugPost(Request $request, Post $post, $slug) {
+    // 	$user = Post::where('slug', $slug)->first()->user()->firstOrFail();
     	
-        return User::where('id', $user->id)->with('posts', 'followers')->firstOrFail();
+    //     return User::where('id', $user->id)->with('posts', 'followers')->firstOrFail();
+    // }
+
+    public function getPostSideBar() {
+        return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->take(5)->get();
     }
 }

@@ -16,14 +16,14 @@ class UserController extends Controller
     public function getSinge(Request $request, $email) {
         $email = $email.'@gmail.com';
 
-        return User::where('email', $email)->with('posts', 'followers', 'questions')->firstOrFail();
+        return User::where('email', $email)->with('posts', 'followers', 'follows', 'questions')->firstOrFail();
     }
 
     public function getPostsOfUser(Request $request, $email) {
     	$email = $email.'@gmail.com';
     	$user = User::where('email', $email)->firstOrFail();
 
-    	return Post::where('user_id', $user->id)->with('categories', 'tags')->paginate(2);
+    	return Post::where('user_id', $user->id)->with('categories', 'tags')->paginate(5);
     	/*auto has comment in post*/
     }
 
@@ -31,7 +31,25 @@ class UserController extends Controller
     	$email = $email.'@gmail.com';
     	$user = User::where('email', $email)->firstOrFail();
 
-    	return Question::where('user_id', $user->id)->with('categories', 'tags')->paginate(2);
+    	return Question::where('user_id', $user->id)->with('categories', 'tags')->paginate(5);
+    }
+
+    public function getUserFollow(Request $request, $email) {
+        $email = $email.'@gmail.com';
+        $user = User::where('email', $email)->firstOrFail();
+
+        return $user->follows()->get();
+    }
+
+    public function getUserFollower(Request $request, $email) {
+        $email = $email.'@gmail.com';
+        $user = User::where('email', $email)->firstOrFail();
+
+        return $user->followers()->get();
+    }
+
+    public function getAllUser() {
+        return User::all();
     }
 }
  

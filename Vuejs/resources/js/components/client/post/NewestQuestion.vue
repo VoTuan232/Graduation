@@ -30,7 +30,7 @@
 		},
 
 		created() {
-			 this.$Progress.start();
+			this.$Progress.start();
 			this.getQuestions();
             this.$Progress.finish();
 		}		

@@ -33,18 +33,40 @@
 		<div class="row mt-5">
           <router-link :to="'/u/' + slug" href="#" class="list-function">Posts</router-link>
           <router-link :to="'/u/' + slug + '/questions'" class="list-function notfirst">Questions</router-link>
-          <router-link to="/series" class="list-function notfirst">Series</router-link>
-          <router-link to="/following" class="list-function notfirst">Following</router-link>
-          <router-link to="/following" class="list-function notfirst">Trendings</router-link>
-          <router-link to="/following" class="list-function notfirst">Tags</router-link>
-          <router-link to="/following" class="list-function notfirst">Drafts</router-link>
+          <router-link :to="'/u/' + slug + '/followings'" class="list-function notfirst">Followings</router-link>
+          <router-link :to="'/u/' + slug + '/followers'" class="list-function notfirst">Followers</router-link>
+          <!-- check login == user detail => getUser(slug) => $auth -->
+          <!-- <router-link to="/following" class="list-function notfirst">Drafts</router-link>  -->
         </div>
         <div class="row  mt-5">
         	<div class="col-md-9">
         		<router-view :userData="user"></router-view>
         	</div>
         	<div class="col-md-3">
-        		Infomation
+        		<table class="table">
+				  <tbody>
+				    <tr>
+				      <td>Posts</td>
+				      <th scope="row">{{ user['posts'].length }}</th>
+				    </tr>
+				    <tr>
+				      <td>Followers</td>
+				      <th scope="row">{{ user['followers'].length }}</th>
+				    </tr>
+				    <tr>
+				      <td>Followings user</td>
+				      <th scope="row">{{ user['follows'].length }}</th>
+				    </tr>
+				    <tr>
+				      <td>Totals questions</td>
+				      <th scope="row">{{ user['questions'].length }}</th>
+				    </tr>
+				    <tr>
+				      <td>Totals answers</td>
+				      <th scope="row">No</th>
+				    </tr>
+				  </tbody>
+				</table>
         	</div>
         </div>
 	</div>
@@ -55,7 +77,12 @@
 		data() {
 			return {
 				slug: this.$route.params.email,
-				user: {},
+				user: {
+					posts: {},
+					followers: {},
+					follows: {},
+					questions: {},
+				},
 			}
 		},
 

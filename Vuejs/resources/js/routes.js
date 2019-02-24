@@ -50,6 +50,10 @@ let routes = [
             {
                 path: '/following',
                 component: require('./components/client/post/Following.vue').default,
+            }, 
+            {
+                path: '/trending',
+                component: require('./components/client/post/Trending.vue').default,
             },
         ]
     },
@@ -62,6 +66,10 @@ let routes = [
             {
                 path: '/t/:slug',
                 component: require('./components/client/tag/PostBaseTag.vue').default,
+            },
+            {
+                path: '/t/:slug/questions',
+                component: require('./components/client/tag/QuestionBaseTag.vue').default,
             },
         ]    
     },
@@ -76,6 +84,14 @@ let routes = [
             {
                 path: '/u/:email/questions',
                 component: require('./components/client/user/Question.vue').default,
+            }, 
+            {
+                path: '/u/:email/followings',
+                component: require('./components/client/user/Following.vue').default,
+            },
+            {
+                path: '/u/:email/followers',
+                component: require('./components/client/user/Follower.vue').default,
             },
         ]  
     },
@@ -89,6 +105,7 @@ let routes = [
             },
         ]
     },
+    { path: '/authors', component: require('./components/client/author/Author.vue').default  },
     { path: '/question/ask', component: require('./components/client/question/Create.vue').default  },
     { path: '/q/:slug', component: require('./components/client/question/Single.vue').default  },
     { path: '/register', name: 'register', component: require('./components/client/auth/Register.vue').default, meta: {auth: false}  },

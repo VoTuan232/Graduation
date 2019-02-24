@@ -38,7 +38,7 @@ left: -40px !important;
     <body>
         <div class="container" id="client">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">MonkeyDNews</a>
+                <router-link to="/" class="navbar-brand" href="#">MonkeyDNews</router-link>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -50,9 +50,9 @@ left: -40px !important;
                         <li class="nav-item">
                             <router-link to="/questions" class="nav-link" href="#">Question</router-link>
                         </li>
-                        <li class="nav-item">
+                       {{--  <li class="nav-item">
                             <a class="nav-link" href="#">Discuss</a>
-                        </li>
+                        </li> --}}
                        {{--  <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
@@ -139,14 +139,17 @@ left: -40px !important;
         <div class="col-md-3 mb-md-0 mb-3">
 
             <!-- Links -->
-            <h5 class="text-uppercase">Links</h5>
+            <h5 class="text-uppercase">Resource</h5>
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Link 1</a>
+                <router-link to="/" href="#!">Posts</router-link>
               </li>
               <li>
-                <a href="#!">Link 2</a>
+                <router-link to="/questions" href="#!">Questions</router-link>
+              </li>
+              <li>
+                <router-link to="/authors" href="#!">Authors</router-link>
               </li>
               <li>
                 <a href="#!">Link 3</a>
@@ -179,10 +182,10 @@ left: -40px !important;
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Link 1</a>
+                <a href="#!">Facebook</a>
               </li>
               <li>
-                <a href="#!">Link 2</a>
+                <a href="#!">Github</a>
               </li>
               <li>
                 <a href="#!">Link 3</a>

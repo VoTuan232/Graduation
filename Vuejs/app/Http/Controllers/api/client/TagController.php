@@ -13,10 +13,14 @@ use DB;
 class TagController extends Controller
 {
 	public function getSingle(Request $request, $slug) {
-		return Tag::where('slug', $slug)->firstOrFail();
+		return Tag::where('slug', $slug)->with('posts', 'questions')->firstOrFail();
 	}
 
     public function getPostsBaseTag(Request $request, Tag $tag) {
-    	return $tag->posts()->orderBy('created_at', 'desc')->with('user', 'user.posts', 'user.followers', 'tags')->paginate(2);
+    	return $tag->posts()->orderBy('created_at', 'desc')->with('user', 'user.posts', 'user.followers', 'tags')->paginate(5);
+    }
+
+    public function getQuestionsBaseTag(Request $request, Tag $tag) {
+    	return $tag->questions()->orderBy('created_at', 'desc')->with('user', 'user.posts', 'user.followers', 'tags')->paginate(5);
     }
 }

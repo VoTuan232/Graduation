@@ -6,11 +6,7 @@
 <template>
 	<div class="container">
 		<div class="row">
-			Tag Name : {{ tagData.name }}
-		</div>
-
-		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<!-- <div class="row"  v-for="post in reversePostOfTag(page)" :key="post.id"> -->
 				<div class="row"  v-for="post in posts.data" :key="post.id">
 					<div class="col-md-1">
@@ -37,7 +33,7 @@
                     <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
                 </div>
 			</div>
-			<div class="col-md-4">
+			<!-- <div class="col-md-4">
 				{{ slug }}
 				<div class="row">
 					<div class="col-md-4">
@@ -50,7 +46,7 @@
 						1 Followers
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
     </div>
 </template>
