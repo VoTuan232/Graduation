@@ -1,21 +1,23 @@
 <template>
 	<div class="container">
+		<h2>{{ tagData.name }} <span>______________</span></h2>
 		<div class="row">
-			<h2>{{ tagData.name }} <span>______________</span></h2>
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th scope="col">{{ tagData.posts.length }}</th>
-			      <th scope="col">{{ tagData.questions.length }}</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <td>Posts</td>
-			      <td>Questions</td>
-			    </tr>
-			  </tbody>
-			</table>
+			<div class="col-sm-6">
+				<div class="card" style="width: 100%;">
+				  <div class="card-body">
+				    <h5 class="card-title">{{ tagData.posts.length }}</h5>
+				    <p class="card-text">Posts</p>
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="card" style="width: 100%; margin-left: -30px;">
+				  <div class="card-body">
+				    <h5 class="card-title">{{ tagData.questions.length }}</h5>
+				    <p class="card-text">Questions</p>
+				  </div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

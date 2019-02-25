@@ -29,10 +29,7 @@
           <div class="row">
             <router-link :to="'/t/' + slug" href="#" class="list-function">Posts</router-link>
             <router-link :to="'' + '/t/' + slug + '/questions'" class="list-function notfirst">Questions</router-link>
-            <router-link to="/following" class="list-function notfirst">Following</router-link>
-            <router-link to="/following" class="list-function notfirst">Trendings</router-link>
-            <router-link to="/following" class="list-function notfirst">Videos</router-link>
-            <router-link to="/following" class="list-function notfirst">Editor's Choice</router-link>
+            <router-link to="/following" class="list-function notfirst">Followers</router-link>
           </div>
           <br>
           <div class="row">

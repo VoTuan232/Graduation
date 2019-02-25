@@ -53,7 +53,7 @@
                                         <i class="fa fa-edit blue"></i>
                                         </a>
                                         /
-                                        <a href="#" @click="deletePost(post.id)">
+                                        <a href="#" @click="deletePost(post.slug)">
                                         <i class="fa fa-trash red"></i>
                                         </a>
                                     </td>
@@ -185,7 +185,7 @@
             },
 
             updatePost() {
-                this.form.put('m/post/' + this.form.id) //has id maybe for form.fill(user)
+                this.form.put('m/post/' + this.form.slug) //has id maybe for form.fill(user)
                 .then(() => {
                     this.$Progress.start();
                     Fire.$emit('AfterCrud');
@@ -219,7 +219,7 @@
                 $("#addNew").modal("show");
             },
 
-            deletePost(id) {
+            deletePost(slug) {
                 this.$swal({
                       title: 'Are you sure?',
                       text: "You won't be able to revert this!",
@@ -231,7 +231,7 @@
                 }).then((result) => {
                     if(result.value) {
                         //send request api
-                        this.form.delete('m/post/'+id)
+                        this.form.delete('m/post/'+slug)
                         .then(() => {
                              Fire.$emit('AfterCrud');
                                 this.$swal(
@@ -306,7 +306,7 @@
             //     })
             //     .catch(() => {})
             // });
-             this.$Progress.start();
+            this.$Progress.start();
             this.loadPosts();
             this.loadCategories();
             this.loadTags();

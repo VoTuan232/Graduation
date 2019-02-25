@@ -9,6 +9,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+/*scrollTo*/
+import VueScrollTo from 'vue-scrollto';
+Vue.use(VueScrollTo);
+
 /*Vue ProgressBar*/
 import VueProgressBar from 'vue-progressbar'
 

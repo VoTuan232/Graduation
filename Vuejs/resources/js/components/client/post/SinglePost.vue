@@ -36,6 +36,8 @@
 			</div>
 		</div>
 		
+		<comment :slug="slug"></comment>
+
 		<h4>Related</h4>
 		<div class="row">
 			<!-- 4 posts -->
@@ -56,7 +58,10 @@
 </template>
 
 <script>
+	import Comment from './Comment.vue';
+
 	export default {
+		components: {Comment},
 		data() {
 			return {
 				slug: this.$route.params.slug,

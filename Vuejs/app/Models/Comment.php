@@ -8,6 +8,8 @@ class Comment extends Model
 {
     protected $fillable = [
         'body',
+        'post_id',
+        'user_id',
     ];
 
     public function post()
@@ -27,6 +29,6 @@ class Comment extends Model
     //reply comment
     public function replies()
     {
-        return $this->hasMany(Comment::class, 'parent_id');
+        return $this->hasMany(Comment::class, 'parent_id')->with('user');
     }
 }

@@ -75,8 +75,10 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
 Route::get('p/trending', 'api\client\PostController@getTrending');
 Route::get('p/slidebar', 'api\client\PostController@getPostSideBar');
-Route::get('p/{slug}', 'api\client\PostController@getSingle');
+Route::get('p/{post}', 'api\client\PostController@getSingle');
 // Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
+Route::get('p/{post}/comments', 'api\client\PostController@getComments');
+Route::post('p/{post}/comment', 'api\client\PostController@storeComment');
 
 Route::get('t/{tag}', 'api\client\TagController@getSingle');
 Route::get('t/{tag}/posts', 'api\client\TagController@getPostsBaseTag');

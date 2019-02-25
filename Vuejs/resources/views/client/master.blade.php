@@ -151,24 +151,6 @@ left: -40px !important;
               <li>
                 <router-link to="/authors" href="#!">Authors</router-link>
               </li>
-              <li>
-                <a href="#!">Link 3</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
-              </li>
             </ul>
 
           </div>
@@ -182,16 +164,10 @@ left: -40px !important;
 
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Facebook</a>
+                <a href="https://facebook.com">Facebook</a>
               </li>
               <li>
-                <a href="#!">Github</a>
-              </li>
-              <li>
-                <a href="#!">Link 3</a>
-              </li>
-              <li>
-                <a href="#!">Link 4</a>
+                <a href="https://github.com">Github</a>
               </li>
             </ul>
 
