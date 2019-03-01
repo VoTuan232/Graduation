@@ -62,5 +62,5 @@ const admin = new Vue({
 
               return slug;
       },
-    }
+    },
 });

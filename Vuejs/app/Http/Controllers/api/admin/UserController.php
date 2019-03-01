@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Auth;
@@ -18,6 +19,10 @@ class UserController extends Controller
 
     public function index() {
     	return User::with('roles')->paginate(5);
+    }
+
+    public function getUserPermission() {
+        return Auth::user()->roles()->with('permissions')->get();
     }
 
     public function profile()

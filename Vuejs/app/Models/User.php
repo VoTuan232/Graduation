@@ -40,7 +40,7 @@ class User extends Authenticatable
         return $this->getKey();
     }
 
-     public function getJWTCustomClaims()
+    public function getJWTCustomClaims()
     {
         return [];
     }

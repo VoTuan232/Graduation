@@ -32,6 +32,8 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 	Route::get('user/countFollower', 'api\admin\UserController@countFollower');
 	Route::get('user/countPost', 'api\admin\UserController@countPost');
 	Route::get('m/roles/all', 'api\admin\RoleController@getAllRole');
+	
+	Route::get('user/userPermission', 'api\admin\UserController@getUserPermission');
 
 	Route::get('profile', 'api\admin\UserController@profile');
 	Route::put('profile', 'api\admin\UserController@updateProfile');
@@ -88,13 +90,16 @@ Route::get('u/{email}/follows', 'api\client\UserController@getUserFollow');
 Route::get('u/{email}/followers', 'api\client\UserController@getUserFollower');
 Route::get('u/{email}', 'api\client\UserController@getSinge');
 Route::get('u/{email}/posts', 'api\client\UserController@getPostsOfUser');
+Route::get('u/{email}/drafts', 'api\client\UserController@getDraftsOfUser');
 Route::get('u/{email}/questions', 'api\client\UserController@getQuestionsOfUser');
 Route::get('authors', 'api\client\UserController@getAllUser');
 
 Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');
-Route::get('q/{slug}', 'api\client\QuestionController@getSingle');
+Route::get('q/{question}', 'api\client\QuestionController@getSingle');
 Route::get('c/newestquestions', 'api\client\QuestionController@getNewests');
+Route::get('q/{question}/comments', 'api\client\QuestionController@getComments');
+Route::post('q/{question}/comment', 'api\client\QuestionController@storeComment');
 
 /*auth*/
 Route::post('auth/register', 'api\AuthController@register');
@@ -102,6 +107,7 @@ Route::post('auth/login', 'api\AuthController@login');
 Route::group(['middleware' => 'jwt.auth'], function(){
   Route::get('auth/user', 'api\AuthController@user');
   Route::post('auth/logout', 'api\AuthController@logout');
+
 });
 Route::group(['middleware' => 'jwt.refresh'], function(){
  	Route::get('auth/refresh', 'api\AuthController@refresh');

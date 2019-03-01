@@ -90,6 +90,8 @@ class QuestionController extends Controller
         catch (\Exception $e) {
             DB::rollback();
         }
+
+        return $question;
     }
 
     public function destroy(Question $question) {

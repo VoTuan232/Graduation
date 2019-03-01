@@ -9,11 +9,12 @@ use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use App\Http\Requests\CommentRequest;
 
 class PostController extends Controller
 {
     public function getNewestPosts() {
-        return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
+        return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
     }
 
     public function getTrending() {
@@ -21,7 +22,7 @@ class PostController extends Controller
     }
 
     public function getSingle(Post $post) {
-        return $post->with('categories', 'user', 'user.posts', 'user.followers', 'tags', 'comments')->firstOrFail();
+        return Post::where('id', $post->id)->with('categories', 'user', 'user.posts', 'user.followers', 'tags', 'comments')->firstOrFail();
     }
 
     // public function getUserBaseSlugPost(Request $request, Post $post, $slug) {
@@ -38,11 +39,7 @@ class PostController extends Controller
         return $post->comments()->orderBy('id', 'desc')->with('user', 'replies')->get();
     }
 
-    public function storeComment(Request $request, Post $post) {
-        $this->validate($request, [
-            'body'         => 'required',
-        ]);
-        
+    public function storeComment(CommentRequest $request, Post $post) {
         $comment = new Comment;
         $comment->body = $request->body;
         $comment->user()->associate($request->user_id);

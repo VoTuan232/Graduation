@@ -97,5 +97,5 @@ return [
     'check_login_save_post' => 'You need login to save post!',
     'auto' => 'Auto',
     'update_post_success' => 'The post was updated successfully',
-
+    'comment_body_required' => 'The content of comment is required!',
 ];

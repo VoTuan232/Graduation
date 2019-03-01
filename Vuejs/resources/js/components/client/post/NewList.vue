@@ -36,6 +36,9 @@
                 </p>
                 <hr>
             </div>
+           <!--  <div class="col-md-1">
+                <a v-if="userPermission.hasPermission('post.edit')">Edit</a>
+            </div> -->
         </div>
         <div>
             <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
@@ -44,6 +47,7 @@
 </template>
 <script>
     export default {
+        // props: ['userPermission'],
     	data() {
     		return {
     			posts: {},

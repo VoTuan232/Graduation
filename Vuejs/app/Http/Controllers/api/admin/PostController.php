@@ -96,7 +96,7 @@ class PostController extends Controller
             DB::rollback();
         }
 
-        // return $post;
+        return $post;
     }
 
     public function destroy(Post $post) {

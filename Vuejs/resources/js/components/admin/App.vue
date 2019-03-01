@@ -211,7 +211,7 @@
             <div class="content-wrapper">
                 <div class="content">
                     <div class="container-fluid">
-                        <router-view></router-view>
+                        <router-view @updatedUser="getUserCurrent" :userPermission="userPermission"></router-view>
 
                         <vue-progress-bar></vue-progress-bar>
                     </div>
@@ -234,12 +234,30 @@
 
  <script>
     import UserPanel from '../asset/UserPanel.vue';
+    import Gate from "./../../Gate";
+
      export default {
         components: {UserPanel},
         data() {
             return {
+                userPermission : new Gate({
 
+                }),
             }
+        },
+
+        methods: {
+           getUserCurrent() {
+                axios.get('user/userPermission')
+                .then(response => (
+                    this.userPermission = response.data,
+                    this.userPermission = new Gate(this.userPermission)
+                    ))
+            }
+        },
+
+        created() {
+          // this.getUserCurrent();
         }
      }
  </script>

@@ -2,7 +2,7 @@
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <template>
-    <div class="container">
+    <div v-if="userPermission.hasPermission('users.read')" class="container">
         <!-- <div class="row mt-5" v-if="$gate.isAdmin()"> -->
         <div class="row mt-5">
             <div class="col-12">
@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <h3 class="card-title">User Table</h3>
                         <div class="card-tools">
-                            <button class="btn btn-success" @click="newModal">Add New
+                            <button v-if="userPermission.hasPermission('users.create')" class="btn btn-success" @click="newModal">Add New
                             <i class="fas fa-plus-square"></i>                           
                             </button>
                         </div>
@@ -37,11 +37,11 @@
                                     </td>
                                     <td>{{ user.created_at | changeCreatedDate }}</td>
                                     <td>
-                                        <a href="#" @click="editModal(user)">
+                                        <a v-if="userPermission.hasPermission('users.update')" href="#" @click="editModal(user)">
                                         <i class="fa fa-edit blue"></i>
                                         </a>
-                                        /
-                                        <a href="#" @click="deleteUser(user.id)">
+                                        <span v-if="userPermission.hasPermission('users.update') && userPermission.hasPermission('users.delete')">/</span>
+                                        <a v-if="userPermission.hasPermission('users.delete')" href="#" @click="deleteUser(user.id)">
                                         <i class="fa fa-trash red"></i>
                                         </a>
                                     </td>
@@ -128,9 +128,13 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        <no-permission></no-permission>
+    </div>
 </template>
 <script>
     export default {
+        props: ['userPermission'],
         data () {
             return {
                 editMode : false,
@@ -145,7 +149,8 @@
                     bio : '',
                     photo : '',
                     roles : [],
-                })
+                }),
+                // userPermission: this.$auth.user(),
             }
         },
         methods: {
@@ -155,6 +160,11 @@
                         this.users = response.data;
                 });
             },
+
+            // getUserPermission() {
+            //     axios.get('user/userPermission')
+            //     .then(response => this.userPermission = response.data)
+            // },
 
             updateUser() {
                 // console.log(this.form.name);
@@ -250,6 +260,11 @@
 
             }
         },
+
+        // beforeMounted() {
+        //     this.$emit('updatedUser');
+        // },
+
         created() {
             // Fire.$on('searching', () => {
             //     let query = this.$parent.search;
@@ -259,7 +274,7 @@
             //     })
             //     .catch(() => {})
             // });
-             this.$Progress.start();
+            this.$Progress.start();
             this.loadUsers();
             this.loadRoles();
             this.$Progress.finish();
@@ -267,6 +282,7 @@
             Fire.$on('AfterCrud', () => {
                 this.loadUsers();
             });
+            this.$emit('updatedUser');
             //send request each 3s
             // setInterval(() => this.loadUsers(), 3000);
         }

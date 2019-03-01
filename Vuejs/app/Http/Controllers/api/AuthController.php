@@ -20,6 +20,7 @@ class AuthController extends Controller
             'data' => $user
         ], 200);
     }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -36,6 +37,7 @@ class AuthController extends Controller
             ])
             ->header('Authorization', $token);
     }
+
     public function logout()
     {
         JWTAuth::invalidate();
@@ -44,6 +46,7 @@ class AuthController extends Controller
                 'msg' => 'Logged out Successfully.'
             ], 200);
     }
+
     public function user(Request $request)
     {
         $user = User::find(Auth::user()->id);
@@ -52,10 +55,13 @@ class AuthController extends Controller
                 'data' => $user
             ]);
     }
+
     public function refresh()
     {
         return response([
             'status' => 'success'
         ]);
     }
+
+    
 }

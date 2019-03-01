@@ -7,6 +7,10 @@
 <template>
 	<div>
 		<h4>Comments</h4>
+		<div class="hello">
+		    <!-- <read-more more-str="read more" :text="msg" link="#" less-str="read less" :max-chars="50"></read-more>
+		    <read-more more-str="read more" less-str="read less" :text="msg2" link="#"></read-more> -->
+		  </div>
 		<div v-if="!$auth.check()" class="row">
 			<div class="col-md-12">
 				<div class="card" style="width: 100%">
@@ -32,76 +36,56 @@
 			</div>
 		</div>
 		<br>
-		<div v-for="comment in comments" class="row mt-1">
-			<div :id="'comment-' + comment.id">
+		<div v-for="commentIndex in commentsToShow" v-if="commentIndex <= comments.length"  class="row mt-1">
+		<!-- <div v-for="comment in comments" class="row mt-1"> -->
+			<div :id="'comment-' + comments[commentIndex-1].id">
 		        <div class="media" >
 		            <a class="pull-left" href="#">
-		                <img v-if="comment.user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
-		                <img v-else class="media-object" :src="'/images/profile/' + comment.user.avatar" alt="">
+		                <img v-if="comments[commentIndex-1].user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
+		                <img v-else class="media-object" :src="'/images/profile/' + comments[commentIndex-1].user.avatar" alt="">
 	                </a>
 	            	<div class="media-body" style="margin-left: 20px;">
-		                <h4 class="media-heading">{{ comment.user.name }}
+		                <h4 class="media-heading">{{ comments[commentIndex-1].user.name }}
 	                    	<small>August 25, 2014 at 9:30 PM</small>
 	                    </h4>
-		                    {{ comment.body }} 
+		                    {{ comments[commentIndex-1].body }} 
 		                    <br>
 		                    <a href="#">Like</a> 
 		                    &nbsp; 
-		                    <a href="#" @click="clickReplyComment(comment.id)" v-scroll-to="'#comment-' + comment.id">Reply</a>
+		                    <a href="#" @click="clickReplyComment(comments[commentIndex-1].id)" v-scroll-to="'#comment-' + comments[commentIndex-1].id">Reply</a>
 		            </div>
 	            </div>
-	            <div v-if="comment.replies.length > 0">
-		            <!-- <comment-replies :comments="comment.replies" :parent:"comment"></comment-replies> -->
-		            <div v-for="commentReply in comment.replies" class="row" :key="commentReply.id">
-						<div class="media mt-2 ml-5" >
-					        <a class="pull-left" href="#">
-					            <img v-if="commentReply.user.avatar == null" class="media-object" src="/images/profile/profile.png" alt="">
-					            <img v-else class="media-object" :src="'/images/profile/' + commentReply.user.avatar" alt="">
-					        </a>
-					    	<div class="media-body" style="margin-left: 20px;">
-					        <h4 class="media-heading">{{ commentReply.user.name }}
-				            	<small>August 25, 2014 at 9:30 PM</small>
-				            </h4>
-					            {{ commentReply.body }}
-					            <br>
-			                	<a href="#">Like</a> 
-			                	&nbsp; 
-			                	<a href="#" @click="clickReplyComment(comment.id)" v-scroll-to="'#comment-' + comment.id">Reply</a>
-					        </div>
-					    </div>
-				    </div>
-	            </div>
+	            <comment-replies :comments="comments[commentIndex-1]" @clickReply="clickReplyComment"></comment-replies>
 	            <br>
-	            <div class="media ml-5"  :id="'reply-' + comment.id" v-show="false">
+	            <div class="media ml-5"  :id="'reply-' + comments[commentIndex-1].id" v-show="false" style="margin-left: 35px !important;">
 		            <a class="pull-left" href="#">
-		                <img v-if="comment.user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
-		                <img v-else class="media-object" :src="'/images/profile/' + comment.user.avatar" alt="">
+		                <img v-if="comments[commentIndex-1].user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
+		                <img v-else class="media-object" :src="'/images/profile/' + comments[commentIndex-1].user.avatar" alt="">
 	                </a>
 	            	<div class="media-body" style="margin-left: 20px;">
 		               
-		                    <div class="form-group">
-		                        <input v-model="formReply.body" type="text" name="slug" @keyup.enter="CreateCommentReply()"
-		                            placeholder="Write a reply..." 
-		                            class="form-control" :class="{ 'is-invalid': formReply.errors.has('body') }">
-		                        <has-error :form="formReply" field="body"></has-error>
-		                    </div>
+		                    <comment-form :comment="comments[commentIndex-1]" :slug="slug"></comment-form>
 		                
 		            </div>
 	            </div>
 			</div>
 		</div>
+		<button v-show="commentsToShow < comments.length" type="button" class="btn btn-link" @click="commentsToShow += 2"><i class="fas fa-chevron-circle-down"></i>View more comments</button>
 		<br>
 	</div>
 </template>
 
 <script>
-	// import CommentReplies from './CommentReplies.vue';
+	import CommentReplies from './CommentReplies.vue';
+	import CommentForm from './CommentForm.vue';
 
 	export default {
 		props: ['slug'],
-		// components: {CommentReplies},
+		components: {CommentForm, CommentReplies},
 		data() {
 			return {
+				// msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+    //   			msg2: 'Lorem ipsum dolor sit amet',
 				comments: {
 
 				},
@@ -110,13 +94,18 @@
 					user_id: this.$auth.user().id,
 					parent_id: null,
 				}),
-				formReply: new Form({
-					body: '',
-					user_id: this.$auth.user().id,
-					parent_id: null,
-				}),
+				commentsToShow: 2,
 			}
 		},
+
+		watch: {
+			// commentsToShow: function(val) {
+			// 	if(val >= this.comments.length) {
+			// 		this.showReadMore = false;
+			// 	}
+			// }
+		},
+
 		methods: {
 			getComment() {
 				axios.get('p/' + this.slug + '/comments')
@@ -138,14 +127,11 @@
 
 			clickReplyComment(id) {
 				$('#reply-' + id).toggle();
+				// this.$refs["body_reply-" + id][0].focus();
 				// var x=window.scrollX;
-			 //    var y=window.scrollY;
-			 //    window.onscroll=function(){window.scrollTo(x, y);};
+				//    var y=window.scrollY;
+				//    window.onscroll=function(){window.scrollTo(x, y);};
 			},
-
-			CreateCommentReply() {
-				alert('hihi');
-			}
 		},
 
 		created() {

@@ -96,6 +96,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _asset_UserPanel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../asset/UserPanel.vue */ "./resources/js/components/asset/UserPanel.vue");
+/* harmony import */ var _Gate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../Gate */ "./resources/js/Gate.js");
 //
 //
 //
@@ -331,12 +332,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     UserPanel: _asset_UserPanel_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      userPermission: new _Gate__WEBPACK_IMPORTED_MODULE_1__["default"]({})
+    };
+  },
+  methods: {
+    getUserCurrent: function getUserCurrent() {
+      var _this = this;
+
+      axios.get('user/userPermission').then(function (response) {
+        return _this.userPermission = response.data, _this.userPermission = new _Gate__WEBPACK_IMPORTED_MODULE_1__["default"](_this.userPermission);
+      });
+    }
+  },
+  created: function created() {// this.getUserCurrent();
   }
 });
 
@@ -703,7 +718,14 @@ var render = function() {
         _c(
           "div",
           { staticClass: "container-fluid" },
-          [_c("router-view"), _vm._v(" "), _c("vue-progress-bar")],
+          [
+            _c("router-view", {
+              attrs: { userPermission: _vm.userPermission },
+              on: { updatedUser: _vm.getUserCurrent }
+            }),
+            _vm._v(" "),
+            _c("vue-progress-bar")
+          ],
           1
         )
       ])
@@ -1263,6 +1285,59 @@ function normalizeComponent (
     options: options
   }
 }
+
+
+/***/ }),
+
+/***/ "./resources/js/Gate.js":
+/*!******************************!*\
+  !*** ./resources/js/Gate.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Gate; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Gate =
+/*#__PURE__*/
+function () {
+  function Gate(user) {
+    _classCallCheck(this, Gate);
+
+    this.user = user;
+  }
+
+  _createClass(Gate, [{
+    key: "hasPermission",
+    value: function hasPermission(permission) {
+      //check trong day neu user co role la super admin => return true
+      for (var a in this.user) {
+        if (this.user[a].name == 'Super Admin') {
+          return true;
+        } else {
+          for (var b in this.user[a].permissions) {
+            if (permission == this.user[a].permissions[b].name) {
+              return true;
+              break;
+            }
+          }
+        }
+      }
+
+      return false;
+    }
+  }]);
+
+  return Gate;
+}();
+
 
 
 /***/ }),

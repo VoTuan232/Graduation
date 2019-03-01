@@ -12,11 +12,26 @@
 					<i class="fas fa-eye client"></i>&nbsp;{{ question['view'] }} &nbsp;&nbsp;&nbsp;
 					<i class="fa fa-comments client"></i>&nbsp;{{ question['comments'].length }}
 				</p>
-				<h1>{{ question['title'] }}</h1>
+				<div class="row">
+					<div class="col-md-11">	
+						<h1>{{ question['title'] }}</h1>
+					</div>
+					<div class="col-md-1">
+						<div v-if="userPermission.hasPermission('questions.edit')" class="dropdown">
+						  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  </button>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						    <router-link :to="'' +'/q/' + this.slug + '/edit'" class="dropdown-item" href="#">Edit</router-link>
+						    <a class="dropdown-item" href="#">Add to my series</a>
+						    <a class="dropdown-item" href="#">Delete this post</a>
+						  </div>
+						</div>
+					</div>
+				</div>
                     <tag-of-new :tagData="question['tags']"></tag-of-new>
 				<br>
 				<p v-html="question['body']"></p>
-				<button type="button" class="btn btn-primary">Post Answer</button>
+				<comment :slug="slug"></comment>
 			</div>
 			<div class="col-md-3">
 				<div class="row">
@@ -41,7 +56,12 @@
 </template>
 
 <script>
+	import Comment from './Comment.vue';
+
 	export default {
+        props: ['userPermission'],
+
+		components: {Comment},
 		data() {
 			return {
 				slug: this.$route.params.slug,
@@ -91,6 +111,7 @@
 			 this.$Progress.start();
 			this.getQuestionSingle();
             this.$Progress.finish();
+        	this.$emit('updatedUser');
 		}, 
 	}
 </script>

@@ -26,7 +26,7 @@
       <br><br>
       <div class="row">
           <div class="col-md-8">
-            <router-view></router-view>
+            <router-view :userPermission="userPermission"></router-view>
           </div>
           <div class="col-md-4">
             <newest-question></newest-question>
@@ -42,10 +42,15 @@
 <script>
   import NewestQuestion from './NewestQuestion';
   export default {
+    props: ['userPermission'],
     components: {NewestQuestion},
     data() {
       return {
-
+      }
+    },
+    created() {
+      if(this.$auth.check()) {
+        this.$emit('updatedUser');
       }
     }
   }

@@ -10,13 +10,13 @@
 //     'tag-of-new',
 //     require('./components/asset/TagOfNew.vue').default
 // );
+import App from './components/client/App.vue'
 
 const client = new Vue({
     el: '#client',
     router: Vue.router,
-    components: {},
+    components: {App},
     data: {
-        // userLogged: userLogged,
     },
 
     methods: {
@@ -68,5 +68,5 @@ const client = new Vue({
 
               return slug;
       },
-    }
+    },
 });

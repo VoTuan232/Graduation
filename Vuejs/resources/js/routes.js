@@ -58,6 +58,7 @@ let routes = [
         ]
     },
     { path: '/p/:slug', component: require('./components/client/post/SinglePost.vue').default  },
+    { path: '/p/:slug/edit', component: require('./components/client/post/EditSinglePost.vue').default  },
     { path: '/publish/post', component: require('./components/client/post/Create.vue').default  },
     { 
         path: '/t/:slug', 
@@ -92,6 +93,10 @@ let routes = [
             {
                 path: '/u/:email/followers',
                 component: require('./components/client/user/Follower.vue').default,
+            }, 
+            {
+                path: '/u/:email/drafts',
+                component: require('./components/client/user/Draft.vue').default,
             },
         ]  
     },
@@ -108,6 +113,7 @@ let routes = [
     { path: '/authors', component: require('./components/client/author/Author.vue').default  },
     { path: '/question/ask', component: require('./components/client/question/Create.vue').default  },
     { path: '/q/:slug', component: require('./components/client/question/Single.vue').default  },
+    { path: '/q/:slug/edit', component: require('./components/client/question/EditQuestionSingle.vue').default  },
     { path: '/register', name: 'register', component: require('./components/client/auth/Register.vue').default, meta: {auth: false}  },
     { path: '/login', name: 'login', component: require('./components/client/auth/Login.vue').default, meta: {auth: false}  },
 ];

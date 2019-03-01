@@ -34,6 +34,17 @@
                 <tag-of-new :tagData="post['tags']"></tag-of-new>
 				<p v-html="post['body']"></p>
 			</div>
+			<div class="col-md-1">
+				<div v-if="userPermission.hasPermission('post.edit')" class="dropdown">
+				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  </button>
+				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				    <router-link :to="'' +'/p/' + this.slug + '/edit'" class="dropdown-item" href="#">Edit</router-link>
+				    <a class="dropdown-item" href="#">Add to my series</a>
+				    <a class="dropdown-item" href="#">Delete this post</a>
+				  </div>
+				</div>
+			</div>
 		</div>
 		
 		<comment :slug="slug"></comment>
@@ -61,6 +72,8 @@
 	import Comment from './Comment.vue';
 
 	export default {
+        props: ['userPermission'],
+
 		components: {Comment},
 		data() {
 			return {
@@ -110,6 +123,7 @@
 			this.$Progress.start();
 			this.getPostSingle();
 			this.$Progress.finish();
+        	this.$emit('updatedUser');
 		}, 
 	}
 </script>

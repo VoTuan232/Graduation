@@ -20,10 +20,24 @@ class UserController extends Controller
     }
 
     public function getPostsOfUser(Request $request, $email) {
+        $email = $email.'@gmail.com';
+        $user = User::where('email', $email)->firstOrFail();
+
+        return Post::where([
+            'user_id' => $user->id,
+            'published' => true,
+        ])->with('categories', 'tags')->paginate(5);
+        /*auto has comment in post*/
+    }
+
+    public function getDraftsOfUser(Request $request, $email) {
     	$email = $email.'@gmail.com';
     	$user = User::where('email', $email)->firstOrFail();
 
-    	return Post::where('user_id', $user->id)->with('categories', 'tags')->paginate(5);
+    	return Post::where([
+            'user_id' => $user->id,
+            'published' => false,
+        ])->with('categories', 'tags')->paginate(5);
     	/*auto has comment in post*/
     }
 

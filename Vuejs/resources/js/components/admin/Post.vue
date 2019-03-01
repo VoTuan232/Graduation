@@ -1,7 +1,7 @@
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <template>
-    <div class="container">
+    <div v-if="userPermission.hasPermission('posts.read')" class="container">
         <div class="row mt-5">
             <div class="col-12">
                 <div class="card">
@@ -148,11 +148,15 @@
             </div>
         </div>
     </div>
+    <div v-else>
+        <no-permission></no-permission>
+    </div>
 </template>
 <script>
   import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
     export default {
+        props: ['userPermission'],
         data () {
             return {
                 editMode : false,
@@ -315,6 +319,7 @@
             Fire.$on('AfterCrud', () => {
                 this.loadPosts();
             });
+            this.$emit('updatedUser');
             //send request each 3s
             // setInterval(() => this.loadUsers(), 3000);
         }

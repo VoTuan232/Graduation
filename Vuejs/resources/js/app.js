@@ -9,9 +9,18 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+/*vue-read-more*/
+import ReadMore from 'vue-read-more';
+Vue.use(ReadMore);
+
 /*scrollTo*/
 import VueScrollTo from 'vue-scrollto';
 Vue.use(VueScrollTo);
+
+/*Gate*/
+// import Gate from "./Gate";
+// Vue.prototype.$gate = Gate;
+// // Vue.use(Gate);
 
 /*Vue ProgressBar*/
 import VueProgressBar from 'vue-progressbar'
@@ -93,6 +102,10 @@ Vue.component(
 Vue.component(
     'not-found',
     require('./components/NotFound.vue').default
+);
+Vue.component(
+    'no-permission',
+    require('./components/NoPermission.vue').default
 );
 Vue.component(
     'box-user-single',
