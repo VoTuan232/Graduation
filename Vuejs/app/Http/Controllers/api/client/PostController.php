@@ -14,7 +14,22 @@ use App\Http\Requests\CommentRequest;
 class PostController extends Controller
 {
     public function getNewestPosts() {
-        return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
+        $post = Post::all();
+        $i = 0;
+        foreach($post as $post) {
+            if ($i > 1000 && $i < 1500)  
+                $post->update([
+                    'user_id' => 5,
+                ]);
+            else if ($i > 1500 && $i < 2000)
+                $post->update([
+                    'user_id' => 6,
+                ]);
+            $i ++;
+        }
+        return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'tags')->paginate(5);
+
+        // return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
     }
 
     public function getTrending() {
@@ -22,6 +37,8 @@ class PostController extends Controller
     }
 
     public function getSingle(Post $post) {
+        // return Post::where('id', $post->id)->with('categories', 'user', 'tags')->firstOrFail();
+        // return Post::where('id', $post->id)->with('categories', 'user', 'tags', 'comments')->firstOrFail();
         return Post::where('id', $post->id)->with('categories', 'user', 'user.posts', 'user.followers', 'tags', 'comments')->firstOrFail();
     }
 
@@ -32,7 +49,8 @@ class PostController extends Controller
     // }
 
     public function getPostSideBar() {
-        return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->take(5)->get();
+        return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'tags')->take(5)->get();
+        // return Post::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->take(5)->get();
     }
 
     public function getComments(Post $post) {

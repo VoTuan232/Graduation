@@ -13,6 +13,18 @@ use DB;
 
 class UserController extends Controller
 {
+    public function getUserInformation(User $user) {
+        $data = User::where('id', $user->id)->with('followers', 'posts')->firstOrFail();
+
+        return response([
+            'name' => $data['name'],
+            'avatar' => $data['avatar'],
+            'posts' => count($data['posts']),
+            'followers' => count($data['followers']),
+        ]);
+        // return User::where('id', $user->id)->with('followers', 'posts')->firstOrFail();
+    }
+
     public function getSinge(Request $request, $email) {
         $email = $email.'@gmail.com';
 

@@ -48,7 +48,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img v-if="$auth.check" :src="'/images/profile/' + $auth.user().avatar" alt="User avatar" class="avatar-client"/>
+                        <img v-if="$auth.user().avatar !=null" :src="'/images/profile/' + $auth.user().avatar" alt="User avatar" class="avatar-client"/>
                         <img v-else src="/images/profile/profile.png" alt="User avatar" class="avatar-client"/>
                         </a>
                         <div class="dropdown-menu client" aria-labelledby="navbarDropdown">

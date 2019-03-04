@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class PostController extends Controller
 {
     public function index() {
-    	return Post::with('categories', 'user', 'tags')->paginate(2);
+    	return Post::with('categories', 'user', 'tags')->paginate(5);
     }
 
     public function store(Request $request)

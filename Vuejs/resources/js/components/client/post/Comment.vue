@@ -64,7 +64,7 @@
 	                </a>
 	            	<div class="media-body" style="margin-left: 20px;">
 		               
-		                    <comment-form :comment="comments[commentIndex-1]" :slug="slug"></comment-form>
+		                    <comment-form :id="'form-reply-' + comments[commentIndex-1].id" v-show="false" :comment="comments[commentIndex-1]" :slug="slug"></comment-form>
 		                
 		            </div>
 	            </div>
@@ -127,6 +127,7 @@
 
 			clickReplyComment(id) {
 				$('#reply-' + id).toggle();
+				$('#form-reply-' + id).toggle();
 				// this.$refs["body_reply-" + id][0].focus();
 				// var x=window.scrollX;
 				//    var y=window.scrollY;

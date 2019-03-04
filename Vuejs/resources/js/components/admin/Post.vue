@@ -63,7 +63,21 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
+                         <!-- <paginate
+                            v-model="posts"
+                            :page-count="20"
+                            :page-range="3"
+                            :margin-pages="2"
+                            :click-handler="clickCallback"
+                            :prev-text="'Prev'"
+                            :next-text="'Next'"
+                            :container-class="'pagination'"
+                            :page-class="'page-item'">
+                          </paginate> -->
+                        <pagination  :data="posts" @pagination-change-page="getResults" :limit="2">
+                            <span slot="prev-nav">&lt; Previous</span>
+                            <span slot="next-nav">Next &gt;</span>
+                        </pagination>
                     </div>
                 </div>
                 <!-- /.card -->

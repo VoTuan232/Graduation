@@ -61,7 +61,8 @@ import Multiselect from 'vue-multiselect'
 Vue.component('multiselect', Multiselect);
 
 /*Vuejs paginator*/
-// Vue.component('paginate', require('vuejs-paginate'));
+// import Paginate from 'vuejs-paginate'
+// Vue.component('paginate', Paginate)
 
 /*Popper*/
 Vue.component('popper', require('vue-popperjs'));
@@ -90,6 +91,10 @@ Vue.use(require('@websanova/vue-auth'), {
 Vue.component(
     'user-popper',
     require('./components/asset/UserPopper.vue').default
+);
+Vue.component(
+    'user-popper-not-load',
+    require('./components/asset/UserPoperNotLoad.vue').default
 );
 Vue.component(
     'tag-of-new',

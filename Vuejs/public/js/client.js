@@ -399,7 +399,7 @@ var render = function() {
                           }
                         },
                         [
-                          _vm.$auth.check
+                          _vm.$auth.user().avatar != null
                             ? _c("img", {
                                 staticClass: "avatar-client",
                                 attrs: {

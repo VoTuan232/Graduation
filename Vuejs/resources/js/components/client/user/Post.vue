@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-11">
                 <p>
-                   	<user-popper :userData="userData"></user-popper>
+                   	<user-popper-not-load :userData="userData"></user-popper-not-load>
 	                {{ post.created_at}}
 	                <br>
 	                <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
@@ -25,9 +25,10 @@
         <div v-else>
         	There is nothing here.
         </div>
-        <div>
-            <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
-        </div>
+        <pagination  :data="posts" @pagination-change-page="getResults" :limit="2">
+            <span slot="prev-nav">&lt; Previous</span>
+            <span slot="next-nav">Next &gt;</span>
+        </pagination>
 	</div>
 </template>
 

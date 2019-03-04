@@ -12,7 +12,7 @@
 			</div>
 			<div class="col-md-8">
 				<p>
-                    <user-popper :userData="post['user']"></user-popper>
+                    <user-popper-not-load :userData="post['user']"></user-popper-not-load>
 					{{ post['created_at'] | agoDate }}
 					<br>
 					<i class="fa fa-user-friends"></i>{{ post['user']['followers'].length }}&nbsp;&nbsp;&nbsp;

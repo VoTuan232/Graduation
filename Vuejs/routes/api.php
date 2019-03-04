@@ -93,6 +93,7 @@ Route::get('u/{email}/posts', 'api\client\UserController@getPostsOfUser');
 Route::get('u/{email}/drafts', 'api\client\UserController@getDraftsOfUser');
 Route::get('u/{email}/questions', 'api\client\UserController@getQuestionsOfUser');
 Route::get('authors', 'api\client\UserController@getAllUser');
+Route::get('u/{user}/information', 'api\client\UserController@getUserInformation');
 
 Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');

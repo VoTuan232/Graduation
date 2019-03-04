@@ -3,11 +3,11 @@
 		<h5>NEWEST POST ________________</h5>
 
 		<div v-for="(post, index) in posts" v-if="index < 5">
-			<router-link :to="'' + '/q/' + post.slug">{{ post.title }}</router-link>
+			<router-link :to="'' + '/p/' + post.slug">{{ post.title }}</router-link>
 			<br>
 				<i class="fas fa-eye client"></i>&nbsp;{{ post.view }} &nbsp;&nbsp;&nbsp;
 				<i class="fa fa-comments client"></i>&nbsp;{{ post.comments.length }}
-		<br>
+			<br>
 			<router-link :to="'' + 'u/' + $root.changeEmail(post.user.email)">{{ post.user.name }}</router-link>
 			<hr>
 		</div>

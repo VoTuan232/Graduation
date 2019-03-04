@@ -40,9 +40,10 @@
                 <a v-if="userPermission.hasPermission('post.edit')">Edit</a>
             </div> -->
         </div>
-        <div>
-            <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
-        </div>
+        <pagination  :data="posts" @pagination-change-page="getResults" :limit="2">
+            <span slot="prev-nav">&lt; Previous</span>
+            <span slot="next-nav">Next &gt;</span>
+        </pagination>
     </div>
 </template>
 <script>
