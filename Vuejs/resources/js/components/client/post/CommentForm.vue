@@ -9,13 +9,13 @@
 
 <script>
 	export default {
-		props: ['comment', 'slug'],
+		props: ['comment', 'slug', 'parent_id'],
 		data() {
 			return {
 				form: new Form({
 					body: '',
 					user_id: this.$auth.user().id,
-					parent_id: this.comment.id,
+					parent_id: this.parent_id,
 				})
 			}
 		},

@@ -13,20 +13,36 @@ use App\Http\Requests\CommentRequest;
 
 class PostController extends Controller
 {
+    public function search() {
+        return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'tags')->paginate(1);
+    }
+
+    // public function search() {
+    //     if ($search = \Request::get('q')) {
+    //         $users = User::where(function($query) use ($search){
+    //             $query->where('name','LIKE',"%$search%")
+    //                     ->orWhere('email','LIKE',"%$search%");
+    //         })->paginate(2);
+    //     }else{
+    //         $users = User::latest()->paginate(5);
+    //     }
+    //     return $users;
+    // }
+    // 
     public function getNewestPosts() {
-        $post = Post::all();
-        $i = 0;
-        foreach($post as $post) {
-            if ($i > 1000 && $i < 1500)  
-                $post->update([
-                    'user_id' => 5,
-                ]);
-            else if ($i > 1500 && $i < 2000)
-                $post->update([
-                    'user_id' => 6,
-                ]);
-            $i ++;
-        }
+        // $post = Post::all();
+        // $i = 0;
+        // foreach($post as $post) {
+        //     if ($i > 1000 && $i < 1500)  
+        //         $post->update([
+        //             'user_id' => 5,
+        //         ]);
+        //     else if ($i > 1500 && $i < 2000)
+        //         $post->update([
+        //             'user_id' => 6,
+        //         ]);
+        //     $i ++;
+        // }
         return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'tags')->paginate(5);
 
         // return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);

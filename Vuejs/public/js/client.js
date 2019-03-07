@@ -221,6 +221,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      search: '',
       userPermission: new _Gate__WEBPACK_IMPORTED_MODULE_0__["default"]({})
     };
   },
@@ -231,6 +232,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('user/userPermission').then(function (response) {
         return _this.userPermission = response.data, _this.userPermission = new _Gate__WEBPACK_IMPORTED_MODULE_0__["default"](_this.userPermission);
       });
+    },
+    searchit: function searchit() {
+      Fire.$emit('searching');
     }
   }
 });
@@ -329,12 +333,47 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(1),
+              _c("div", { staticClass: "form-inline my-2 my-lg-0" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control mr-sm-2",
+                  attrs: {
+                    type: "search",
+                    placeholder: "Search",
+                    "aria-label": "Search"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !("button" in $event) &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.searchit($event)
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                })
+              ]),
               _vm._v(" "),
               _vm.$auth.check()
                 ? _c("ul", { staticClass: "navbar-nav" }, [
                     _c("li", { staticClass: "nav-item dropdown" }, [
-                      _vm._m(2),
+                      _vm._m(1),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -426,7 +465,7 @@ var render = function() {
                           attrs: { "aria-labelledby": "navbarDropdown" }
                         },
                         [
-                          _vm._m(3),
+                          _vm._m(2),
                           _vm._v(" "),
                           _c(
                             "router-link",
@@ -548,7 +587,7 @@ var render = function() {
       _c("footer", { staticClass: "page-footer font-small blue pt-4" }, [
         _c("div", { staticClass: "container-fluid text-center text-md-left" }, [
           _c("div", { staticClass: "row" }, [
-            _vm._m(4),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "clearfix w-100 d-md-none pb-3" }),
             _vm._v(" "),
@@ -592,11 +631,11 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(5)
+            _vm._m(4)
           ])
         ]),
         _vm._v(" "),
-        _vm._m(6)
+        _vm._m(5)
       ])
     ],
     1
@@ -622,26 +661,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
-      _c("input", {
-        staticClass: "form-control mr-sm-2",
-        attrs: { type: "search", placeholder: "Search", "aria-label": "Search" }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success my-2 my-sm-0",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Search")]
-      )
-    ])
   },
   function() {
     var _vm = this

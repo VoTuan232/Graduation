@@ -72,13 +72,28 @@
     		getPosts() {
     			axios.get('c/newestposts')
     			.then(({data}) => this.posts = data)
-    		}
+    		},
+
+            getPostsSearch() {
+                axios.get('findPosts')
+                .then(({data}) => this.posts = data)
+            }
     	},
     
     	created() {
             this.$Progress.start();
             this.getPosts();
             this.$Progress.finish();
+
+            Fire.$on('searching', () => {
+                this.getPostsSearch();
+                // let query = this.$parent.search;
+                // axios.get('api/findUser?q=' + query)
+                // .then((data) => {
+                //     this.users = data.data;
+                // })
+                // .catch(() => {})
+            });
     	}
     
     }

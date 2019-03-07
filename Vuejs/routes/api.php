@@ -102,6 +102,9 @@ Route::get('c/newestquestions', 'api\client\QuestionController@getNewests');
 Route::get('q/{question}/comments', 'api\client\QuestionController@getComments');
 Route::post('q/{question}/comment', 'api\client\QuestionController@storeComment');
 
+/*search*/
+Route::get('findPosts', 'api\client\PostController@search');
+
 /*auth*/
 Route::post('auth/register', 'api\AuthController@register');
 Route::post('auth/login', 'api\AuthController@login');

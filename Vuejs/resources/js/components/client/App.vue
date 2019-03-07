@@ -30,10 +30,10 @@
                         </div>
                     </li> -->
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <div class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" @keyup.enter="searchit" v-model="search">
+                    <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button> -->
+                </div>
                 <ul v-if="$auth.check()"  class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle write" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -125,6 +125,7 @@
 	export default {
 		data() {
 			return {
+                search: '',
 				userPermission : new Gate({
 
                 }),
@@ -138,6 +139,10 @@
                     this.userPermission = response.data,
                     this.userPermission = new Gate(this.userPermission)
                     ))
+            },
+
+            searchit() {
+                Fire.$emit('searching');
             }
         },
 	}

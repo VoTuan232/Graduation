@@ -6485,8 +6485,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     clickReplyComment: function clickReplyComment(id) {
-      $('#reply-' + id).toggle();
-      $('#form-reply-' + id).toggle(); // this.$refs["body_reply-" + id][0].focus();
+      $('#reply-' + id).toggle(); // $('#form-reply-' + id).toggle();
+      // this.$refs["body_reply-" + id][0].focus();
       // var x=window.scrollX;
       //    var y=window.scrollY;
       //    window.onscroll=function(){window.scrollTo(x, y);};
@@ -6525,13 +6525,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['comment', 'slug'],
+  props: ['comment', 'slug', 'parent_id'],
   data: function data() {
     return {
       form: new Form({
         body: '',
         user_id: this.$auth.user().id,
-        parent_id: this.comment.id
+        parent_id: this.parent_id
       })
     };
   },
@@ -7053,12 +7053,31 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
         return _this2.posts = data;
       });
+    },
+    getPostsSearch: function getPostsSearch() {
+      var _this3 = this;
+
+      axios.get('findPosts').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this3.posts = data;
+      });
     }
   },
   created: function created() {
+    var _this4 = this;
+
     this.$Progress.start();
     this.getPosts();
     this.$Progress.finish();
+    Fire.$on('searching', function () {
+      _this4.getPostsSearch(); // let query = this.$parent.search;
+      // axios.get('api/findUser?q=' + query)
+      // .then((data) => {
+      //     this.users = data.data;
+      // })
+      // .catch(() => {})
+
+    });
   }
 });
 
@@ -72046,18 +72065,8 @@ var render = function() {
                         },
                         [
                           _c("comment-form", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: false,
-                                expression: "false"
-                              }
-                            ],
                             attrs: {
-                              id:
-                                "form-reply-" +
-                                _vm.comments[commentIndex - 1].id,
+                              parent_id: _vm.comments[commentIndex - 1].id,
                               comment: _vm.comments[commentIndex - 1],
                               slug: _vm.slug
                             }
