@@ -31,7 +31,26 @@
                     </li> -->
                 </ul>
                 <div class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" @keyup.enter="searchit" v-model="search">
+                    <autocomplete
+                        placeholder="Search..."
+                      :source="distributionGroupsEndpoint"
+                      :results-display="formattedDisplay"
+                    >
+                    </autocomplete>
+                    <!-- <autocomplete
+                      ref="autocomplete"
+                      placeholder="Search Distribution Groups"
+                      :source="distributionGroupsEndpoint"
+                      input-class="form-control"
+                      results-property="data"
+                      :results-display="formattedDisplay"
+                    </autocomplete> -->
+                   <!--  <vue-bootstrap-typeahead 
+                      v-model="search"
+                      :data="titlePosts"
+                      @keyup.enter="searchit()"
+                    /> -->
+                    <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" @keyup.enter="searchit" v-model="search"> -->
                     <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button> -->
                 </div>
                 <ul v-if="$auth.check()"  class="navbar-nav">
@@ -125,12 +144,25 @@
 	export default {
 		data() {
 			return {
+                isSearch: false,
                 search: '',
+                posts: [],
+                titlePosts: [],
 				userPermission : new Gate({
 
                 }),
 			}
 		},
+
+        watch: {
+            // 'search': function (search) {
+            //     this.isSearch = true;
+            //     this.searchit();
+            //     console.log(this.posts);
+            //     // this.posts = ['Canada', 'USA', 'Mexico'];
+            //     // console.log(this.posts);
+            // },
+        },
 
 		methods: {
            getUserCurrent() {
@@ -141,8 +173,30 @@
                     ))
             },
 
+            distributionGroupsEndpoint (input) {
+                return 'api/findPosts?search=' + input;
+            },
+
+            formattedDisplay (result) {
+                return "<a  target='_blank' href=" + "http://127.0.0.1:8000/p/" + result.slug + ">" + result.title + "</a>";
+            },
+
+            addDistributionGroup (result) {
+                // console.log(result);
+                // this.group = group
+                // access the autocomplete component methods from the parent
+                // this.$refs.autocomplete.clear()
+              },
+
             searchit() {
-                Fire.$emit('searching');
+                axios.get('findPosts?search=' + this.search)
+                .then(response => { 
+                    this.posts = response.data,
+                    this.isSearch = true
+                    // for (var b in response.data) {
+                    // }
+                });
+                // Fire.$emit('searching', this.search);
             }
         },
 	}

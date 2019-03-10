@@ -9,6 +9,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+/*typeahead*/
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)
+
+/*vue-autocomplete*/
+import Autocomplete from 'vuejs-auto-complete'
+Vue.component('autocomplete', Autocomplete)
+
 /*vue-read-more*/
 import ReadMore from 'vue-read-more';
 Vue.use(ReadMore);

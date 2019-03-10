@@ -217,13 +217,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      isSearch: false,
       search: '',
+      posts: [],
+      titlePosts: [],
       userPermission: new _Gate__WEBPACK_IMPORTED_MODULE_0__["default"]({})
     };
+  },
+  watch: {// 'search': function (search) {
+    //     this.isSearch = true;
+    //     this.searchit();
+    //     console.log(this.posts);
+    //     // this.posts = ['Canada', 'USA', 'Mexico'];
+    //     // console.log(this.posts);
+    // },
   },
   methods: {
     getUserCurrent: function getUserCurrent() {
@@ -233,8 +263,24 @@ __webpack_require__.r(__webpack_exports__);
         return _this.userPermission = response.data, _this.userPermission = new _Gate__WEBPACK_IMPORTED_MODULE_0__["default"](_this.userPermission);
       });
     },
+    distributionGroupsEndpoint: function distributionGroupsEndpoint(input) {
+      return 'api/findPosts?search=' + input;
+    },
+    formattedDisplay: function formattedDisplay(result) {
+      return "<a  target='_blank' href=" + "http://127.0.0.1:8000/p/" + result.slug + ">" + result.title + "</a>";
+    },
+    addDistributionGroup: function addDistributionGroup(result) {// console.log(result);
+      // this.group = group
+      // access the autocomplete component methods from the parent
+      // this.$refs.autocomplete.clear()
+    },
     searchit: function searchit() {
-      Fire.$emit('searching');
+      var _this2 = this;
+
+      axios.get('findPosts?search=' + this.search).then(function (response) {
+        _this2.posts = response.data, _this2.isSearch = true; // for (var b in response.data) {
+        // }
+      }); // Fire.$emit('searching', this.search);
     }
   }
 });
@@ -333,42 +379,20 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-inline my-2 my-lg-0" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.search,
-                      expression: "search"
+              _c(
+                "div",
+                { staticClass: "form-inline my-2 my-lg-0" },
+                [
+                  _c("autocomplete", {
+                    attrs: {
+                      placeholder: "Search...",
+                      source: _vm.distributionGroupsEndpoint,
+                      "results-display": _vm.formattedDisplay
                     }
-                  ],
-                  staticClass: "form-control mr-sm-2",
-                  attrs: {
-                    type: "search",
-                    placeholder: "Search",
-                    "aria-label": "Search"
-                  },
-                  domProps: { value: _vm.search },
-                  on: {
-                    keyup: function($event) {
-                      if (
-                        !("button" in $event) &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.searchit($event)
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.search = $event.target.value
-                    }
-                  }
-                })
-              ]),
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
               _vm.$auth.check()
                 ? _c("ul", { staticClass: "navbar-nav" }, [

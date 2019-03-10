@@ -181,6 +181,8 @@ return [
         //jwt
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         //cors
+        //elastic search
+        Elasticquent\ElasticquentServiceProvider::class,
     ],
 
     /*
@@ -236,6 +238,7 @@ return [
         //jwt
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
     ],
 
 ];

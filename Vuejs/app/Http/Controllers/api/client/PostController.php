@@ -10,11 +10,21 @@ use App\Models\Comment;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use App\Http\Requests\CommentRequest;
+use Event;
 
 class PostController extends Controller
 {
-    public function search() {
-        return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'tags')->paginate(1);
+    public function search(Request $request) {
+
+        $response = \App\Models\Post::searchByQuery([
+        'match' => [
+            'title' => $request->get('search')
+            ]
+        ])->where('published', true);
+
+        return $response;
+
+        // return Post::orderBy('created_at', 'desc')->where('published', true)->with('categories', 'user', 'tags')->paginate(1);
     }
 
     // public function search() {
@@ -53,9 +63,11 @@ class PostController extends Controller
     }
 
     public function getSingle(Post $post) {
+        Event::fire('posts.view', $post);
         // return Post::where('id', $post->id)->with('categories', 'user', 'tags')->firstOrFail();
         // return Post::where('id', $post->id)->with('categories', 'user', 'tags', 'comments')->firstOrFail();
-        return Post::where('id', $post->id)->with('categories', 'user', 'user.posts', 'user.followers', 'tags', 'comments')->firstOrFail();
+        return Post::where('id', $post->id)->with('categories', 'user', 'tags', 'comments')->firstOrFail();
+        // return Post::where('id', $post->id)->with('categories', 'user', 'user.posts', 'user.followers', 'tags', 'comments')->firstOrFail();
     }
 
     // public function getUserBaseSlugPost(Request $request, Post $post, $slug) {

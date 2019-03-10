@@ -61,7 +61,11 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <pagination  :data="questions" @pagination-change-page="getResults"></pagination>
+                        <!-- <pagination  :data="questions" @pagination-change-page="getResults"></pagination> -->
+                        <pagination  :data="questions" @pagination-change-page="getResults" :limit="2">
+                            <span slot="prev-nav">&lt; Previous</span>
+                            <span slot="next-nav">Next &gt;</span>
+                        </pagination>
                     </div>
                 </div>
                 <!-- /.card -->

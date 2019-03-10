@@ -12,11 +12,12 @@
 			</div>
 			<div class="col-md-8">
 				<p>
-                    <user-popper-not-load :userData="post['user']"></user-popper-not-load>
+                	<router-link :to="'' + '/u/' + $root.changeEmail(post['user'].email)" href="#">{{ post['user'].name }}</router-link>
+                    <!-- <user-popper-not-load :userData="post['user']"></user-popper-not-load> -->
 					{{ post['created_at'] | agoDate }}
 					<br>
-					<i class="fa fa-user-friends"></i>{{ post['user']['followers'].length }}&nbsp;&nbsp;&nbsp;
-					<i class="fas fa-pen"></i>{{ post['user']['posts'].length }}
+					<!-- <i class="fa fa-user-friends"></i>{{ post['user']['followers'].length }}&nbsp;&nbsp;&nbsp; -->
+					<!-- <i class="fas fa-pen"></i>{{ post['user']['posts'].length }} -->
 				</p>
 				
 			</div>
@@ -55,7 +56,7 @@
 		</div>
 		
 		<h4>More from {{ post['user'].name }}</h4>
-		<div class="row">
+		<!-- <div class="row">
 			<br>
 			<div v-for="(item,index) in reversePostOfUser" v-if="reversePostOfUser && reversePostOfUser.length > 0 && index <= 3" class="card list-under" style="width: 16.5rem;" :key="item.id">
 			  <div class="card-body">
@@ -64,7 +65,7 @@
 			    <router-link :to="'/p/' + item.slug" href="#" class="btn btn-primary">>>>See More</router-link>
 			  </div>
 			</div>
-		</div>
+		</div> -->
     </div>
 </template>
 

@@ -14,7 +14,7 @@
                 	<img v-else src="/images/profile/profile.png" class="userpopper-avatar" />
         		</div>
         		<div class="col-md-9">
-                	<router-link :to="'u/' + userInfor.name" href="#">{{ userInfor.name }}</router-link>
+                	<router-link :to="'' + '/u/' + $root.changeEmail(userData.email)" href="#">{{ userData.name }}</router-link>
                 	<br>
                 	{{ userInfor.followers }} followers
                 	{{ userInfor.posts }} posts

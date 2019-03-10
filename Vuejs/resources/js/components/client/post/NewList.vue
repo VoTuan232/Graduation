@@ -15,14 +15,15 @@
 </style>
 <template>
     <div class="container">
-        <div class="row"  v-for="post in posts.data" :key="post.id">
+        <div  class="row"  v-for="post in posts.data" :key="post.id">
             <div class="col-md-1">
                 <img v-if="post.user.avatar !=null" :src="'images/profile/' + post.user.avatar" class="avatar-client">
                 <img v-else src="images/profile/profile.png" class="avatar-client">
             </div>
             <div class="col-md-11">
                 <p>
-                    <user-popper :userData="post.user"></user-popper>
+                    <router-link :to="'' + '/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link>
+                    <!-- <user-popper :userData="post.user"></user-popper> -->
                 {{ post.created_at }}
                 <br>
                 <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
@@ -36,7 +37,7 @@
                 </p>
                 <hr>
             </div>
-           <!--  <div class="col-md-1">
+            <!-- <div class="col-md-1">
                 <a v-if="userPermission.hasPermission('post.edit')">Edit</a>
             </div> -->
         </div>
@@ -48,9 +49,10 @@
 </template>
 <script>
     export default {
-        // props: ['userPermission'],
+        props: ['userPermission'],
     	data() {
     		return {
+                // search: false,
     			posts: {},
     		}
     	},
@@ -74,10 +76,13 @@
     			.then(({data}) => this.posts = data)
     		},
 
-            getPostsSearch() {
-                axios.get('findPosts')
-                .then(({data}) => this.posts = data)
-            }
+            // getPostsSearch(search) {
+            //     axios.get('findPosts?search=' + search)
+            //     .then(response => { 
+            //         this.posts = response,
+            //         this.search = true
+            //         })
+            // }
     	},
     
     	created() {
@@ -85,15 +90,15 @@
             this.getPosts();
             this.$Progress.finish();
 
-            Fire.$on('searching', () => {
-                this.getPostsSearch();
-                // let query = this.$parent.search;
-                // axios.get('api/findUser?q=' + query)
-                // .then((data) => {
-                //     this.users = data.data;
-                // })
-                // .catch(() => {})
-            });
+            // Fire.$on('searching', (search) => {
+            //     this.getPostsSearch(search);
+            //     // let query = this.$parent.search;
+            //     // axios.get('api/findUser?q=' + query)
+            //     // .then((data) => {
+            //     //     this.users = data.data;
+            //     // })
+            //     // .catch(() => {})
+            // });
     	}
     
     }

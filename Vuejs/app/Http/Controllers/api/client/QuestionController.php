@@ -18,7 +18,8 @@ class QuestionController extends Controller
     }
 
     public function getQuestionSideBar() {
-        return Question::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->take(5)->get();
+        return Question::orderBy('created_at', 'desc')->with('user', 'tags')->take(5)->get();
+        // return Question::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->take(5)->get();
     }
 
     public function getSingle(Request $request, Question $question) {

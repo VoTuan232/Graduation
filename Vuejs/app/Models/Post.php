@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use App\Models\Category;
+use Elasticquent\ElasticquentTrait;
 
 class Post extends Model
 {
     // public static $slug;
-    
+    use ElasticquentTrait;
+
     protected $fillable = [
         'title',
         'slug',
@@ -21,6 +23,18 @@ class Post extends Model
         'view',
         'trending',
     ];
+
+    //  các trường cần đánh index
+    protected $mappingProperties = array(
+        'title' => [
+          'type' => 'text',
+          'analyzer' => 'standard', //tu dong tach tu theo space
+        ],
+        'body' => [
+          'type' => 'text',
+          'analyzer' => 'standard',
+        ],
+    );
 
     /* auto with in Pot Model*/
     protected $with = ['comments']; 

@@ -79,7 +79,7 @@ class PostController extends Controller
                 foreach ($request->categories as $key => $value) {
                     array_push($data_categories_sync, $value['id']);
                 }
-                $post->categories()->sync($data_categories_sync);
+                $post->categories()->sync($data_categories_sync); //sync: chi gĩư lại những id trong đó, mặc định false
             }
 
             if(count($request->tags) > 0) {

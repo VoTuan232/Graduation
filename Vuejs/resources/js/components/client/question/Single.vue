@@ -41,7 +41,8 @@
 					</div>
 					<div class="col-md-9">
 						<p>
-                   			<user-popper :userData="question['user']"></user-popper>
+							<router-link :to="'' + '/u/' + $root.changeEmail(question['user'].email)" href="#">{{ question['user'].name }}</router-link>
+                   			<!-- <user-popper-not-load :userData="question['user']"></user-popper-not-load> -->
 							{{ question['user'].email }}
 						</p>
 						<p>
