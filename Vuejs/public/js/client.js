@@ -236,6 +236,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -264,7 +275,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     distributionGroupsEndpoint: function distributionGroupsEndpoint(input) {
-      return 'api/findPosts?search=' + input;
+      return '' + '/api/findPosts?search=' + input;
     },
     formattedDisplay: function formattedDisplay(result) {
       return "<a  target='_blank' href=" + "http://127.0.0.1:8000/p/" + result.slug + ">" + result.title + "</a>";
@@ -448,6 +459,57 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("li", { staticClass: "nav-item dropdown" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "dropdown-menu client",
+                          attrs: { "aria-labelledby": "navbarDropdown" }
+                        },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { to: "/publish/post" }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-pencil-alt" }),
+                              _vm._v("Write post")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { to: "/question/ask" }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-question-circle"
+                              }),
+                              _vm._v("Ask question")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "dropdown-divider" }),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              attrs: { href: "#" }
+                            },
+                            [_vm._v("Something else here")]
+                          )
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "nav-item dropdown" }, [
                       _c(
                         "a",
                         {
@@ -489,7 +551,7 @@ var render = function() {
                           attrs: { "aria-labelledby": "navbarDropdown" }
                         },
                         [
-                          _vm._m(2),
+                          _vm._m(3),
                           _vm._v(" "),
                           _c(
                             "router-link",
@@ -611,7 +673,7 @@ var render = function() {
       _c("footer", { staticClass: "page-footer font-small blue pt-4" }, [
         _c("div", { staticClass: "container-fluid text-center text-md-left" }, [
           _c("div", { staticClass: "row" }, [
-            _vm._m(3),
+            _vm._m(4),
             _vm._v(" "),
             _c("div", { staticClass: "clearfix w-100 d-md-none pb-3" }),
             _vm._v(" "),
@@ -655,11 +717,11 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(4)
+            _vm._m(5)
           ])
         ]),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(6)
       ])
     ],
     1
@@ -684,6 +746,32 @@ var staticRenderFns = [
         }
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link dropdown-toggle write",
+        staticStyle: { "padding-top": "15px" },
+        attrs: {
+          href: "#",
+          id: "navbarDropdown",
+          role: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("i", { staticClass: "fas fa-exclamation" }),
+        _c("span", { staticClass: "badge badge-pill badge-success" }, [
+          _vm._v("9")
+        ])
+      ]
     )
   },
   function() {

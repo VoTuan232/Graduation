@@ -24,7 +24,9 @@
 			<div class="col-md-10">
 				<p>
 				<span class="username">{{ user.name }}</span> &nbsp; 
-				<button  class="btn btn-light follow" type="button">Follow</button>
+				<button  v-if="$auth.user().id != user.id && !isFollowing" class="btn btn-light follow" type="button" @click="addFollow"><i class="fas fa-plus"></i>&nbsp;Follow</button>
+				<button  v-if="$auth.user().id != user.id && isFollowing" class="btn btn-primary follow" type="button" @click="removeFollow"><i class="fas fa-check"></i>&nbsp;Following</button>
+				<router-link  to="/profile/setting" v-if="$auth.user().id == user.id" class="btn btn-light follow" type="button">Edit</router-link>
 				</p>
 				<p>{{ user.email }}</p>
 				<p>Report</p>
@@ -78,6 +80,7 @@
 		data() {
 			return {
 				slug: this.$route.params.email,
+				isFollowing: false,
 				user: {
 					posts: {},
 					followers: {},
@@ -94,12 +97,32 @@
 					this.user = response.data,
 				);
 				this.$root.scrollToTop();
+			}, 
+
+			checkFollow() {
+				axios.get('u/checkFollow/' + this.slug)
+				.then(response => this.isFollowing = response.data.isFollowing);
+			},
+
+			removeFollow() {
+				axios.post('u/removeFollow/' + this.slug)
+				.then(() => {
+					this.isFollowing = false;
+				});
+			},
+
+			addFollow() {
+				axios.post('u/addFollow/' + this.slug)
+				.then(() => {
+					this.isFollowing = true;
+				});
 			}
 		},
 
 		created() {
             this.$Progress.start();
 			this.getUserSingle();
+			this.checkFollow();
             this.$Progress.finish();
 		}
 	}

@@ -10,9 +10,39 @@ use App\Models\Tag;
 use App\Models\Question;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
 
 class UserController extends Controller
 {
+    public function checkFollow($email) {
+        $email = $email.'@gmail.com';
+        $user = User::where('email', $email)->firstOrFail();
+
+        return response([ 
+            'isFollowing' => Auth::user()->isFollowing($user->id)
+        ]);
+    }
+
+    public function removeFollow($email) {
+        $email = $email.'@gmail.com';
+        $user = User::where('email', $email)->firstOrFail();
+
+        Auth::user()->unfollow($user->id);
+        return response([ 
+            'success' => true
+        ]);
+    }
+
+    public function addFollow($email) {
+        $email = $email.'@gmail.com';
+        $user = User::where('email', $email)->firstOrFail();
+
+        Auth::user()->follow($user->id);
+        return response([ 
+            'success' => true
+        ]);
+    }
+
     public function getUserInformation(User $user) {
         $data = User::where('id', $user->id)->with('followers', 'posts')->firstOrFail();
 

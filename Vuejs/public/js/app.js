@@ -8967,6 +8967,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['userData'],
   data: function data() {
@@ -9086,10 +9090,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       slug: this.$route.params.email,
+      isFollowing: false,
       user: {
         posts: {},
         followers: {},
@@ -9106,11 +9113,33 @@ __webpack_require__.r(__webpack_exports__);
         return _this.user = response.data;
       });
       this.$root.scrollToTop();
+    },
+    checkFollow: function checkFollow() {
+      var _this2 = this;
+
+      axios.get('u/checkFollow/' + this.slug).then(function (response) {
+        return _this2.isFollowing = response.data.isFollowing;
+      });
+    },
+    removeFollow: function removeFollow() {
+      var _this3 = this;
+
+      axios.post('u/removeFollow/' + this.slug).then(function () {
+        _this3.isFollowing = false;
+      });
+    },
+    addFollow: function addFollow() {
+      var _this4 = this;
+
+      axios.post('u/addFollow/' + this.slug).then(function () {
+        _this4.isFollowing = true;
+      });
     }
   },
   created: function created() {
     this.$Progress.start();
     this.getUserSingle();
+    this.checkFollow();
     this.$Progress.finish();
   }
 });
@@ -77248,10 +77277,22 @@ var render = function() {
       _c(
         "div",
         [
-          _c("pagination", {
-            attrs: { data: _vm.questions },
-            on: { "pagination-change-page": _vm.getResults }
-          })
+          _c(
+            "pagination",
+            {
+              attrs: { data: _vm.questions, limit: 2 },
+              on: { "pagination-change-page": _vm.getResults }
+            },
+            [
+              _c("span", { attrs: { slot: "prev-nav" }, slot: "prev-nav" }, [
+                _vm._v("< Previous")
+              ]),
+              _vm._v(" "),
+              _c("span", { attrs: { slot: "next-nav" }, slot: "next-nav" }, [
+                _vm._v("Next >")
+              ])
+            ]
+          )
         ],
         1
       )
@@ -77299,17 +77340,53 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-10" }, [
-        _c("p", [
-          _c("span", { staticClass: "username" }, [
-            _vm._v(_vm._s(_vm.user.name))
-          ]),
-          _vm._v("   \n\t\t\t\t"),
-          _c(
-            "button",
-            { staticClass: "btn btn-light follow", attrs: { type: "button" } },
-            [_vm._v("Follow")]
-          )
-        ]),
+        _c(
+          "p",
+          [
+            _c("span", { staticClass: "username" }, [
+              _vm._v(_vm._s(_vm.user.name))
+            ]),
+            _vm._v("   \n\t\t\t\t"),
+            _vm.$auth.user().id != _vm.user.id && !_vm.isFollowing
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-light follow",
+                    attrs: { type: "button" },
+                    on: { click: _vm.addFollow }
+                  },
+                  [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Follow")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$auth.user().id != _vm.user.id && _vm.isFollowing
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary follow",
+                    attrs: { type: "button" },
+                    on: { click: _vm.removeFollow }
+                  },
+                  [
+                    _c("i", { staticClass: "fas fa-check" }),
+                    _vm._v(" Following")
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$auth.user().id == _vm.user.id
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-light follow",
+                    attrs: { to: "/profile/setting", type: "button" }
+                  },
+                  [_vm._v("Edit")]
+                )
+              : _vm._e()
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.user.email))]),
         _vm._v(" "),

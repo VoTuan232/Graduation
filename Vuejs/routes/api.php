@@ -70,6 +70,11 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 	Route::post('m/comment', 'api\admin\CommentController@store');
 	Route::put('m/comment/{comment}', 'api\admin\CommentController@update');
 	Route::delete('m/comment/{comment}', 'api\admin\CommentController@destroy');
+
+	//folow
+	Route::get('u/checkFollow/{email}', 'api\client\UserController@checkFollow');
+	Route::post('u/removeFollow/{email}', 'api\client\UserController@removeFollow');
+	Route::post('u/addFollow/{email}', 'api\client\UserController@addFollow');
 });
 
 

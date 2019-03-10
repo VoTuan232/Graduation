@@ -55,6 +55,17 @@
                 </div>
                 <ul v-if="$auth.check()"  class="navbar-nav">
                     <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle write" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">
+                        <i class="fas fa-exclamation"></i><span class="badge badge-pill badge-success">9</span>
+                        </a>
+                        <div class="dropdown-menu client" aria-labelledby="navbarDropdown">
+                            <router-link to="/publish/post" class="dropdown-item"><i class="fas fa-pencil-alt"></i>Write post</router-link>
+                            <router-link to="/question/ask" class="dropdown-item"><i class="fas fa-question-circle"></i>Ask question</router-link>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle write" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-pencil-alt"></i>
                         </a>
@@ -174,7 +185,7 @@
             },
 
             distributionGroupsEndpoint (input) {
-                return 'api/findPosts?search=' + input;
+                return '' + '/api/findPosts?search=' + input;
             },
 
             formattedDisplay (result) {

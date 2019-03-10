@@ -26,7 +26,11 @@
         	There is nothing here.
         </div>
         <div>
-            <pagination  :data="questions" @pagination-change-page="getResults"></pagination>
+            <pagination  :data="questions" @pagination-change-page="getResults" :limit="2">
+                <span slot="prev-nav">&lt; Previous</span>
+                <span slot="next-nav">Next &gt;</span>
+            </pagination>
+            <!-- <pagination  :data="questions" @pagination-change-page="getResults"></pagination> -->
         </div>
 	</div>
 </template>
