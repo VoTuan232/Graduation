@@ -91,6 +91,16 @@
 			}
 		},
 
+		//socket io
+		// sockets: {
+	 //        // connect: function () {
+	 //        //     console.log('socket connected')
+	 //        // },
+	 //        // message: function (data) {
+	 //        //     console.log(data)
+	 //        // }
+	 //    },
+	    
 		methods: {
 			getPostSingle() {
 				axios.get('p/'+this.slug)

@@ -37,7 +37,6 @@
 		</div>
 		<br>
 		<div v-for="commentIndex in commentsToShow" v-if="commentIndex <= comments.length"  class="row mt-1">
-		<!-- <div v-for="comment in comments" class="row mt-1"> -->
 			<div :id="'comment-' + comments[commentIndex-1].id">
 		        <div class="media" >
 		            <a class="pull-left" href="#">
@@ -98,12 +97,23 @@
 			}
 		},
 
+		
+
+
 		watch: {
 			// commentsToShow: function(val) {
 			// 	if(val >= this.comments.length) {
 			// 		this.showReadMore = false;
 			// 	}
 			// }
+		},
+
+		sockets: {
+			message(data) {
+				let message = JSON.parse(data);
+				this.comments.push(message);
+				// console.log('message', message);
+			}
 		},
 
 		methods: {
@@ -114,9 +124,10 @@
 
 			createComment() {
 				this.form.post('p/' + this.slug + '/comment')
-				.then(() => {
+				.then((response) => {
                     this.$Progress.start();
-                    Fire.$emit('AfterCrudComment');
+                    this.comments.push(response.data);
+                    // Fire.$emit('AfterCrudComment');
                     this.$Progress.finish();
 
                 })

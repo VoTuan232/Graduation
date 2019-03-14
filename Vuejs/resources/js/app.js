@@ -9,6 +9,46 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+/*Vue Socket*/
+// import VueSocketio from 'vue-socket.io'
+// Vue.use(VueSocketio, 'http://localhost:8890')
+
+import VueSocketio from 'vue-socket.io-extended';
+import io from 'socket.io-client';
+
+Vue.use(VueSocketio, io('http://localhost:8890'));
+
+// var server = require('http').Server(app);
+// var io = require('socket.io')(server);
+
+// server.listen(8000);
+// import VueSocketio from 'vue-socket.io'
+
+// var client = require('socket.io-client')
+// var socketServer = 'http://localhost:6999'
+// var options = {
+//   autoConnect: false
+// }
+// Vue.use(VueSocketio, client(socketServer, options))
+// import VueSocketIO from 'vue-socket.io'
+// import socketio from 'socket.io-client'
+// Vue.use(VueSocketIO, socketio(':6999'))
+// Vue.use(VueSocketIO, ':6999');
+// const options = { path: '/my-app/' }; //Options object to pass into SocketIO
+ 
+// Vue.use(new VueSocketIO({
+//     debug: true,
+//     connection: 'http://metinseylan.com:1992',
+//     vuex: {
+//         store,
+//         actionPrefix: 'SOCKET_',
+//         mutationPrefix: 'SOCKET_'
+//     },
+//     options: { path: "/p/" } //Optional options
+// }))
+
+
+
 /*typeahead*/
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead)

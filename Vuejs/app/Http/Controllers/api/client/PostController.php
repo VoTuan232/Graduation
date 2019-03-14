@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use DB;
 use App\Http\Requests\CommentRequest;
 use Event;
+use Illuminate\Support\Facades\Redis;
 
 class PostController extends Controller
 {
@@ -93,6 +94,10 @@ class PostController extends Controller
 
         $post->comments()->save($comment);
 
-        return $comment;
+        $data = Comment::where('id', $comment->id)->orderBy('id', 'desc')->with('user', 'replies')->firstOrFail();
+        $redis = Redis::connection();
+        $redis->publish('message', json_encode($data));
+
+        return Comment::where('id', $comment->id)->with('user', 'replies')->firstOrFail();
     }
 }
