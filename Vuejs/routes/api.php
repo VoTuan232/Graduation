@@ -99,6 +99,7 @@ Route::get('u/{email}/drafts', 'api\client\UserController@getDraftsOfUser');
 Route::get('u/{email}/questions', 'api\client\UserController@getQuestionsOfUser');
 Route::get('authors', 'api\client\UserController@getAllUser');
 Route::get('u/{user}/information', 'api\client\UserController@getUserInformation');
+Route::get('u/{user}/getUserInfor', 'api\client\UserController@getUserInfor');
 
 Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');

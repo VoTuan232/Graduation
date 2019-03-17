@@ -14,6 +14,14 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function getUserInfor(User $user) {
+        $data = User::where('id', $user->id)->with('posts', 'followers')->firstOrFail();
+        return response([
+            'countPosts' => count($data->posts),
+            'countFollowers' => count($data->followers)
+        ]);
+    }
+
     public function checkFollow($email) {
         $email = $email.'@gmail.com';
         $user = User::where('email', $email)->firstOrFail();

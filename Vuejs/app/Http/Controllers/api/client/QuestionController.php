@@ -10,6 +10,7 @@ use App\Models\Question;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Redis;
 
 class QuestionController extends Controller
 {
@@ -47,6 +48,13 @@ class QuestionController extends Controller
         $comment->parent_id = $request->parent_id;
 
         $question->comments()->save($comment);
+
+        $data = Comment::where('id', $comment->id)->orderBy('id', 'desc')->with('user', 'replies')->firstOrFail();
+        $redis = Redis::connection();
+        $redis->publish('commentQuestion', json_encode([
+            'data' => $data,
+            'slug' => $question->slug,
+        ]));
 
         return $question;
     }

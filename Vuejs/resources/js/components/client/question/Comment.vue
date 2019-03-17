@@ -98,6 +98,18 @@
 			}
 		},
 
+		sockets: {
+			commentQuestion (data) {
+				let message = JSON.parse(data);
+
+				if (message.slug == this.slug) {
+					this.getComment(); 
+				}
+				// this.comments.push(message);
+				// console.log('message', message);
+			}
+		},
+
 		watch: {
 			
 		},

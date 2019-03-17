@@ -111,7 +111,11 @@
 		sockets: {
 			message(data) {
 				let message = JSON.parse(data);
-				this.comments.push(message);
+
+				if (message.slug_post == this.slug) {
+					this.getComment();
+				}
+				// this.comments.push(message);
 				// console.log('message', message);
 			}
 		},

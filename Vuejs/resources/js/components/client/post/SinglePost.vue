@@ -2,9 +2,37 @@
 .list-under {
 	margin-right: 10px;
 }
+
+.navbar-vote {
+  overflow: hidden;
+  position: fixed;
+  top: 200px;
+  left: 60px;
+}
+
+.vote {
+	color: #9b9b9b
+}
+
+.vote-number {
+	margin-left: 5px;
+	font-size: 2em;
+	/*font-size: .6em;
+	height: .6em;
+	line-height: .6em;
+	color: #9b9b9b;
+	font-weight: 500;*/
+}
 </style>
 <template>
 	<div class="container">
+		<div class="navbar-vote">
+		  <span @click="up_vote"<i class="fas fa-sort-up fa-3x vote"></i></span>
+		  <br>
+		  <span class="vote-number">0</span>
+		  <br>
+		  <span><i class="fas fa-sort-down fa-3x vote"></i></span>
+		</div>
 		<div class="row">
 			<div class="col-md-1">
 				<img v-if="post['user']['avatar'] !=null" :src="'/images/profile/' + post['user']['avatar']" class="avatar-client">
@@ -14,18 +42,28 @@
 				<p>
                 	<router-link :to="'' + '/u/' + $root.changeEmail(post['user'].email)" href="#">{{ post['user'].name }}</router-link>
                     <!-- <user-popper-not-load :userData="post['user']"></user-popper-not-load> -->
-					{{ post['created_at'] | agoDate }}
+					<!-- {{ post['created_at'] | agoDate }} -->
 					<br>
+					<div v-if="post['user'].id">
+						<infor-user :userid="post['user'].id"></infor-user>
+					</div>
 					<!-- <i class="fa fa-user-friends"></i>{{ post['user']['followers'].length }}&nbsp;&nbsp;&nbsp; -->
 					<!-- <i class="fas fa-pen"></i>{{ post['user']['posts'].length }} -->
 				</p>
 				
 			</div>
+			<!-- <div class="col-md-3">
+				<div class="navbar">
+				  <a href="#home">Home</a>
+				  <a href="#news">News</a>
+				  <a href="#contact">Contact</a>
+				</div>
+			</div> -->
 			<div class="col-md-3">
 				Published {{ post['created_at'] | changeCreatedDate}}
 				<p>
-					<i class="fas fa-eye client"></i>&nbsp;{{ post['view'] }} &nbsp;&nbsp;&nbsp;
-					<i class="fa fa-comments client"></i>&nbsp;{{ post['comments'].length }}
+					<i class="fas fa-eye client" title="view"></i>&nbsp;{{ post['view'] }} &nbsp;&nbsp;&nbsp;
+					<i class="fa fa-comments client" title="comment"></i>&nbsp;{{ post['comments'].length }}
 				</p>
 			</div>
 		</div>
@@ -71,11 +109,12 @@
 
 <script>
 	import Comment from './Comment.vue';
+	import InforUser from './InforUser.vue';
 
 	export default {
         props: ['userPermission'],
 
-		components: {Comment},
+		components: {Comment, InforUser},
 		data() {
 			return {
 				slug: this.$route.params.slug,
@@ -107,6 +146,10 @@
 				.then(response => this.post = response.data);
 				this.$root.scrollToTop();
 			},
+
+			up_vote() {
+				alert('hihi');
+			}
 		},
 
 		computed: {

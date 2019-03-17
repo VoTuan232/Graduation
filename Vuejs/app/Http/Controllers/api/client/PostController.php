@@ -96,7 +96,10 @@ class PostController extends Controller
 
         $data = Comment::where('id', $comment->id)->orderBy('id', 'desc')->with('user', 'replies')->firstOrFail();
         $redis = Redis::connection();
-        $redis->publish('message', json_encode($data));
+        $redis->publish('message', json_encode([
+            'data' => $data,
+            'slug_post' => $post->slug,
+        ]));
 
         return Comment::where('id', $comment->id)->with('user', 'replies')->firstOrFail();
     }
