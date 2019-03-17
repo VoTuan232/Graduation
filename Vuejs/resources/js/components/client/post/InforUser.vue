@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<i class="fa fa-user-friends" title="followers"></i>{{ userInfor.countFollowers }}&nbsp;&nbsp;&nbsp;
-		<i class="fas fa-pen" title="posts"></i>0 {{ userInfor.countPosts }}
+		<i class="fas fa-pen" title="posts"></i> {{ userInfor.countPosts }}
 	</div>
 </template>
 

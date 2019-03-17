@@ -11,7 +11,13 @@
 }
 
 .vote {
-	color: #9b9b9b
+	color: #9b9b9b;
+	cursor: pointer;
+}
+
+.voted {
+	color: #5488c7;
+	cursor: pointer;
 }
 
 .vote-number {
@@ -27,11 +33,13 @@
 <template>
 	<div class="container">
 		<div class="navbar-vote">
-		  <span @click="up_vote"<i class="fas fa-sort-up fa-3x vote"></i></span>
+		  <span v-if="!upvote" @click="up_vote"><i class="fas fa-sort-up fa-3x vote"></i></span>
+		  <span v-else @click="remove_up_vote"><i class="fas fa-sort-up fa-3x voted"></i></span>
 		  <br>
-		  <span class="vote-number">0</span>
+		  <span class="vote-number">{{ vote }}</span>
 		  <br>
-		  <span><i class="fas fa-sort-down fa-3x vote"></i></span>
+		  <span v-if="!downvote" @click="down_vote"><i class="fas fa-sort-down fa-3x vote"></i></span>
+		  <span v-else @click="remove_down_vote"><i class="fas fa-sort-down fa-3x voted"></i></span>
 		</div>
 		<div class="row">
 			<div class="col-md-1">
@@ -127,6 +135,9 @@
 					},
 					comments: {},
 				},
+				vote: '',
+				upvote: false,
+				downvote: false,
 			}
 		},
 
@@ -147,8 +158,65 @@
 				this.$root.scrollToTop();
 			},
 
+			countVote() {
+				axios.get('p/' + this.slug + '/countVote')
+				.then(response => this.vote = response.data.vote);
+			},
+
+			checkVote() {
+				axios.get('/p/' + this.slug + '/checkVote')
+				.then((response) => {
+					if (response.data.like == 0) {
+						this.upvote = false;
+						this.downvote = false;
+					}
+					else if (response.data.like == 1) {
+						this.upvote = true	;
+						this.downvote = false;
+					}
+					else if (response.data.like == -1) {
+						this.upvote = false	;
+						this.downvote = true;
+					}
+				})
+			},
+
 			up_vote() {
-				alert('hihi');
+				this.upvote = true;
+				if (this.downvote == false) {
+					axios.post('p/' + this.slug + '/upvote', {checkDownvote: false})
+					.then(response => this.vote = response.data.vote);
+				}
+				else {
+					axios.post('p/' + this.slug + '/upvote', {checkDownvote: true})
+					.then(response => this.vote = response.data.vote);
+				}
+				this.downvote = false;
+			},
+
+			remove_up_vote() {
+				this.upvote = false;
+				axios.post('p/' + this.slug + '/removeUpvote')
+					.then(response => this.vote = response.data.vote);
+			},
+
+			down_vote() {
+				this.downvote = true;
+				if (this.upvote == false) {
+					axios.post('p/' + this.slug + '/downvote', {checkUpvote: false})
+					.then(response => this.vote = response.data.vote);
+				}
+				else {
+					axios.post('p/' + this.slug + '/downvote', {checkUpvote: true})
+					.then(response => this.vote = response.data.vote);
+				} 
+				this.upvote = false;
+			},
+
+			remove_down_vote() {
+				this.downvote = false;
+				axios.post('p/' + this.slug + '/removeDownvote')
+					.then(response => this.vote = response.data.vote);
 			}
 		},
 
@@ -176,6 +244,8 @@
 		created() {
 			this.$Progress.start();
 			this.getPostSingle();
+			this.checkVote();
+			this.countVote();
 			this.$Progress.finish();
         	this.$emit('updatedUser');
 		}, 

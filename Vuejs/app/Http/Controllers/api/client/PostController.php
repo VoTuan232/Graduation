@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Storage;
 use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Hash;
@@ -12,9 +13,209 @@ use DB;
 use App\Http\Requests\CommentRequest;
 use Event;
 use Illuminate\Support\Facades\Redis;
+use Auth;
 
 class PostController extends Controller
 {
+    public function countVote(Post $post) {
+        return response([
+            'vote' => $post->like
+        ]);
+    }
+
+    public function upvote(Request $request, Post $post) {
+        if ($request->checkDownvote == false) {
+            $post->like +=1;
+            $post->update();
+
+
+            $storage = Storage::where([
+                'post_id' => $post->id,
+                'user_id' => Auth::user()->id
+            ])->first();
+            
+            if ($storage != null) {
+                $storage->update([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 1,
+                ]);
+            }
+            else {
+                Storage::create([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 1,
+                ]);
+            }
+        }
+        else if ($request->checkDownvote == true) {
+            $post->like +=2;
+            $post->update();
+
+            $storage = Storage::where([
+                'post_id' => $post->id,
+                'user_id' => Auth::user()->id
+            ])->first();
+            
+            if ($storage != null) {
+                $storage->update([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 1,
+                ]);
+            }
+            else {
+                Storage::create([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 1,
+                ]);
+            }
+        }
+        return response([
+            'vote' => $post->like
+        ]);
+    }
+
+    public function RemoveUpvote(Post $post) {
+            $post->like -=1;
+            $post->update();
+
+            $storage = Storage::where([
+                'post_id' => $post->id,
+                'user_id' => Auth::user()->id
+            ])->first();
+
+            if ($storage != null) {
+                $storage->update([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 0,
+                ]);
+            }
+
+            else {
+                Storage::create([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 0,
+                ]);
+            }
+          
+        return response([
+            'vote' => $post->like
+        ]);
+    }
+
+    public function downvote(Request $request, Post $post) {
+        if ($request->checkUpvote == false) {
+            $post->like -=1;
+            $post->update();
+
+            $storage = Storage::where([
+                'post_id' => $post->id,
+                'user_id' => Auth::user()->id
+            ])->first();
+
+            if ($storage != null) {
+                $storage->update([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => -1,
+                ]);
+            }
+
+            else {
+                Storage::create([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => -1,
+                ]);
+            }
+        }
+        else if ($request->checkUpvote == true) {
+            $post->like -=2;
+            $post->update();
+
+            $storage = Storage::where([
+                'post_id' => $post->id,
+                'user_id' => Auth::user()->id
+            ])->first();
+
+            if ($storage != null) {
+                $storage->update([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => -1,
+                ]);
+            }
+
+            else {
+                Storage::create([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => -1,
+                ]);
+            }
+        }
+        return response([
+            'vote' => $post->like
+        ]);
+    }
+
+    public function removeDownvote(Post $post) {
+            $post->like +=1;
+            $post->update();
+
+            $storage = Storage::where([
+                'post_id' => $post->id,
+                'user_id' => Auth::user()->id
+            ])->first();
+
+            if ($storage != null) {
+                $storage->update([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 0,
+                ]);
+            }
+
+            else {
+                Storage::create([
+                    'post_id' => $post->id,
+                    'user_id' => Auth::user()->id,
+                    'like' => 0,
+                ]);
+            }
+          
+        return response([
+            'vote' => $post->like
+        ]);
+    }
+
+    public function checkVote(Post $post) {
+        if (count($post->storages()->get()) > 0) {
+            $data = $post->storages()->where('user_id', Auth::user()->id)->firstOrFail();
+        }
+        else {
+            $data = null;
+        }
+
+        if ($data == null) {
+            return response([
+            // 'like'  => $post->storages()->get()
+            'like'  => 0
+            ]);
+        }
+        else {
+            return response([
+                // 'like'  => $post->storages()->get()
+                'like'  => $data->like
+            ]);
+        }
+    }
+
     public function search(Request $request) {
 
         $response = \App\Models\Post::searchByQuery([

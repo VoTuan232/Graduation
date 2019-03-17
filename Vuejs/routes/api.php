@@ -75,6 +75,14 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 	Route::get('u/checkFollow/{email}', 'api\client\UserController@checkFollow');
 	Route::post('u/removeFollow/{email}', 'api\client\UserController@removeFollow');
 	Route::post('u/addFollow/{email}', 'api\client\UserController@addFollow');
+
+	//post
+	Route::get('p/{post}/checkVote', 'api\client\PostController@checkVote');
+	Route::post('p/{post}/upvote', 'api\client\PostController@upvote');
+	Route::post('p/{post}/removeUpvote', 'api\client\PostController@removeUpvote');
+	Route::post('p/{post}/downvote', 'api\client\PostController@downvote');
+	Route::post('p/{post}/removeDownvote', 'api\client\PostController@removeDownvote');
+
 });
 
 
@@ -86,6 +94,7 @@ Route::get('p/{post}', 'api\client\PostController@getSingle')->middleware('check
 // Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
 Route::get('p/{post}/comments', 'api\client\PostController@getComments');
 Route::post('p/{post}/comment', 'api\client\PostController@storeComment');
+Route::get('p/{post}/countVote', 'api\client\PostController@countVote');
 
 Route::get('t/{tag}', 'api\client\TagController@getSingle');
 Route::get('t/{tag}/posts', 'api\client\TagController@getPostsBaseTag');
