@@ -82,7 +82,7 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 	Route::post('p/{post}/removeUpvote', 'api\client\PostController@removeUpvote');
 	Route::post('p/{post}/downvote', 'api\client\PostController@downvote');
 	Route::post('p/{post}/removeDownvote', 'api\client\PostController@removeDownvote');
-
+	Route::post('p/{post}/comment', 'api\client\PostController@storeComment');
 });
 
 
@@ -93,7 +93,7 @@ Route::get('p/slidebar', 'api\client\PostController@getPostSideBar');
 Route::get('p/{post}', 'api\client\PostController@getSingle')->middleware('checkviewpost');
 // Route::get('user/p/{slug}', 'api\client\PostController@getUserBaseSlugPost');
 Route::get('p/{post}/comments', 'api\client\PostController@getComments');
-Route::post('p/{post}/comment', 'api\client\PostController@storeComment');
+// Route::post('p/{post}/comment', 'api\client\PostController@storeComment');
 Route::get('p/{post}/countVote', 'api\client\PostController@countVote');
 
 Route::get('t/{tag}', 'api\client\TagController@getSingle');
@@ -109,6 +109,7 @@ Route::get('u/{email}/questions', 'api\client\UserController@getQuestionsOfUser'
 Route::get('authors', 'api\client\UserController@getAllUser');
 Route::get('u/{user}/information', 'api\client\UserController@getUserInformation');
 Route::get('u/{user}/getUserInfor', 'api\client\UserController@getUserInfor');
+Route::get('u/{user}/getNotifications', 'api\client\UserController@getNotifications');
 
 Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');

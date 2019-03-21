@@ -54,9 +54,10 @@
                     <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button> -->
                 </div>
                 <ul v-if="$auth.check()"  class="navbar-nav">
-                    <li class="nav-item dropdown">
+                        <notification></notification>
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle write" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">
-                        <i class="fas fa-exclamation"></i><span class="badge badge-pill badge-success">9</span>
+                        <i class="fas fa-exclamation"></i><span class="badge badge-pill badge-success">{{ notifications.length }}</span>
                         </a>
                         <div class="dropdown-menu client" aria-labelledby="navbarDropdown">
                             <router-link to="/publish/post" class="dropdown-item"><i class="fas fa-pencil-alt"></i>Write post</router-link>
@@ -64,7 +65,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle write" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-pencil-alt"></i>
@@ -151,8 +152,10 @@
 
 <script>
     import Gate from "./../../Gate";
+    import Notification from "./Notification.vue";
 
 	export default {
+        components: {Notification},
 		data() {
 			return {
                 isSearch: false,
@@ -162,6 +165,9 @@
 				userPermission : new Gate({
 
                 }),
+                notifications: {
+
+                },
 			}
 		},
 
@@ -176,7 +182,7 @@
         },
 
 		methods: {
-           getUserCurrent() {
+            getUserCurrent() {
                 axios.get('user/userPermission')
                 .then(response => (
                     this.userPermission = response.data,
@@ -197,7 +203,7 @@
                 // this.group = group
                 // access the autocomplete component methods from the parent
                 // this.$refs.autocomplete.clear()
-              },
+            },
 
             searchit() {
                 axios.get('findPosts?search=' + this.search)
@@ -208,7 +214,23 @@
                     // }
                 });
                 // Fire.$emit('searching', this.search);
-            }
+            },
+
+            // getNotification() {
+            //     //check login
+            //     axios.get('auth/user')
+            //     .then((response) => {
+            //         axios.get('/' + response.data.id + '/getNotifications')
+            //         .then((response) => {
+            //             console.log(response.data);
+            //             this.notifications = response.data;
+            //         })
+            //     })
+            // }
         },
+
+        created() {
+            // this.getNotification();
+        }
 	}
 </script>

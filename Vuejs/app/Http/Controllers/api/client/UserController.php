@@ -14,6 +14,10 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function getNotifications(User $user) {
+        return $user->notifications;
+    }
+
     public function getUserInfor(User $user) {
         $data = User::where('id', $user->id)->with('posts', 'followers')->firstOrFail();
         return response([

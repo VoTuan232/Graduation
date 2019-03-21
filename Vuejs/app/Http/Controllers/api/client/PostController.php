@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Storage;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use App\Http\Requests\CommentRequest;
@@ -295,11 +296,21 @@ class PostController extends Controller
 
         $post->comments()->save($comment);
 
+        //create notification
+        Notification::create([
+            'sender_id' => $request->user_id,
+            'receiver_id' => $post->user->id,
+            'content' => Auth::user()->name.': đã bình luận bài viết của bạn',
+            'url' => 'http://127.0.0.1:8000/p/'.$post->slug,
+            'status_notification' => false,
+        ]);
+
         $data = Comment::where('id', $comment->id)->orderBy('id', 'desc')->with('user', 'replies')->firstOrFail();
         $redis = Redis::connection();
         $redis->publish('message', json_encode([
             'data' => $data,
             'slug_post' => $post->slug,
+            'receiver_id' => $post->user->id,
         ]));
 
         return Comment::where('id', $comment->id)->with('user', 'replies')->firstOrFail();
