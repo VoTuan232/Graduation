@@ -19,7 +19,7 @@
                                     <th>ID</th>
                                     <th>Title</th>
                                     <th>Slug</th>
-                                    <th>Body</th>
+                                    <!-- <th>Body</th> -->
                                     <th>Published</th>
                                     <th>User</th>
                                     <th>Category</th>
@@ -31,7 +31,7 @@
                                     <td>{{ post.id }}</td>
                                     <td>{{ post.title }}</td>
                                     <td>{{ post.slug }}</td>
-                                    <td>{{ post.body }}</td>
+                                    <!-- <td v-html="post.body"></td> -->
                                     <td>{{ post.published }}</td>
                                     <td>{{ post.user.name }}</td>
                                     <td>
@@ -60,7 +60,11 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
+                        <pagination  :data="posts" @pagination-change-page="getResults" :limit="2">
+                            <span slot="prev-nav">&lt; Previous</span>
+                            <span slot="next-nav">Next &gt;</span>
+                        </pagination>
+                        <!-- <pagination  :data="posts" @pagination-change-page="getResults"></pagination> -->
                     </div>
                 </div>
                 <!-- /.card -->

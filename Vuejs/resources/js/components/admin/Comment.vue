@@ -50,7 +50,11 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                        <pagination  :data="comments" @pagination-change-page="getResults"></pagination>
+                    	<pagination  :data="comments" @pagination-change-page="getResults" :limit="2">
+                            <span slot="prev-nav">&lt; Previous</span>
+                            <span slot="next-nav">Next &gt;</span>
+                        </pagination>
+                        <!-- <pagination  :data="comments" @pagination-change-page="getResults"></pagination> -->
                     </div>
                 </div>
                 <!-- /.card -->

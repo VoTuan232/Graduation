@@ -87,7 +87,7 @@
 				  </button>
 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				    <router-link :to="'' +'/p/' + this.slug + '/edit'" class="dropdown-item" href="#">Edit</router-link>
-				    <a class="dropdown-item" href="#">Add to my series</a>
+				    <!-- <a class="dropdown-item" href="#">Add to my series</a> -->
 				    <a class="dropdown-item" href="#">Delete this post</a>
 				  </div>
 				</div>

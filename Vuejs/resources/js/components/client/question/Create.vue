@@ -5,7 +5,7 @@
 </style>
 <template>
 	<div class="container">
-		<div class="row">
+		<div v-if="$auth.check()" class="row">
 			<form @submit.prevent="createQuestion()" role="form" class="myform">
                 <!-- text input -->
                 <div class="form-group">
@@ -71,6 +71,9 @@
                 <button type="submit" class="btn btn-success">Create Question</button>
               </form>
 		</div>
+    <div v-else>
+      <redirect-login></redirect-login>
+    </div>
 	</div>
 </template>
 

@@ -335,6 +335,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1550,9 +1559,12 @@ var render = function() {
       "div",
       {
         staticClass: "dropdown-menu client",
+        staticStyle: { "min-width": "300px" },
         attrs: { "aria-labelledby": "navbarDropdown" }
       },
       [
+        _vm._m(0),
+        _vm._v(" "),
         _vm._l(_vm.notifications, function(notification) {
           return _c(
             "router-link",
@@ -1562,11 +1574,7 @@ var render = function() {
               style: !notification.status_notification
                 ? "background-color: #ebf5ff;"
                 : "",
-              attrs: {
-                to: "/publish/post",
-                onMouseOver: "this.style.background='#0F0'",
-                onMouseOut: "this.style.background='#ebf5ff'"
-              }
+              attrs: { to: "/publish/post" }
             },
             [
               _c("i", { staticClass: "fas fa-pencil-alt" }),
@@ -1578,14 +1586,29 @@ var render = function() {
         _c("div", { staticClass: "dropdown-divider" }),
         _vm._v(" "),
         _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-          _vm._v("Something else here")
+          _vm._v("All Announcements")
         ])
       ],
       2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-7" }, [
+        _c("h5", [_vm._v("Announcements")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5" }, [
+        _vm._v("\n\t        \t\tMark all as read\n\t        \t")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

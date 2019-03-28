@@ -1,5 +1,64 @@
 <template>
-    <div>
+     <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign Up</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger" v-if="error && !success">
+                        <p>There was an error, unable to complete registration.</p>
+                    </div>
+
+                    <div class="alert alert-success" v-if="success">
+                        <p>Registration completed. You can now <router-link :to="{name:'login'}">sign in.</router-link></p>
+                    </div>
+                    <form autocomplete="off" @submit.prevent="register" v-if="!success" method="post">
+                        <span class="help-block" v-if="error && errors.name">{{ errors.name }}</span>
+                        <div class="input-group form-group" v-bind:class="{ 'has-error': error && errors.name }">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="username" v-model="name" required>
+                            <br>
+                        </div>
+                        <div class="help-block" v-if="error && errors.email">{{ errors.email }}</div>
+                        <div class="input-group form-group" v-bind:class="{ 'has-error': error && errors.email }">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="username" v-model="email" required>
+                        </div>
+                        <span class="help-block" v-if="error && errors.password">{{ errors.password }}</span>
+                        <div class="input-group form-group" v-bind:class="{ 'has-error': error && errors.password }">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" class="form-control" placeholder="password" v-model="password" required>
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Register" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Do you have an account?<a href="#">Sign In</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Forgot your password?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div>
         <div class="alert alert-danger" v-if="error && !success">
             <p>There was an error, unable to complete registration.</p>
         </div>
@@ -31,7 +90,7 @@
             <button type="submit" class="btn btn-default">Submit</button>
 
         </form>
-    </div>
+    </div> -->
 </template>
 
 <script> 
@@ -63,7 +122,7 @@
                         app.error = true;
                         app.errors = resp.response.data.errors;
                     },
-                    redirect: 'login'
+                    // redirect: 'login'
                 });                
             }
         }

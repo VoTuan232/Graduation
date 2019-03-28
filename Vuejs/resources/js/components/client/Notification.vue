@@ -9,10 +9,19 @@
         <a class="nav-link dropdown-toggle write" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">
         <i class="fas fa-exclamation"></i><span class="badge badge-pill badge-success">{{ notifications.length }}</span>
         </a>
-        <div class="dropdown-menu client" aria-labelledby="navbarDropdown">
-            <router-link v-for="notification in notifications" to="/publish/post" :key="notification.id" class="dropdown-item" onMouseOver="this.style.background='#0F0'" onMouseOut="this.style.background='#ebf5ff'" v-bind:style=" !notification.status_notification ? 'background-color: #ebf5ff;' : '' "><i class="fas fa-pencil-alt"></i>{{ notification.content }}</router-link>
+        <div class="dropdown-menu client" aria-labelledby="navbarDropdown" style="min-width:300px;">
+        	<div class="row">
+	        	<div class="col-md-7">
+	        		<h5>Announcements</h5>
+	        	</div>
+	        	<div class="col-md-5">
+	        		Mark all as read
+	        	</div>
+        	</div>
+            <!-- <router-link v-for="notification in notifications" to="/publish/post" :key="notification.id" class="dropdown-item" onMouseOver="this.style.background='#0F0'" onMouseOut="this.style.background='#ebf5ff'" v-bind:style=" !notification.status_notification ? 'background-color: #ebf5ff;' : '' "><i class="fas fa-pencil-alt"></i>{{ notification.content }}</router-link> -->
+            <router-link v-for="notification in notifications" to="/publish/post" :key="notification.id" class="dropdown-item" v-bind:style=" !notification.status_notification ? 'background-color: #ebf5ff;' : '' "><i class="fas fa-pencil-alt"></i>{{ notification.content }}</router-link>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">All Announcements</a>
         </div>
     </li>
 </template>

@@ -55,7 +55,7 @@ class UserController extends Controller
     public function getListPost() {
         $user = Auth::user();
 
-        return $user->posts()->with('user', 'categories', 'tags')->paginate(2);
+        return $user->posts()->with('user', 'categories', 'tags')->paginate(5);
     }
 
     public function countFollow() {

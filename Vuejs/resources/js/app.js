@@ -164,6 +164,10 @@ Vue.component(
     'box-user-single',
     require('./components/asset/BoxUserSingle.vue').default
 );
+Vue.component(
+    'redirect-login',
+    require('./components/asset/RedirectLogin.vue').default
+);
 // const client = new Vue({
 //     el: '#client',
 //     router: router,

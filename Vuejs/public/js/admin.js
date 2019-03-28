@@ -484,30 +484,6 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "nav-link",
-                          attrs: { to: "/developer" }
-                        },
-                        [
-                          _c("i", { staticClass: "nav-icon fas fa-cogs" }),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v(
-                              "\n                                    Developer\n                                "
-                            )
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
                           attrs: { to: "/profile/setting" }
                         },
                         [
