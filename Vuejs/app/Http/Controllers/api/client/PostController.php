@@ -301,7 +301,7 @@ class PostController extends Controller
             'sender_id' => $request->user_id,
             'receiver_id' => $post->user->id,
             'content' => Auth::user()->name.': đã bình luận bài viết của bạn',
-            'url' => 'http://127.0.0.1:8000/p/'.$post->slug,
+            'url' => 'p/'.$post->slug,
             'status_notification' => false,
         ]);
 

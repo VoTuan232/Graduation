@@ -110,6 +110,7 @@ Route::get('authors', 'api\client\UserController@getAllUser');
 Route::get('u/{user}/information', 'api\client\UserController@getUserInformation');
 Route::get('u/{user}/getUserInfor', 'api\client\UserController@getUserInfor');
 Route::get('u/{user}/getNotifications', 'api\client\UserController@getNotifications');
+Route::get('u/{user}/markAllReadNotification', 'api\client\UserController@markAllReadNotification');
 
 Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');

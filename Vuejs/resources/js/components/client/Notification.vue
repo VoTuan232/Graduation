@@ -7,19 +7,19 @@
 <template>
 	<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle write" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">
-        <i class="fas fa-exclamation"></i><span class="badge badge-pill badge-success">{{ notifications.length }}</span>
+        <i class="fas fa-exclamation"></i><span class="badge badge-pill badge-success">{{ unread }}</span>
         </a>
         <div class="dropdown-menu client" aria-labelledby="navbarDropdown" style="min-width:300px;">
         	<div class="row">
 	        	<div class="col-md-7">
-	        		<h5>Announcements</h5>
+	        		<h5>&nbsp;&nbsp;Announcements</h5>
 	        	</div>
 	        	<div class="col-md-5">
-	        		Mark all as read
+	        		<a href="#" @click="mark_all_read">Mark all as read</a>
 	        	</div>
         	</div>
             <!-- <router-link v-for="notification in notifications" to="/publish/post" :key="notification.id" class="dropdown-item" onMouseOver="this.style.background='#0F0'" onMouseOut="this.style.background='#ebf5ff'" v-bind:style=" !notification.status_notification ? 'background-color: #ebf5ff;' : '' "><i class="fas fa-pencil-alt"></i>{{ notification.content }}</router-link> -->
-            <router-link v-for="notification in notifications" to="/publish/post" :key="notification.id" class="dropdown-item" v-bind:style=" !notification.status_notification ? 'background-color: #ebf5ff;' : '' "><i class="fas fa-pencil-alt"></i>{{ notification.content }}</router-link>
+            <router-link v-for="notification in notifications" :to="notification.url" :key="notification.id" class="dropdown-item" v-bind:style=" notification.status_notification ? 'background-color: #ebf5ff;' : '' "><i class="fas fa-pencil-alt"></i>{{ notification.content }}</router-link>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">All Announcements</a>
         </div>
@@ -32,6 +32,7 @@
 			return {
 				notifications: {},
 				ex: 2,
+				unread: 0,
 			}
 		},
 
@@ -55,8 +56,22 @@
 	            axios.get('/u/' + this.$auth.user().id + '/getNotifications')
 	            .then((response) => {
 	                this.notifications = response.data;
+	                var d = 0;
+	                for ( var notification in this.notifications) {
+	                	if (this.notifications[notification].status_notification == 0) {
+	                		d +=1;
+	                	}
+	                }
+	                this.unread = d;
             	})
 			},
+
+			mark_all_read() {
+				axios.get('/u/' + this.$auth.user().id + '/markAllReadNotification')
+				.then(() => {
+					this.getNotifications();
+				})
+			}
 		},
 
 		created() {

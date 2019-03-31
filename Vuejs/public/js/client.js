@@ -348,7 +348,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       notifications: {},
-      ex: 2
+      ex: 2,
+      unread: 0
     };
   },
   sockets: {
@@ -370,6 +371,22 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/u/' + this.$auth.user().id + '/getNotifications').then(function (response) {
         _this.notifications = response.data;
+        var d = 0;
+
+        for (var notification in _this.notifications) {
+          if (_this.notifications[notification].status_notification == 0) {
+            d += 1;
+          }
+        }
+
+        _this.unread = d;
+      });
+    },
+    mark_all_read: function mark_all_read() {
+      var _this2 = this;
+
+      axios.get('/u/' + this.$auth.user().id + '/markAllReadNotification').then(function () {
+        _this2.getNotifications();
       });
     }
   },
@@ -1550,7 +1567,7 @@ var render = function() {
       [
         _c("i", { staticClass: "fas fa-exclamation" }),
         _c("span", { staticClass: "badge badge-pill badge-success" }, [
-          _vm._v(_vm._s(_vm.notifications.length))
+          _vm._v(_vm._s(_vm.unread))
         ])
       ]
     ),
@@ -1563,7 +1580,17 @@ var render = function() {
         attrs: { "aria-labelledby": "navbarDropdown" }
       },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-5" }, [
+            _c(
+              "a",
+              { attrs: { href: "#" }, on: { click: _vm.mark_all_read } },
+              [_vm._v("Mark all as read")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _vm._l(_vm.notifications, function(notification) {
           return _c(
@@ -1571,10 +1598,10 @@ var render = function() {
             {
               key: notification.id,
               staticClass: "dropdown-item",
-              style: !notification.status_notification
+              style: notification.status_notification
                 ? "background-color: #ebf5ff;"
                 : "",
-              attrs: { to: "/publish/post" }
+              attrs: { to: notification.url }
             },
             [
               _c("i", { staticClass: "fas fa-pencil-alt" }),
@@ -1598,14 +1625,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-7" }, [
-        _c("h5", [_vm._v("Announcements")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-5" }, [
-        _vm._v("\n\t        \t\tMark all as read\n\t        \t")
-      ])
+    return _c("div", { staticClass: "col-md-7" }, [
+      _c("h5", [_vm._v("  Announcements")])
     ])
   }
 ]

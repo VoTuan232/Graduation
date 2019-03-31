@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\Question;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Auth;
@@ -16,6 +17,12 @@ class UserController extends Controller
 {
     public function getNotifications(User $user) {
         return $user->notifications;
+    }
+
+    public function markAllReadNotification(User $user) {
+        Notification::where('receiver_id', $user->id)->update([
+            'status_notification' => 1,
+        ]);
     }
 
     public function getUserInfor(User $user) {
