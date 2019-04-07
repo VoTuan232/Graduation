@@ -183,6 +183,7 @@ return [
         //cors
         //elastic search
         Elasticquent\ElasticquentServiceProvider::class,
+        // Elasticquent\ElasticquentServiceProvider::class,
     ],
 
     /*

@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET', '1A7PIaryfBPGDdrRYK4OfgXydVStAdfU'),
+    'secret' => env('JWT_SECRET', 'hoLXn0mY77AU6SflOCLSW1AV5QCwCgRd'),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +47,7 @@ return [
     |
     */
 
-    'refresh_ttl' => 20160, //2week
+    'refresh_ttl' => 20160,
 
     /*
     |--------------------------------------------------------------------------

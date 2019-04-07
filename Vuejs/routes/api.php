@@ -83,6 +83,9 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 	Route::post('p/{post}/downvote', 'api\client\PostController@downvote');
 	Route::post('p/{post}/removeDownvote', 'api\client\PostController@removeDownvote');
 	Route::post('p/{post}/comment', 'api\client\PostController@storeComment');
+	Route::put('p/{post}/makeTrending', 'api\client\PostController@makeTrending');
+	Route::get('p/following', 'api\client\UserController@getPostFollowing');
+
 });
 
 
@@ -133,5 +136,3 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 Route::group(['middleware' => 'jwt.refresh'], function(){
  	Route::get('auth/refresh', 'api\AuthController@refresh');
 });
-
-

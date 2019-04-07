@@ -15,9 +15,19 @@ use App\Http\Requests\CommentRequest;
 use Event;
 use Illuminate\Support\Facades\Redis;
 use Auth;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
+    public function makeTrending(Post $post) {
+        $post->update([
+            'trending' => Carbon::now(),
+        ]);
+        return response([
+            'status' => 'true',
+        ]);
+    }
+
     public function countVote(Post $post) {
         return response([
             'vote' => $post->like
@@ -262,7 +272,8 @@ class PostController extends Controller
     }
 
     public function getTrending() {
-    	return Post::orderBy('trending', 'desc')->whereNotNull('trending')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
+        return Post::orderBy('trending', 'desc')->whereNotNull('trending')->with('categories', 'user', 'tags')->paginate(5);
+    	// return Post::orderBy('trending', 'desc')->whereNotNull('trending')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
     }
 
     public function getSingle(Post $post) {

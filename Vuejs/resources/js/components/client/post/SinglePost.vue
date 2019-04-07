@@ -78,7 +78,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<h1>{{ post['title'] }}</h1>
-                <tag-of-new :tagData="post['tags']"></tag-of-new>
+                <tag-of-new :tagData="post['tags']" :checkTrending="checkTrending" :slug_post="slug" :checkPermissionTrending="userPermission.hasPermission('post.trending')"></tag-of-new>
 				<p v-html="post['body']"></p>
 			</div>
 			<div class="col-md-1">
@@ -138,6 +138,7 @@
 				vote: '',
 				upvote: false,
 				downvote: false,
+				checkTrending: 0,
 			}
 		},
 
@@ -154,7 +155,10 @@
 		methods: {
 			getPostSingle() {
 				axios.get('p/'+this.slug)
-				.then(response => this.post = response.data);
+				.then((response) => {
+					this.post = response.data;
+					this.checkTrending = this.post.trending;
+				});
 				this.$root.scrollToTop();
 			},
 

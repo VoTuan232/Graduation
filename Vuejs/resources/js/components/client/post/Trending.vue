@@ -22,14 +22,18 @@
             </div>
             <div class="col-md-11">
                 <p>
-                    <user-popper :userData="post.user"></user-popper>
-                {{ post.created_at }}
+                    <router-link :to="'' + '/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link>
+                    <!-- <user-popper :userData="post.user"></user-popper> -->
+                    {{ post.created_at }}
                 <br>
                 <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
                 </p>
-                <div  v-if="post.tags.length > 0" class="btn-group">
-                    <tag-of-new :tagData="post.tags"></tag-of-new>
+                <div class="btn-group">
+                    <tag-of-new :tagData="post.tags" :checkTrending="true"></tag-of-new>
                 </div>
+                <!-- <div  v-if="post.tags.length > 0" class="btn-group">
+                    <tag-of-new :tagData="post.tags"></tag-of-new>
+                </div> -->
                 <p>
                     <i class="fas fa-eye client"></i>&nbsp;{{ post.view }} &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-comments client"></i>&nbsp;{{ post.comments.length }}

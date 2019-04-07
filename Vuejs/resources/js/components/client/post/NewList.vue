@@ -28,9 +28,12 @@
                 <br>
                 <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
                 </p>
-                <div  v-if="post.tags.length > 0" class="btn-group">
-                    <tag-of-new :tagData="post.tags"></tag-of-new>
+                <div class="btn-group">
+                    <tag-of-new :tagData="post.tags" :checkTrending="post.trending" :slug_post="post.slug" :checkPermissionTrending="userPermission.hasPermission('post.trending')"></tag-of-new>
                 </div>
+                <!-- <div  v-if="post.tags.length > 0" class="btn-group">
+                    <tag-of-new :tagData="post.tags"></tag-of-new>
+                </div> -->
                 <p>
                     <i class="fas fa-eye client"></i>&nbsp;{{ post.view }} &nbsp;&nbsp;&nbsp;
                     <i class="fa fa-comments client"></i>&nbsp;{{ post.comments.length }}

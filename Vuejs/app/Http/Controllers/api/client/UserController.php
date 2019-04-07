@@ -15,6 +15,10 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function getPostFollowing() {
+        return Auth::user()->follows()->with('posts')->get();
+    }
+
     public function getNotifications(User $user) {
         return $user->notifications;
     }

@@ -2040,7 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /opt/lampp/htdocs/Graduation/Vuejs/resources/js/client.js */"./resources/js/client.js");
+module.exports = __webpack_require__(/*! /var/www/html/Graduation/Vuejs/resources/js/client.js */"./resources/js/client.js");
 
 
 /***/ })
