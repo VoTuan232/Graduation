@@ -296,7 +296,8 @@ class PostController extends Controller
     }
 
     public function getComments(Post $post) {
-        return $post->comments()->orderBy('id', 'desc')->with('user', 'replies')->get();
+        return $post->comments()->orderBy('id', 'desc')->with('user', 'replies')->paginate(5);
+        // return $post->comments()->orderBy('id', 'desc')->with('user', 'replies')->get();
     }
 
     public function storeComment(CommentRequest $request, Post $post) {

@@ -14,6 +14,13 @@
 // Auth::routes();
 // Route::get('logout','Auth\LoginController@logout');
 
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
+});
+
 Route::get('/', 'client\HomeController@index')->name('client.index');
 Route::get('/login', 'client\HomeController@index')->name('client.index');
 Route::get('/register', 'client\HomeController@index')->name('client.index');

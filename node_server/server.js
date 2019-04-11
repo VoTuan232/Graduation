@@ -6,6 +6,7 @@ var redis = require('redis');
 server.listen(8890);
 
 io.on('connection', function(socket) {
+	console.log('hihi');
 	//CommentPost
 	var redisClient = redis.createClient();
 	redisClient.subscribe('message');
