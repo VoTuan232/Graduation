@@ -14,7 +14,7 @@
 		            <br>
 	            	<a href="#">Like</a> 
 	            	&nbsp; 
-	            	<a href="#" @click="clickReplyComment(comments.id)" v-scroll-to="'#comment-' + comments.replies[commentIndex-1].id">Reply</a>
+	            	<a href="#" @click="clickReplyComment" v-scroll-to="'#comment-' + comments.replies[commentIndex-1].id">Reply</a>
 		        </div>
 		    </div>
 	    </div>
@@ -54,8 +54,8 @@
 		},
 
 		methods: {
-			clickReplyComment(id) {
-				this.$emit('clickReply', id);
+			clickReplyComment() {
+				this.$emit('clickReply');
 			}
 		},
 

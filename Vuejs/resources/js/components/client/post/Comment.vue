@@ -54,7 +54,7 @@
 		                    <a href="#" @click="clickReplyComment(comment.id)" v-scroll-to="'#comment-' + comment.id">Reply</a>
 		            </div>
 	            </div>
-	            <comment-replies :comments="comment" @clickReply="clickReplyComment"></comment-replies>
+	            <comment-replies :comments="comment" @clickReply="clickReplyComment(comment.id)"></comment-replies>
 	            <br>
 	            <div class="media ml-5"  :id="'reply-' + comment.id" v-show="false" style="margin-left: 35px !important;">
 		            <a class="pull-left" href="#">
@@ -176,7 +176,9 @@
 				this.form.post('p/' + this.slug + '/comment')
 				.then((response) => {
                     this.$Progress.start();
-                    this.comments.push(response.data);
+                    this.getComment();
+                    this.form.body = "";
+                    // this.comments.push(response.data);
                     // Fire.$emit('AfterCrudComment');
                     this.$Progress.finish();
 
@@ -187,6 +189,7 @@
 			},
 
 			clickReplyComment(id) {
+				console.log(id);
 				$('#reply-' + id).toggle();
 				// $('#form-reply-' + id).toggle();
 				// this.$refs["body_reply-" + id][0].focus();

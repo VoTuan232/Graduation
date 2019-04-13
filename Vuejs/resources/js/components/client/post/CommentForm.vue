@@ -15,13 +15,14 @@
 				form: new Form({
 					body: '',
 					user_id: this.$auth.user().id,
-					parent_id: this.parent_id,
+					parent_id: '',
 				})
 			}
 		},
 
 		methods: {
 			CreateCommentReply() {
+				this.form.parent_id = this.parent_id;
 				this.form.post('p/' + this.slug + '/comment')
 				.then(() => {
                     this.$Progress.start();
@@ -35,5 +36,9 @@
                 });
 			}
 		},
+
+		created() {
+
+		}
 	}
 </script>
