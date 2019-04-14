@@ -15,8 +15,8 @@
     }
 </style>
 <template>
-    <div v-if="posts.length > 0" class="container">
-        <div class="row"  v-for="x in showCount" :key="posts[x-1].id">
+    <div v-if="posts.length > 0" class="container" id="following_posts">
+        <div class="row"  v-for="x in page*perPage" v-if="x > (page-1)*perPage && x <= posts.length" :key="posts[x-1].id">
             <div class="col-md-1">
                 <!-- <img v-if="post.user.avatar !=null" :src="'images/profile/' + post.user.avatar" class="avatar-client"> -->
                 <img src="images/profile/profile.png" class="avatar-client">
@@ -40,7 +40,13 @@
             </div>
         </div>
         <div>
-            <a v-if="x in pageCount">{{ x+1 }}</a>
+            <a v-if="page > 1" type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;" @click="previousPage">< Previous</a>
+            <a v-if="(page - 3) > 1 " type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;" @click="changePage(1)">1</a>
+            <a v-if="(page - 3) > 1 " type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;">...</a>
+            <a v-for="x in pageCount" v-if="x <= (page + 3) && x >= (page - 3)" type="button" :class="pageCurrent(x)" style="border: 1px solid #ad9d9d;" @click="changePage(x)">{{ x }}</a>
+            <a v-if="(page + 3) < pageCount" type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;">...</a>
+            <a v-if="(page + 3) < pageCount" type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;" @click="changePage(pageCount)">{{ pageCount }}</a>
+            <a v-if="page < pageCount" type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;" @click="nextPage">Next ></a>
         </div>
       <!--   <div>
             <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
@@ -55,12 +61,37 @@
     	data() {
     		return {
     			posts: '',
-                showCount: 20,
+                perPage: 20,
                 pageCount: '',
+                page: 1,
     		}
     	},
     
     	methods: {
+            pageCurrent(x) {
+                if (x == this.page) {
+                    return "btn btn-primary";
+                }
+                else {
+                    return "btn btn-light";
+                }
+            },
+
+            changePage(page) {
+                this.page = page;
+                this.$scrollTo("#following_posts");
+            },
+
+            previousPage() {
+                this.page -=1;
+                this.$scrollTo("#following_posts");
+            },
+
+            nextPage() {
+                this.page +=1;
+                this.$scrollTo("#following_posts");
+            },
+
     		getResults(page = 1) {
                    axios.get('c/newestposts?page=' + page)
                        .then(response => {
@@ -75,12 +106,9 @@
     			.then(({data}) => {
                     this.posts = [];
                     for (var x in data) {
-                        console.log(x);
                         this.posts = this.posts.concat(data[x].posts);
                     }
-                    this.pageCount = Math.ceil(this.posts.length/this.showCount);
-                    console.log(this.pageCount);
-                    console.log(this.posts.length);
+                    this.pageCount = Math.ceil(this.posts.length/this.perPage);
                 });
     		}
     	},
