@@ -14,7 +14,7 @@
     }
 </style>
 <template>
-    <div v-if="posts.data.length > 0" class="container">
+    <div v-if="posts.data.length > 0" class="container" id="posts_trending">
         <div class="row"  v-for="post in posts.data" :key="post.id">
             <div class="col-md-1">
                 <img v-if="post.user.avatar !=null" :src="'images/profile/' + post.user.avatar" class="avatar-client">
@@ -41,9 +41,10 @@
                 <hr>
             </div>
         </div>
-        <div>
-            <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
-        </div>
+        <pagination  :data="posts" @pagination-change-page="getResults" :limit="2">
+            <span slot="prev-nav">&lt; Previous</span>
+            <span slot="next-nav">Next &gt;</span>
+        </pagination>
     </div>
     <div v-else class="container">
         There is nothing here!
@@ -61,11 +62,11 @@
     
     	methods: {
     		getResults(page = 1) {
-                   axios.get('c/newestposts?page=' + page)
+                   axios.get('p/trending?page=' + page)
                        .then(response => {
                            this.posts = response.data;
                    });
-                this.$root.scrollToTop();
+                this.$scrollTo("#posts_trending");
                        
                },
     

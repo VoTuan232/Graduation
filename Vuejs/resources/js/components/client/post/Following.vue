@@ -15,33 +15,36 @@
     }
 </style>
 <template>
-    <div v-if="posts.data.length > 0" class="container">
-        <div class="row"  v-for="post in posts.data" :key="post.id">
+    <div v-if="posts.length > 0" class="container">
+        <div class="row"  v-for="x in showCount" :key="posts[x-1].id">
             <div class="col-md-1">
-                <img v-if="post.user.avatar !=null" :src="'images/profile/' + post.user.avatar" class="avatar-client">
-                <img v-else src="images/profile/profile.png" class="avatar-client">
+                <!-- <img v-if="post.user.avatar !=null" :src="'images/profile/' + post.user.avatar" class="avatar-client"> -->
+                <img src="images/profile/profile.png" class="avatar-client">
             </div>
             <div class="col-md-11">
                 <p>
-                <router-link :to="'' + '/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link>
+                <!-- <router-link :to="'' + '/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link> -->
                     <!-- <user-popper :userData="post.user"></user-popper> -->
-                {{ post.created_at }}
+                {{ posts[x-1].created_at }}
                 <br>
-                <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>
+                <router-link :to="'/p/' + posts[x-1].slug">{{ posts[x-1].title }}</router-link>
                 </p>
-                <div  v-if="post.tags.length > 0" class="btn-group">
+              <!--   <div  v-if="post.tags.length > 0" class="btn-group">
                     <tag-of-new :tagData="post.tags"></tag-of-new>
-                </div>
+                </div> -->
                 <p>
-                    <i class="fas fa-eye client"></i>&nbsp;{{ post.view }} &nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-comments client"></i>&nbsp;{{ post.comments.length }}
+                    <i class="fas fa-eye client"></i>&nbsp;{{ posts[x-1].view }} &nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-comments client"></i>&nbsp;{{ posts[x-1].comments.length }}
                 </p>
                 <hr>
             </div>
         </div>
         <div>
-            <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
+            <a v-if="x in pageCount">{{ x+1 }}</a>
         </div>
+      <!--   <div>
+            <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
+        </div> -->
     </div>
     <div v-else class="container">
         There is nothing here!
@@ -51,9 +54,9 @@
     export default {
     	data() {
     		return {
-    			posts: {
-                    data: {}
-                },
+    			posts: '',
+                showCount: 20,
+                pageCount: '',
     		}
     	},
     
@@ -69,7 +72,16 @@
     
     		getPosts() {
     			axios.get('p/following')
-    			.then(({data}) => this.posts = data)
+    			.then(({data}) => {
+                    this.posts = [];
+                    for (var x in data) {
+                        console.log(x);
+                        this.posts = this.posts.concat(data[x].posts);
+                    }
+                    this.pageCount = Math.ceil(this.posts.length/this.showCount);
+                    console.log(this.pageCount);
+                    console.log(this.posts.length);
+                });
     		}
     	},
     
