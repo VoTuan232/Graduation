@@ -52,8 +52,7 @@
                     .then(response => {
                         this.questions = response.data;
                 });
-                this.$root.scrollToTop();
-                    
+                this.$scrollTo("#scrollToTop");
             },
 
 			getQuestionsOfUser() {

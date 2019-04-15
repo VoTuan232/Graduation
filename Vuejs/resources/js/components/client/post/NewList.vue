@@ -70,7 +70,7 @@
                        .then(response => {
                            this.posts = response.data;
                    });
-                this.$scrollTo("#posts")
+                this.$scrollTo("#scrollToTop")
                        
                },
     

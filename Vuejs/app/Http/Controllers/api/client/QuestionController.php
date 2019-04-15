@@ -15,7 +15,7 @@ use Redis;
 class QuestionController extends Controller
 {
     public function getNewests() {
-    	return Question::orderBy('created_at', 'desc')->with('categories', 'user', 'user.posts', 'user.followers', 'tags')->paginate(5);
+    	return Question::orderBy('created_at', 'desc')->with('categories', 'user', 'tags')->paginate(5);
     }
 
     public function getQuestionSideBar() {

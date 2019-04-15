@@ -29,7 +29,7 @@
           <div class="row">
             <router-link :to="'/t/' + slug" href="#" class="list-function">Posts</router-link>
             <router-link :to="'' + '/t/' + slug + '/questions'" class="list-function notfirst">Questions</router-link>
-            <router-link to="/following" class="list-function notfirst">Followers</router-link>
+            <!-- <router-link to="/following" class="list-function notfirst">Followers</router-link> -->
           </div>
           <br>
           <div class="row">
@@ -38,7 +38,9 @@
         </div>
         <div class="col-md-4">
           <information-tag-single :tagData="tag"></information-tag-single>
-          ALl Tags
+          <div class="col-md-12">
+            <h4>Popular tags <span>_______________</span></h4>
+          </div>
         </div>
       </div>
   </div>
@@ -69,7 +71,7 @@
     },
 
     created() {
-       this.$Progress.start();
+      this.$Progress.start();
       this.getTagSingle();
             this.$Progress.finish();
     }

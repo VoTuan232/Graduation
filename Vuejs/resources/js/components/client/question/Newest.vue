@@ -12,7 +12,7 @@
     }
 </style>
 <template>
-    <div class="container">
+    <div class="container" id="questions">
         <div class="row"  v-for="question in questions.data" :key="question.id">
             <div class="col-md-1">
                 <img v-if="question.user.avatar !=null" :src="'images/profile/' + question.user.avatar" class="avatar-client">
@@ -20,7 +20,8 @@
             </div>
             <div class="col-md-11">
                 <p>
-                    <user-popper :userData="question.user"></user-popper>
+                    <router-link :to="'' + '/u/' + $root.changeEmail(question.user.email)" href="#">{{ question.user.name }}</router-link>
+                    <!-- <user-popper :userData="question.user"></user-popper> -->
                     {{ question.created_at }}
                     <br>
                     <router-link :to="'/q/' + question.slug">{{ question.title }}</router-link>
@@ -57,7 +58,7 @@
                        .then(response => {
                            this.questions = response.data;
                    });
-                this.$root.scrollToTop();
+                this.$scrollTo("#scrollToTop");
                        
                },
     

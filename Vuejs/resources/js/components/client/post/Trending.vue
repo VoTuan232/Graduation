@@ -66,7 +66,7 @@
                        .then(response => {
                            this.posts = response.data;
                    });
-                this.$scrollTo("#posts_trending");
+                this.$scrollTo("#scrollToTop");
                        
                },
     

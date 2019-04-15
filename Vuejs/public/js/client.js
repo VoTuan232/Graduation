@@ -1059,6 +1059,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { attrs: { id: "scrollToTop" } },
     [
       _c(
         "nav",

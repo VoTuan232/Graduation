@@ -49,7 +49,7 @@
                     .then(response => {
                         this.posts = response.data;
                 });
-                this.$scrollTo("#posts-user");
+                this.$scrollTo("#scrollToTop");
             },
 
 			getPostsOfUser() {

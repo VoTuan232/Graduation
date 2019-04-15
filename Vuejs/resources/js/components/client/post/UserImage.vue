@@ -1,5 +1,5 @@
 <template>
-	<img v-if="avatar !=null" :src="'images/profile/' + avatar" class="avatar-client">
+	<img v-if="avatar !=null && avatar != ''" :src="'images/profile/' + avatar" class="avatar-client">
     <img v-else src="images/profile/profile.png" class="avatar-client">
 </template>
 

@@ -5,7 +5,7 @@
 			<img v-else :src="'/images/profile/' + boxUserSingle.avatar" class="user-avatar"/>
 		</div>
 		<div class="col-md-8">
-			{{ boxUserSingle.name }}
+			 <router-link :to="'' + '/u/' + $root.changeEmail(boxUserSingle.email)" href="#">{{ boxUserSingle.name }}</router-link>
 		</div>
 	</div>
 </template>

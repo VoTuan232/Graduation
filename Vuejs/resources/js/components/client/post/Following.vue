@@ -47,9 +47,6 @@
             <a v-if="(page + 3) < pageCount" type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;" @click="changePage(pageCount)">{{ pageCount }}</a>
             <a v-if="page < pageCount" type="button" class="btn btn-light" style="border: 1px solid #ad9d9d;" @click="nextPage">Next ></a>
         </div>
-      <!--   <div>
-            <pagination  :data="posts" @pagination-change-page="getResults"></pagination>
-        </div> -->
     </div>
     <div v-else class="container">
         There is nothing here!
@@ -81,28 +78,19 @@
 
             changePage(page) {
                 this.page = page;
-                this.$scrollTo("#following_posts");
+                this.$scrollTo("#scrollToTop");
             },
 
             previousPage() {
                 this.page -=1;
-                this.$scrollTo("#following_posts");
+                this.$scrollTo("#scrollToTop");
             },
 
             nextPage() {
                 this.page +=1;
-                this.$scrollTo("#following_posts");
+                this.$scrollTo("#scrollToTop");
             },
 
-    		getResults(page = 1) {
-                   axios.get('c/newestposts?page=' + page)
-                       .then(response => {
-                           this.posts = response.data;
-                   });
-                this.$root.scrollToTop();
-                       
-               },
-    
     		getPosts() {
     			axios.get('p/following')
     			.then(({data}) => {
