@@ -18,12 +18,11 @@
     <div v-if="posts.length > 0" class="container" id="following_posts">
         <div class="row"  v-for="x in page*perPage" v-if="x > (page-1)*perPage && x <= posts.length" :key="posts[x-1].id">
             <div class="col-md-1">
-                <!-- <img v-if="post.user.avatar !=null" :src="'images/profile/' + post.user.avatar" class="avatar-client"> -->
-                <img src="images/profile/profile.png" class="avatar-client">
+                <user-image :user_id="posts[x-1].user_id"></user-image>
             </div>
             <div class="col-md-11">
                 <p>
-                <!-- <router-link :to="'' + '/u/' + $root.changeEmail(post.user.email)" href="#">{{ post.user.name }}</router-link> -->
+                <user-name :user_id="posts[x-1].user_id"></user-name>
                     <!-- <user-popper :userData="post.user"></user-popper> -->
                 {{ posts[x-1].created_at }}
                 <br>
@@ -57,7 +56,10 @@
     </div>
 </template>
 <script>
+    import UserImage from './UserImage.vue';
+    import UserName from './UserName.vue';
     export default {
+        components: {UserImage, UserName},
     	data() {
     		return {
     			posts: '',
@@ -109,10 +111,17 @@
                         this.posts = this.posts.concat(data[x].posts);
                     }
                     this.pageCount = Math.ceil(this.posts.length/this.perPage);
+                    this.posts.sort(function(a,b){
+                      // Turn your strings into dates, and then subtract them
+                      // to get a value that is either negative, positive, or zero.
+                      return new Date(b.created_at) - new Date(a.created_at);
+                    });
                 });
-    		}
+    		},
+
+           
     	},
-    
+
     	created() {
             this.$Progress.start();
             this.getPosts();

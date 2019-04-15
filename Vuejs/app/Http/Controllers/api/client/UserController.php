@@ -15,6 +15,19 @@ use Auth;
 
 class UserController extends Controller
 {
+    public function getImageBaseUserId(User $user) {
+        return response([
+            'avatar' => $user->avatar,
+        ]);
+    } 
+
+    public function getNameBaseUserId(User $user) {
+        return response([
+            'username' => $user->name,
+            'email' => $user->email,
+        ]);
+    }
+
     public function getPostFollowing() {
         return Auth::user()->follows()->with('posts')->get();
     }

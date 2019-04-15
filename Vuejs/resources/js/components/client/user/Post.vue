@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div class="container" id="posts-user">
 		<div v-if="posts.data.length > 0" class="row"  v-for="post in posts.data" :key="post.id">
             <div class="col-md-1">
                 <img v-if="userData.avatar !=null" :src="'/images/profile/' + userData.avatar" class="avatar-client">
@@ -49,7 +49,7 @@
                     .then(response => {
                         this.posts = response.data;
                 });
-                this.$root.scrollToTop();
+                this.$scrollTo("#posts-user");
             },
 
 			getPostsOfUser() {

@@ -114,6 +114,8 @@ Route::get('u/{user}/information', 'api\client\UserController@getUserInformation
 Route::get('u/{user}/getUserInfor', 'api\client\UserController@getUserInfor');
 Route::get('u/{user}/getNotifications', 'api\client\UserController@getNotifications');
 Route::get('u/{user}/markAllReadNotification', 'api\client\UserController@markAllReadNotification');
+Route::get('u/{user}/getImageBaseUserId', 'api\client\UserController@getImageBaseUserId');
+Route::get('u/{user}/getNameBaseUserId', 'api\client\UserController@getNameBaseUserId');
 
 Route::get('q/slidebar', 'api\client\QuestionController@getQuestionSideBar');
 Route::post('m/question', 'api\admin\QuestionController@store');
