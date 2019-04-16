@@ -24,7 +24,7 @@ class QuestionController extends Controller
     }
 
     public function getSingle(Request $request, Question $question) {
-        return Question::where('id', $question->id)->with('categories', 'user', 'user.posts', 'user.followers', 'user.questions', 'tags', 'comments')->firstOrFail();
+        return Question::where('id', $question->id)->with('categories', 'user', 'tags', 'comments')->firstOrFail();
     }
 
     // public function getUserBaseSlugPost(Request $request, Post $post, $slug) {
@@ -34,7 +34,7 @@ class QuestionController extends Controller
     // }
 
      public function getComments(Question $question) {
-        return $question->comments()->orderBy('id', 'desc')->with('user', 'replies')->get();
+        return $question->comments()->orderBy('id', 'desc')->with('user', 'replies')->paginate(5);
     }
 
     public function storeComment(Request $request, Question $question) {

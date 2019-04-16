@@ -60,7 +60,7 @@
     	data() {
     		return {
     			posts: '',
-                perPage: 20,
+                perPage: 10,
                 pageCount: '',
                 page: 1,
     		}

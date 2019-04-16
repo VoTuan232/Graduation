@@ -22,6 +22,7 @@
 
 		methods: {
 			CreateCommentReply() {
+				this.form.parent_id = this.comment.id;
 				this.form.post('q/' + this.slug + '/comment')
 				.then(() => {
                     this.$Progress.start();

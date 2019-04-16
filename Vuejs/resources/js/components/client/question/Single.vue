@@ -41,13 +41,12 @@
 					</div>
 					<div class="col-md-9">
 						<p>
-							<router-link :to="'' + '/u/' + $root.changeEmail(question['user'].email)" href="#">{{ question['user'].name }}</router-link>
-                   			<!-- <user-popper-not-load :userData="question['user']"></user-popper-not-load> -->
+							<!-- <router-link :to="'' + '/u/' + $root.changeEmail(question['user'].email)" href="#">{{ question['user'].name }}</router-link> -->
 							{{ question['user'].email }}
 						</p>
 						<p>
-							{{ question['user'].followers.length }} follwers
-							{{ question['user'].questions.length }} questions
+							{{ user.countFollowers }} follwers
+							{{ user.countQuestionss }} questions
 						</p>
 					</div>
 				</div>
@@ -75,17 +74,23 @@
 					},
 					comments: {},
 				},
+				user_id: 10,
+				user: '',
 			}
 		},
 
 		methods: {
 			getQuestionSingle() {
 				axios.get('q/'+this.slug)
-				.then(response => this.question = response.data);
+				.then(response => {
+					this.question = response.data;
+					this.user_id = response.data.user_id;
+					axios.get('u/' + this.user_id + '/getUserInfor')
+					.then(response => {
+						this.user = response.data;
+					});
+				});
 			},
-			scrollToTop() {
-                window.scrollTo(0,0);
-            }
 		},
 
 		computed: {
@@ -109,7 +114,7 @@
 	 	},
 
 		created() {
-			 this.$Progress.start();
+			this.$Progress.start();
 			this.getQuestionSingle();
             this.$Progress.finish();
         	this.$emit('updatedUser');

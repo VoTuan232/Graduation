@@ -6,7 +6,7 @@
 </style>
 <template>
 	<div>
-		<h4>Comments</h4>
+		<h4 id="comment">Comments</h4>
 		<div class="hello">
 		    <!-- <read-more more-str="read more" :text="msg" link="#" less-str="read less" :max-chars="50"></read-more>
 		    <read-more more-str="read more" less-str="read less" :text="msg2" link="#"></read-more> -->
@@ -36,42 +36,43 @@
 			</div>
 		</div>
 		<br>
-		<div v-for="commentIndex in commentsToShow" v-if="commentIndex <= comments.length"  class="row mt-1">
-		<!-- <div v-for="comment in comments" class="row mt-1"> -->
-			<div :id="'comment-' + comments[commentIndex-1].id">
+		<div v-for="comment in comments.data"  class="row mt-1">
+			<div :id="'comment-' + comment.id">
 		        <div class="media" >
 		            <a class="pull-left" href="#">
-		                <img v-if="comments[commentIndex-1].user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
-		                <img v-else class="media-object" :src="'/images/profile/' + comments[commentIndex-1].user.avatar" alt="">
+		                <img v-if="comment.user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
+		                <img v-else class="media-object" :src="'/images/profile/' + comment.user.avatar" alt="">
 	                </a>
 	            	<div class="media-body" style="margin-left: 20px;">
-		                <h4 class="media-heading">{{ comments[commentIndex-1].user.name }}
+		                <h4 class="media-heading">{{ comment.user.name }}
 	                    	<small>August 25, 2014 at 9:30 PM</small>
 	                    </h4>
-		                    {{ comments[commentIndex-1].body }} 
+		                    {{ comment.body }} 
 		                    <br>
 		                    <a href="#">Like</a> 
 		                    &nbsp; 
-		                    <a href="#" @click="clickReplyComment(comments[commentIndex-1].id)" v-scroll-to="'#comment-' + comments[commentIndex-1].id">Reply</a>
+		                    <a href="#" @click="clickReplyComment(comment.id)" v-scroll-to="'#comment-' + comment.id">Reply</a>
 		            </div>
 	            </div>
-	            <comment-replies :comments="comments[commentIndex-1]" @clickReply="clickReplyComment"></comment-replies>
+	            <comment-replies :comments="comment" @clickReply="clickReplyComment(comment.id)"></comment-replies>
 	            <br>
-	            <div class="media ml-5"  :id="'reply-' + comments[commentIndex-1].id" v-show="false" style="margin-left: 35px !important;">
+	            <div class="media ml-5"  :id="'reply-' + comment.id" v-show="false" style="margin-left: 35px !important;">
 		            <a class="pull-left" href="#">
-		                <img v-if="comments[commentIndex-1].user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
-		                <img v-else class="media-object" :src="'/images/profile/' + comments[commentIndex-1].user.avatar" alt="">
+		                <img v-if="comment.user.avatar == null" class="media-object"  src="/images/profile/profile.png" alt="">
+		                <img v-else class="media-object" :src="'/images/profile/' + comment.user.avatar" alt="">
 	                </a>
 	            	<div class="media-body" style="margin-left: 20px;">
 		               
-		                    <comment-form :comment="comments[commentIndex-1]" :slug="slug"></comment-form>
+		                    <comment-form :parent_id="comment.id" :comment="comment" :slug="slug"></comment-form>
 		                
 		            </div>
 	            </div>
 			</div>
 		</div>
-		<button v-show="commentsToShow < comments.length" type="button" class="btn btn-link" @click="commentsToShow += 2"><i class="fas fa-chevron-circle-down"></i>View more comments</button>
-		<br>
+		<pagination  :data="comments" @pagination-change-page="getResults" :limit="2">
+            <span slot="prev-nav">&lt; Previous</span>
+            <span slot="next-nav">Next &gt;</span>
+        </pagination>
 	</div>
 </template>
 
@@ -84,8 +85,6 @@
 		components: {CommentForm, CommentReplies},
 		data() {
 			return {
-				// msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-    //   			msg2: 'Lorem ipsum dolor sit amet',
 				comments: {
 
 				},
@@ -94,27 +93,30 @@
 					user_id: this.$auth.user().id,
 					parent_id: null,
 				}),
-				commentsToShow: 2,
+				// commentsToShow: 2,
 			}
 		},
 
 		sockets: {
-			commentQuestion (data) {
+			message(data) {
 				let message = JSON.parse(data);
 
-				if (message.slug == this.slug) {
-					this.getComment(); 
+				if (message.slug_post == this.slug) {
+					this.getComment();
 				}
-				// this.comments.push(message);
-				// console.log('message', message);
 			}
 		},
 
-		watch: {
-			
-		},
-
 		methods: {
+			getResults(page = 1) {
+                   axios.get('q/' + this.slug + '/comments?page=' + page)
+                       .then(response => {
+                           this.comments = response.data;
+                   });
+                this.$scrollTo("#comment")
+                       
+            },
+
 			getComment() {
 				axios.get('q/' + this.slug + '/comments')
 				.then(response => this.comments = response.data)
@@ -122,9 +124,12 @@
 
 			createComment() {
 				this.form.post('q/' + this.slug + '/comment')
-				.then(() => {
+				.then((response) => {
                     this.$Progress.start();
-                    Fire.$emit('AfterCrudComment');
+                    this.getComment();
+                    this.form.body = "";
+                    // this.comments.push(response.data);
+                    // Fire.$emit('AfterCrudComment');
                     this.$Progress.finish();
 
                 })
@@ -134,7 +139,9 @@
 			},
 
 			clickReplyComment(id) {
+				console.log(id);
 				$('#reply-' + id).toggle();
+				// $('#form-reply-' + id).toggle();
 				// this.$refs["body_reply-" + id][0].focus();
 				// var x=window.scrollX;
 				//    var y=window.scrollY;

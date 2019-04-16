@@ -43,10 +43,11 @@ class UserController extends Controller
     }
 
     public function getUserInfor(User $user) {
-        $data = User::where('id', $user->id)->with('posts', 'followers')->firstOrFail();
+        $data = User::where('id', $user->id)->with('posts', 'followers', 'questions')->firstOrFail();
         return response([
             'countPosts' => count($data->posts),
-            'countFollowers' => count($data->followers)
+            'countQuestionss' => count($data->questions),
+            'countFollowers' => count($data->followers),
         ]);
     }
 

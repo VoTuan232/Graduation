@@ -14,7 +14,7 @@ use Auth;
 class QuestionController extends Controller
 {
     public function index() {
-    	return Question::with('categories', 'user', 'tags')->paginate(2);
+    	return Question::with('categories', 'user', 'tags')->paginate(5);
     }
 
     public function store(Request $request)
