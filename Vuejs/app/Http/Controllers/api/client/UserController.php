@@ -55,9 +55,17 @@ class UserController extends Controller
         $email = $email.'@gmail.com';
         $user = User::where('email', $email)->firstOrFail();
 
+        if (Auth::user()) {
+            return response([ 
+                'isFollowing' => Auth::user()->isFollowing($user->id),
+                'isLogin' => true,
+            ]);
+        }
         return response([ 
-            'isFollowing' => Auth::user()->isFollowing($user->id)
-        ]);
+                'isFollowing' => false,
+                'isLogin' => false,
+            ]);
+        
     }
 
     public function removeFollow($email) {

@@ -23,9 +23,9 @@
 			</div>
 			<div class="col-md-10">
 				<p>
-				<span class="username">{{ user.name }}</span> &nbsp; 
-				<button  v-if="$auth.user().id != user.id && !isFollowing" class="btn btn-light follow" type="button" @click="addFollow"><i class="fas fa-plus"></i>&nbsp;Follow</button>
-				<button  v-if="$auth.user().id != user.id && isFollowing" class="btn btn-primary follow" type="button" @click="removeFollow"><i class="fas fa-check"></i>&nbsp;Following</button>
+				<span class="username">{{ user.name }}</span> &nbsp;
+				<button  v-if="$auth.user().id != user.id && !responseCheckFollow.isFollowing && responseCheckFollow.isLogin" class="btn btn-light follow" type="button" @click="addFollow"><i class="fas fa-plus"></i>&nbsp;Follow</button>
+				<button  v-if="$auth.user().id != user.id && responseCheckFollow.isFollowing" class="btn btn-primary follow" type="button" @click="removeFollow"><i class="fas fa-check"></i>&nbsp;Following</button>
 				<router-link  to="/profile/setting" v-if="$auth.user().id == user.id" class="btn btn-light follow" type="button">Edit</router-link>
 				</p>
 				<p>{{ user.email }}</p>
@@ -80,7 +80,7 @@
 		data() {
 			return {
 				slug: this.$route.params.email,
-				isFollowing: false,
+				responseCheckFollow: {},
 				user: {
 					posts: {},
 					followers: {},
@@ -101,20 +101,25 @@
 
 			checkFollow() {
 				axios.get('u/checkFollow/' + this.slug)
-				.then(response => this.isFollowing = response.data.isFollowing);
+				.then(response => {
+					this.responseCheckFollow = response.data;
+					console.log(this.responseCheckFollow.isLogin);
+				});
 			},
 
 			removeFollow() {
 				axios.post('u/removeFollow/' + this.slug)
 				.then(() => {
-					this.isFollowing = false;
+					this.responseCheckFollow.isFollowing = false;
+					// this.isFollowing = false;
 				});
 			},
 
 			addFollow() {
 				axios.post('u/addFollow/' + this.slug)
 				.then(() => {
-					this.isFollowing = true;
+					this.responseCheckFollow.isFollowing = true;
+					// this.isFollowing = true;
 				});
 			}
 		},

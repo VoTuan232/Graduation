@@ -32,7 +32,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="username" v-model="email" required>
+                            <input type="text" class="form-control" placeholder="email" v-model="email" required>
                         </div>
                         <span class="help-block" v-if="error && errors.password">{{ errors.password }}</span>
                         <div class="input-group form-group" v-bind:class="{ 'has-error': error && errors.password }">
