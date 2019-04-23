@@ -7,7 +7,8 @@
             </div>
             <div class="col-md-11">
                 <p>
-                   	<user-popper-not-load :userData="userData"></user-popper-not-load>
+                    <router-link :to="'' + '/u/' + $root.changeEmail(userData.email)" href="#">{{ userData.name }}</router-link>
+                   	<!-- <user-popper-not-load :userData="userData"></user-popper-not-load> -->
 	                {{ post.created_at}}
 	                <br>
 	                <router-link :to="'/p/' + post.slug">{{ post.title }}</router-link>

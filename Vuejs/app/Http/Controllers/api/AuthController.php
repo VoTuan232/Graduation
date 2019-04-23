@@ -6,6 +6,9 @@ use App\Http\Requests\RegisterFormRequest;
 use App\Models\User;
 use Auth;
 use JWTAuth;
+use App\Jobs\SendWelcomeEmail;
+use Carbon\Carbon;
+
 class AuthController extends Controller
 {
     public function register(RegisterFormRequest $request)
@@ -15,6 +18,9 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->password = bcrypt($request->password);
         $user->save();
+
+        dispatch((new SendWelcomeEmail($user))->delay(Carbon::now()->addMinutes(10)));
+
         return response([
             'status' => 'success',
             'data' => $user

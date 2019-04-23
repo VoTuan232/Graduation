@@ -100,18 +100,18 @@
 			}, 
 
 			checkFollow() {
-				axios.get('u/checkFollow/' + this.slug)
-				.then(response => {
-					this.responseCheckFollow = response.data;
-					console.log(this.responseCheckFollow.isLogin);
-				});
+				if (this.$auth.check()) {
+					axios.get('u/checkFollow/' + this.slug)
+					.then(response => {
+						this.responseCheckFollow = response.data;
+					});
+				}
 			},
 
 			removeFollow() {
 				axios.post('u/removeFollow/' + this.slug)
 				.then(() => {
 					this.responseCheckFollow.isFollowing = false;
-					// this.isFollowing = false;
 				});
 			},
 
@@ -119,7 +119,6 @@
 				axios.post('u/addFollow/' + this.slug)
 				.then(() => {
 					this.responseCheckFollow.isFollowing = true;
-					// this.isFollowing = true;
 				});
 			}
 		},
