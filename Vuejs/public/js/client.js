@@ -277,9 +277,12 @@ __webpack_require__.r(__webpack_exports__);
     getUserCurrent: function getUserCurrent() {
       var _this = this;
 
-      axios.get('user/userPermission').then(function (response) {
-        return _this.userPermission = response.data, _this.userPermission = new _Gate__WEBPACK_IMPORTED_MODULE_0__["default"](_this.userPermission);
-      });
+      if (this.$auth.check()) {
+        axios.get('user/userPermission').then(function (response) {
+          return _this.userPermission = response.data, _this.userPermission = new _Gate__WEBPACK_IMPORTED_MODULE_0__["default"](_this.userPermission);
+        });
+      } else {// this.userPermission = null;
+      }
     },
     distributionGroupsEndpoint: function distributionGroupsEndpoint(input) {
       return '' + '/api/findPosts?search=' + input;

@@ -183,11 +183,16 @@
 
 		methods: {
             getUserCurrent() {
-                axios.get('user/userPermission')
-                .then(response => (
-                    this.userPermission = response.data,
-                    this.userPermission = new Gate(this.userPermission)
-                    ))
+                if (this.$auth.check()) {
+                    axios.get('user/userPermission')
+                    .then(response => (
+                        this.userPermission = response.data,
+                        this.userPermission = new Gate(this.userPermission)
+                        ))
+                }
+                else {
+                    // this.userPermission = null;
+                }
             },
 
             distributionGroupsEndpoint (input) {

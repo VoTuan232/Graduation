@@ -33,8 +33,8 @@
 <template>
 	<div class="container">
 		<div class="navbar-vote">
-		  <span v-if="!upvote" @click="up_vote"><i class="fas fa-sort-up fa-3x vote"></i></span>
-		  <span v-else @click="remove_up_vote"><i class="fas fa-sort-up fa-3x voted"></i></span>
+		  <span v-if="!upvote" @click="up_vote"><i class="fas fa-sort-up fa-3x vote" title="upVote"></i></span>
+		  <span v-else @click="remove_up_vote"><i class="fas fa-sort-up fa-3x voted" title="downVote"></i></span>
 		  <br>
 		  <span class="vote-number">{{ vote }}</span>
 		  <br>
@@ -168,34 +168,49 @@
 			},
 
 			checkVote() {
-				axios.get('/p/' + this.slug + '/checkVote')
-				.then((response) => {
-					if (response.data.like == 0) {
-						this.upvote = false;
-						this.downvote = false;
-					}
-					else if (response.data.like == 1) {
-						this.upvote = true	;
-						this.downvote = false;
-					}
-					else if (response.data.like == -1) {
-						this.upvote = false	;
-						this.downvote = true;
-					}
-				})
+				if (this.$auth.check()) {
+					axios.get('/p/' + this.slug + '/checkVote')
+					.then((response) => {
+						if (response.data.like == 0) {
+							this.upvote = false;
+							this.downvote = false;
+						}
+						else if (response.data.like == 1) {
+							this.upvote = true	;
+							this.downvote = false;
+						}
+						else if (response.data.like == -1) {
+							this.upvote = false	;
+							this.downvote = true;
+						}
+					})
+				}
 			},
 
 			up_vote() {
-				this.upvote = true;
-				if (this.downvote == false) {
-					axios.post('p/' + this.slug + '/upvote', {checkDownvote: false})
-					.then(response => this.vote = response.data.vote);
+				if (this.$auth.check()) {
+					this.upvote = true;
+					if (this.downvote == false) {
+						axios.post('p/' + this.slug + '/upvote', {checkDownvote: false})
+						.then(response => this.vote = response.data.vote);
+					}
+					else {
+						axios.post('p/' + this.slug + '/upvote', {checkDownvote: true})
+						.then(response => this.vote = response.data.vote);
+					}
+					this.downvote = false;
 				}
 				else {
-					axios.post('p/' + this.slug + '/upvote', {checkDownvote: true})
-					.then(response => this.vote = response.data.vote);
+					this.$swal({
+    		  		title: '<i>Authorization Notification</i>',
+			        html:
+			            'You need login to complete this action!</em>, ' +
+			            '<a href="/login">login here</a> ',
+			          	showCloseButton: true,
+			          	showCancelButton: true,
+			          	focusConfirm: false,
+			        })
 				}
-				this.downvote = false;
 			},
 
 			remove_up_vote() {
@@ -205,16 +220,29 @@
 			},
 
 			down_vote() {
-				this.downvote = true;
-				if (this.upvote == false) {
-					axios.post('p/' + this.slug + '/downvote', {checkUpvote: false})
-					.then(response => this.vote = response.data.vote);
+				if (this.$auth.check()) {
+					this.downvote = true;
+					if (this.upvote == false) {
+						axios.post('p/' + this.slug + '/downvote', {checkUpvote: false})
+						.then(response => this.vote = response.data.vote);
+					}
+					else {
+						axios.post('p/' + this.slug + '/downvote', {checkUpvote: true})
+						.then(response => this.vote = response.data.vote);
+					} 
+					this.upvote = false;
 				}
 				else {
-					axios.post('p/' + this.slug + '/downvote', {checkUpvote: true})
-					.then(response => this.vote = response.data.vote);
-				} 
-				this.upvote = false;
+					this.$swal({
+			  		title: '<i>Authorization Notification</i>',
+			        html:
+			            'You need login to complete this action!</em>, ' +
+			            '<a href="/login">login here</a> ',
+			          	showCloseButton: true,
+			          	showCancelButton: true,
+			          	focusConfirm: false,
+			        })
+				}
 			},
 
 			remove_down_vote() {
