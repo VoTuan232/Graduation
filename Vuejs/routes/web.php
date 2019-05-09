@@ -27,6 +27,7 @@ Route::get('/register', 'client\HomeController@index')->name('client.index');
 Route::get('/p/{path}',"client\HomeController@index");
 Route::get('/t/{path}',"client\HomeController@index");
 Route::get('/u/{path}',"client\HomeController@index");
+Route::get('/u/{path1}/{path2}',"client\HomeController@index");
 Route::get('/q/{path}',"client\HomeController@index");
 // Route::get('/p/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
 // Route::get('/t/{path}',"client\HomeController@index")->where( 'path', '([A-z\d-\/_.]+)?' );
