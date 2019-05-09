@@ -36,8 +36,9 @@
           <router-link :to="'/u/' + slug" href="#" class="list-function">Posts</router-link>
           <router-link :to="'/u/' + slug + '/questions'" class="list-function notfirst">Questions</router-link>
           <router-link v-if="$auth.user().id == user.id" :to="'/u/' + slug + '/drafts'" class="list-function notfirst">Drafts</router-link>
-          <router-link :to="'/u/' + slug + '/followings'" class="list-function notfirst">Followings</router-link>
-          <router-link :to="'/u/' + slug + '/followers'" class="list-function notfirst">Followers</router-link>
+          <router-link v-if="$auth.user().id == user.id" :to="'/u/' + slug + '/followings'" class="list-function notfirst">Followings</router-link>
+          <router-link v-if="$auth.user().id == user.id" :to="'/u/' + slug + '/followers'" class="list-function notfirst">Followers</router-link>
+           <router-link v-if="$auth.user().id == user.id" :to="'/u/' + slug + '/followers'" class="list-function notfirst">Save</router-link>
           <!-- check login == user detail => getUser(slug) => $auth -->
           <!-- <router-link to="/following" class="list-function notfirst">Drafts</router-link>  -->
         </div>

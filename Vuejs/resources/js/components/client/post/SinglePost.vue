@@ -29,17 +29,29 @@
 	color: #9b9b9b;
 	font-weight: 500;*/
 }
+
+.share {
+	color: #ccb1b1;
+	/*cursor: pointer;*/
+}
+
+.share-box {
+	margin-left: -9px;
+    height: 40px;
+    border-radius: 25px;
+}
 </style>
 <template>
 	<div class="container">
 		<div class="navbar-vote">
 		  <span v-if="!upvote" @click="up_vote"><i class="fas fa-sort-up fa-3x vote" title="upVote"></i></span>
-		  <span v-else @click="remove_up_vote"><i class="fas fa-sort-up fa-3x voted" title="downVote"></i></span>
+		  <span v-else @click="remove_up_vote"><i class="fas fa-sort-up fa-3x voted" title="remove upvote"></i></span>
 		  <br>
 		  <span class="vote-number">{{ vote }}</span>
 		  <br>
-		  <span v-if="!downvote" @click="down_vote"><i class="fas fa-sort-down fa-3x vote"></i></span>
-		  <span v-else @click="remove_down_vote"><i class="fas fa-sort-down fa-3x voted"></i></span>
+		  <span v-if="!downvote" @click="down_vote"><i class="fas fa-sort-down fa-3x vote" title="downVote"></i></span>
+		  <span v-else @click="remove_down_vote"><i class="fas fa-sort-down fa-3x voted" title="remove downvote"></i></span>
+		  <div class="share-box"><a v-bind:href="'https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000/p/' + post.slug + '&display=popup'" target="_blink"><i class="fab fa-facebook fa-3x share" title="share"></i></a></div>
 		</div>
 		<div class="row">
 			<div class="col-md-1">
@@ -82,13 +94,14 @@
 				<p v-html="post['body']"></p>
 			</div>
 			<div class="col-md-1">
-				<div v-if="userPermission.hasPermission('post.edit')" class="dropdown">
-				  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<div v-if="$auth.check()" class="dropdown">
+				  <button v-if="userPermission.hasPermission('post.edit') || $auth.user().id != post.user_id"class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				  </button>
 				  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				    <router-link :to="'' +'/p/' + this.slug + '/edit'" class="dropdown-item" href="#">Edit</router-link>
+				    <router-link v-if="userPermission.hasPermission('post.edit')" :to="'' +'/p/' + this.slug + '/edit'" class="dropdown-item" href="#">Edit</router-link>
 				    <!-- <a class="dropdown-item" href="#">Add to my series</a> -->
-				    <a class="dropdown-item" href="#">Delete this post</a>
+				    <a v-if="userPermission.hasPermission('post.delete')" class="dropdown-item" href="#">Delete this post</a>
+				    <a v-if="$auth.user().id != post.user_id" class="dropdown-item" href="#">Save</a>
 				  </div>
 				</div>
 			</div>
