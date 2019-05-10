@@ -9,12 +9,73 @@ use App\Models\User;
 use App\Models\Tag;
 use App\Models\Question;
 use App\Models\Notification;
+use App\Models\Storage;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Auth;
 
 class UserController extends Controller
 {
+    public function checkSavePost(Request $request) {
+        $post = Post::where('slug', $request->slug)->firstOrFail();
+
+        $storages = Storage::where([
+            'post_id' => $post->id,
+            'user_id' => Auth::user()->id,
+        ])->first();
+        
+        if ($storages != null) {
+            return response([
+                'checkSave' => $storages->save
+            ]);
+        }
+        else {
+            return response([
+                'checkSave' => 0
+            ]);
+        }
+        
+    }
+
+    public function savePost(Request $request) {
+        $post = Post::where('slug', $request->slug)->firstOrFail();
+
+        if(DB::table('storages')->where([
+            'post_id' => $post->id,
+            'user_id' => Auth::user()->id,
+        ])->exists()) {
+            DB::table('storages')->where([
+                ['user_id', '=', Auth::user()->id],
+                ['post_id', '=', $post->id],
+                ])->update([
+                    'save' => true, 
+            ]);
+        }
+
+        else {
+            DB::table('storages')->insert([
+                'post_id' => $post->id,
+                'user_id' => Auth::user()->id,
+                'save' => true,
+            ]);
+        }
+        return response()->json([
+                'message' => 'Save post successfully',
+                'class_name' => 'alert-success',
+            ]); 
+    }
+
+    public function getStorages(Request $request) {
+        $storages = Storage::where([
+            'user_id' => Auth::user()->id,
+            'save' => true,
+        ])->get();
+
+        $posts = $storages->load('post');
+
+        return $posts;
+    }
+
     public function getImageBaseUserId(User $user) {
         return response([
             'avatar' => $user->avatar,

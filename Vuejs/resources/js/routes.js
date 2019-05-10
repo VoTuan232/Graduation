@@ -97,6 +97,10 @@ let routes = [
             {
                 path: '/u/:email/drafts',
                 component: require('./components/client/user/Draft.vue').default,
+            }, 
+            {
+                path: '/u/:email/save',
+                component: require('./components/client/user/Save.vue').default,
             },
         ]  
     },

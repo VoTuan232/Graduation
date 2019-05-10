@@ -15,7 +15,7 @@ class Storage extends Model
 
     public $timestamps = false;
 
-    public function posts() {
+    public function post() {
     
         return $this->belongsTo(Post::class, 'post_id');
     }

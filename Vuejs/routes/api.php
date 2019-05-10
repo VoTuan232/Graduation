@@ -86,6 +86,9 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 	Route::put('p/{post}/makeTrending', 'api\client\PostController@makeTrending');
 	Route::get('p/following', 'api\client\UserController@getPostFollowing');
 
+	Route::post('u/checkSavePost', 'api\client\UserController@checkSavePost');
+	Route::post('u/savePost', 'api\client\UserController@savePost');
+	Route::get('u/getStorages', 'api\client\UserController@getStorages');
 });
 
 

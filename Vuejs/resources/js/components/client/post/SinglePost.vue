@@ -101,7 +101,8 @@
 				    <router-link v-if="userPermission.hasPermission('post.edit')" :to="'' +'/p/' + this.slug + '/edit'" class="dropdown-item" href="#">Edit</router-link>
 				    <!-- <a class="dropdown-item" href="#">Add to my series</a> -->
 				    <a v-if="userPermission.hasPermission('post.delete')" class="dropdown-item" href="#">Delete this post</a>
-				    <a v-if="$auth.user().id != post.user_id" class="dropdown-item" href="#">Save</a>
+				    <a v-if="$auth.user().id != post.user_id && checkSave == 0" class="dropdown-item" href="#" @click="savePost">Save</a>
+				    <a v-if="$auth.user().id != post.user_id && checkSave == 1" class="dropdown-item" href="#">Saved</a>
 				  </div>
 				</div>
 			</div>
@@ -152,6 +153,7 @@
 				upvote: false,
 				downvote: false,
 				checkTrending: 0,
+				checkSave: 0,
 			}
 		},
 
@@ -262,6 +264,25 @@
 				this.downvote = false;
 				axios.post('p/' + this.slug + '/removeDownvote')
 					.then(response => this.vote = response.data.vote);
+			},
+
+			checkSavePost() {
+				if (this.$auth.check()) {
+					axios.post('u/checkSavePost', {slug: this.$route.params.slug})
+					.then(response => this.checkSave = response.data.checkSave);
+				}
+			}, 
+
+			savePost() {
+				axios.post('u/savePost', {slug: this.$route.params.slug})
+					.then(response => {
+						this.checkSave = 1;
+						  this.$swal(
+	                      'Updated!',
+	                      'Updated Post successfully!',
+	                      'success'
+	                    )
+					});
 			}
 		},
 
@@ -291,6 +312,7 @@
 			this.getPostSingle();
 			this.checkVote();
 			this.countVote();
+			this.checkSavePost();
 			this.$Progress.finish();
         	this.$emit('updatedUser');
 		}, 
