@@ -94,6 +94,7 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 
 /* client */
 Route::get('c/newestposts', 'api\client\PostController@getNewestPosts');
+Route::post('p/getPostBaseId', 'api\client\PostController@getPostBaseId');
 Route::get('p/trending', 'api\client\PostController@getTrending');
 Route::get('p/slidebar', 'api\client\PostController@getPostSideBar');
 Route::get('p/{post}', 'api\client\PostController@getSingle')->middleware('checkviewpost');

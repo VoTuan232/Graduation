@@ -19,6 +19,22 @@ use Carbon\Carbon;
 
 class PostController extends Controller
 {
+    public function getPostBaseId(Request $request) {
+        $data = Post::where('id', $request->post_id)->with('user', 'tags', 'comments')->firstOrFail();
+
+        return response()->json([
+            'user_avatar' => $data->user->avatar,
+            'user_email' => $data->user->email,
+            'user_name' => $data->user->name,
+            'created_at' => $data->created_at,
+            'title' => $data->title,
+            'tags' => $data->tags,
+            'view' => $data->view,
+            'slug' => $data->slug,
+            'comment_length' => count($data->comments),
+        ]);
+    }
+
     public function makeTrending(Post $post) {
         $post->update([
             'trending' => Carbon::now(),

@@ -168,6 +168,10 @@ Vue.component(
     'redirect-login',
     require('./components/asset/RedirectLogin.vue').default
 );
+Vue.component(
+    'save-post',
+    require('./components/asset/SavePost.vue').default
+);
 // const client = new Vue({
 //     el: '#client',
 //     router: router,

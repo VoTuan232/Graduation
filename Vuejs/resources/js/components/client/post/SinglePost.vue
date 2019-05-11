@@ -278,8 +278,8 @@
 					.then(response => {
 						this.checkSave = 1;
 						  this.$swal(
-	                      'Updated!',
-	                      'Updated Post successfully!',
+	                      'Save!',
+	                      'Save Post successfully!',
 	                      'success'
 	                    )
 					});

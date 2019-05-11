@@ -69,11 +69,11 @@ class UserController extends Controller
         $storages = Storage::where([
             'user_id' => Auth::user()->id,
             'save' => true,
-        ])->get();
+        ])->paginate(10);
 
-        $posts = $storages->load('post');
+        // $posts = $storages->load('post');
 
-        return $posts;
+        return $storages;
     }
 
     public function getImageBaseUserId(User $user) {
